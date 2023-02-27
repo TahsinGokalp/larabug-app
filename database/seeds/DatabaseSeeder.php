@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,11 +13,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Plan::create([
-            'title' => 'Starter'
-        ]);
-
-        // factory(App\Models\Project::class, 10)->create();
-        // $this->call(UsersTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }

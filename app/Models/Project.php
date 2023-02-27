@@ -202,12 +202,6 @@ class Project extends Model
             $project->key = str_random(50);
         });
 
-        static::created(function (self $project) {
-            if (auth()->check()) {
-                auth()->user()->notify(new ProjectWasCreated($project));
-            }
-        });
-
         static::deleting(function (self $project) {
             $project->exceptions()->delete();
             $project->issues()->delete();
