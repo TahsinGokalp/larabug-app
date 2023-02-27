@@ -11,7 +11,7 @@ class FcmController extends Controller
         $tokens = auth()->user()->fcmTokens()->get();
 
         return inertia('Profile/FcmTokens/Index', [
-            'tokens' => $tokens
+            'tokens' => $tokens,
         ]);
     }
 

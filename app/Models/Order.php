@@ -13,15 +13,15 @@ class Order extends Model
         'amount',
         'payer_id',
         'success',
-        'period'
+        'period',
     ];
 
     protected $dates = [
-        'end_date'
+        'end_date',
     ];
 
     protected $casts = [
-        'success' => 'boolean'
+        'success' => 'boolean',
     ];
 
     public function user()

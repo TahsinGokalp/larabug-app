@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use Kblais\Uuid\Uuid;
+use App\Notifications\ExceptionWasCreated;
 use DateTimeInterface;
 use EloquentFilter\Filterable;
-use Illuminate\Database\Eloquent\Model;
-use App\Notifications\ExceptionWasCreated;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Kblais\Uuid\Uuid;
 
 /**
  * @property mixed exception
@@ -33,8 +33,11 @@ class Exception extends Model
      * Status vars
      */
     const OPEN = 'OPEN';
+
     const READ = 'READ';
+
     const FIXED = 'FIXED';
+
     const DONE = 'DONE';
 
     /**
@@ -43,7 +46,7 @@ class Exception extends Model
     protected $guarded = [
         'created_at',
         'updated_at',
-        'published_at'
+        'published_at',
     ];
 
     /**
@@ -54,7 +57,7 @@ class Exception extends Model
         'storage' => 'array',
         'executor' => 'array',
         'mailed' => 'boolean',
-        'additional' => 'array'
+        'additional' => 'array',
     ];
 
     protected $appends = [
@@ -65,7 +68,7 @@ class Exception extends Model
         'status_text',
         'short_exception_text',
         'executor_output',
-        'markup_language'
+        'markup_language',
     ];
 
     public function getHumanDateAttribute(): string
@@ -98,7 +101,7 @@ class Exception extends Model
 
     public function getStatusTextAttribute()
     {
-        return trans('status.' . strtoupper($this->status));
+        return trans('status.'.strtoupper($this->status));
     }
 
     public function getMarkupLanguageAttribute(): string
@@ -124,13 +127,13 @@ class Exception extends Model
         // strip all the html on the line, replace the line number
         // with nothing(the frontend will do the line numbers for us)
         // and output as one giant string
-        return join(PHP_EOL, collect($this->executor)->map(function ($line) {
+        return implode(PHP_EOL, collect($this->executor)->map(function ($line) {
             return preg_replace(
-                "/^[0-9]{1,}[.]/i",
-                "",
+                '/^[0-9]{1,}[.]/i',
+                '',
                 str_replace(
                     "\n",
-                    "",
+                    '',
                     array_get($line, 'line')
                 )
             );
@@ -139,7 +142,7 @@ class Exception extends Model
 
     public function getShortExceptionTextAttribute(): string
     {
-        if (!$this->exception) {
+        if (! $this->exception) {
             return '-No exception text-';
         }
 
@@ -147,8 +150,6 @@ class Exception extends Model
     }
 
     /**
-     * @param $query
-     *
      * @return mixed
      */
     public function scopeNotMailed($query)
@@ -157,8 +158,6 @@ class Exception extends Model
     }
 
     /**
-     * @param $query
-     *
      * @return mixed
      */
     public function scopeNew($query)
@@ -188,9 +187,6 @@ class Exception extends Model
             ->where('created_at', '>', now()->subMonth());
     }
 
-    /**
-     *
-     */
     public function markAsRead()
     {
         $this->status = self::READ;
@@ -198,7 +194,7 @@ class Exception extends Model
     }
 
     /**
-     * @param string $status
+     * @param  string  $status
      */
     public function markAs($status = self::FIXED)
     {

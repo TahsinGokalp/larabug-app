@@ -45,12 +45,11 @@ class HomeController extends Controller
                 return $exceptions->count();
             });
 
-
         return inertia('Dashboard', [
             'exceptions' => $exceptions,
             'exceptionChart' => $exceptionChart,
             'totalExceptions' => $totalExceptions,
-            'totalProjects' => $totalProjects
+            'totalProjects' => $totalProjects,
         ]);
     }
 

@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\Feedback;
 use App\Models\Exception;
+use App\Models\Feedback;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 

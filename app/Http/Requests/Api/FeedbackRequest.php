@@ -25,8 +25,8 @@ class FeedbackRequest extends FormRequest
     {
         return [
             'name' => [
-                'required'
-            ]
+                'required',
+            ],
         ];
     }
 }

@@ -15,8 +15,6 @@ class StartsWith implements Rule
 
     /**
      * Create a new rule instance.
-     *
-     * @param $starts
      */
     public function __construct($starts)
     {
@@ -26,9 +24,8 @@ class StartsWith implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param string $attribute
-     * @param mixed $value
-     *
+     * @param  string  $attribute
+     * @param  mixed  $value
      * @return bool
      */
     public function passes($attribute, $value)
@@ -47,13 +44,13 @@ class StartsWith implements Rule
         if (is_array($this->starts)) {
             $i = 0;
             foreach ($this->starts as $start) {
-                $str .= ($i !== 0 ? 'or' : null) . ' ' . $start;
+                $str .= ($i !== 0 ? 'or' : null).' '.$start;
                 $i++;
             }
         } else {
             $str = $this->starts;
         }
 
-        return 'The :attribute must start with ' . $str;
+        return 'The :attribute must start with '.$str;
     }
 }

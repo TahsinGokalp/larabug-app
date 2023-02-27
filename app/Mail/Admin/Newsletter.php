@@ -3,24 +3,22 @@
 namespace App\Mail\Admin;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class Newsletter extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-
     public $subject;
+
     public $content;
+
     public $user;
 
     /**
      * NewsletterMail constructor.
-     * @param $user
-     * @param $subject
-     * @param $content
      */
     public function __construct($user, $subject, $content)
     {

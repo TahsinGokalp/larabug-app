@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
 use App\Models\Feedback;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class FeedbackController extends Controller
@@ -18,7 +18,7 @@ class FeedbackController extends Controller
             ->paginateFilter();
 
         return inertia('Feedback/Index', [
-            'feedback' => $feedback
+            'feedback' => $feedback,
         ]);
     }
 
@@ -35,7 +35,7 @@ class FeedbackController extends Controller
         $minified = \JShrink\Minifier::minify(file_get_contents($file));
 
         return response($minified)->withHeaders([
-            'Content-Type' => 'application/javascript'
+            'Content-Type' => 'application/javascript',
         ]);
     }
 }

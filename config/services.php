@@ -40,7 +40,7 @@ return [
     'facebook' => [
         'client_id' => env('FACEBOOK_ID'),
         'client_secret' => env('FACEBOOK_SECRET'),
-        'redirect' => env('APP_URL') . '/login/facebook/callback',
+        'redirect' => env('APP_URL').'/login/facebook/callback',
     ],
 
     'stripe' => [
@@ -49,6 +49,6 @@ return [
     ],
 
     'horizon' => [
-        'token' => env('HORIZON_TOKEN')
-    ]
+        'token' => env('HORIZON_TOKEN'),
+    ],
 ];

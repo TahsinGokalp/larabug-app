@@ -1,11 +1,10 @@
 <?php
 
-use App\Models\User;
-use App\Models\Project;
 use App\Models\Exception;
-use function Pest\Laravel\post;
-
+use App\Models\Project;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
+use function Pest\Laravel\post;
 use function Pest\Laravel\withoutExceptionHandling;
 
 beforeEach(function () {

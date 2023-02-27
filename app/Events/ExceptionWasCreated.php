@@ -3,8 +3,8 @@
 namespace App\Events;
 
 use App\Models\Exception;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Queue\SerializesModels;
 
 class ExceptionWasCreated
 {
@@ -14,8 +14,6 @@ class ExceptionWasCreated
 
     /**
      * Create a new event instance.
-     *
-     * @param \App\Models\Exception $exception
      */
     public function __construct(Exception $exception)
     {

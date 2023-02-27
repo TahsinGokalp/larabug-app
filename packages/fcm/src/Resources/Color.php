@@ -32,18 +32,11 @@ class Color implements FcmResource
         return new self;
     }
 
-    /**
-     * @return float|null
-     */
     public function getRed(): ?float
     {
         return $this->red;
     }
 
-    /**
-     * @param  float|null  $red
-     * @return Color
-     */
     public function setRed(?float $red): self
     {
         $this->red = $red;
@@ -51,18 +44,11 @@ class Color implements FcmResource
         return $this;
     }
 
-    /**
-     * @return float|null
-     */
     public function getGreen(): ?float
     {
         return $this->green;
     }
 
-    /**
-     * @param  float|null  $green
-     * @return Color
-     */
     public function setGreen(?float $green): self
     {
         $this->green = $green;
@@ -70,18 +56,11 @@ class Color implements FcmResource
         return $this;
     }
 
-    /**
-     * @return float|null
-     */
     public function getBlue(): ?float
     {
         return $this->blue;
     }
 
-    /**
-     * @param  float|null  $blue
-     * @return Color
-     */
     public function setBlue(?float $blue): self
     {
         $this->blue = $blue;
@@ -89,18 +68,11 @@ class Color implements FcmResource
         return $this;
     }
 
-    /**
-     * @return float|null
-     */
     public function getAlpha(): ?float
     {
         return $this->alpha;
     }
 
-    /**
-     * @param  float|null  $alpha
-     * @return Color
-     */
     public function setAlpha(?float $alpha): self
     {
         $this->alpha = $alpha;

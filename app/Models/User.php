@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Traits\Planable;
 use App\Mail\User\WelcomeEmail;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Notifications\Notifiable;
+use App\Traits\Planable;
 use Filament\Models\Contracts\FilamentUser;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -31,13 +31,13 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         'receive_email',
         'newsletter',
         'locale',
-        'settings'
+        'settings',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
-        'google2fa_secret'
+        'google2fa_secret',
     ];
 
     protected $casts = [
@@ -53,12 +53,12 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     protected $dates = [
         'created_at',
         'updated_at',
-        'plan_expires_at'
+        'plan_expires_at',
     ];
 
     protected $appends = [
         'first_name',
-        'settings'
+        'settings',
     ];
 
     public static $filamentUserColumn = 'is_admin';
@@ -70,16 +70,16 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function getGravatar($size = 150)
     {
-        return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->attributes['email']))) . '?s=' . (int)$size;
+        return 'https://www.gravatar.com/avatar/'.md5(strtolower(trim($this->attributes['email']))).'?s='.(int) $size;
     }
 
     public function getSettingsAttribute($value)
     {
-        if (!$value) {
+        if (! $value) {
             return [
                 'code_preview' => [
                     'rainbow' => false,
-                ]
+                ],
             ];
         }
 

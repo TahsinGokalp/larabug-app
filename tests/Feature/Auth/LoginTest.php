@@ -3,18 +3,15 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
-use Inertia\Testing\AssertableInertia as Assert;
 
 test('login screen can be rendered', function () {
-
     $response = $this->get(route('login'));
-    
+
     $response->assertViewIs('frontend.login');
     $response->assertStatus(200);
 });
 
 test('users can login using the view', function () {
-
     $user = User::factory()->create();
 
     $response = $this->post(route('login'), [
@@ -27,7 +24,6 @@ test('users can login using the view', function () {
 });
 
 test('users cannot authenticate with an incorrect password', function () {
-
     $user = User::factory()->create();
 
     $response = $this->from(route('login'))->post(route('login'), [
@@ -43,7 +39,6 @@ test('users cannot authenticate with an incorrect password', function () {
 });
 
 test('authenticated users get redirected away from /login', function () {
-
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)->get(route('login'));

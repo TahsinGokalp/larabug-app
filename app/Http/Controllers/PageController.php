@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Sponsor;
 use App\Models\Exception;
+use App\Models\Sponsor;
 
 class PageController extends Controller
 {
@@ -42,7 +42,7 @@ class PageController extends Controller
         $sponsors = Sponsor::all();
 
         return view('frontend.larabug-is-free', [
-            'sponsors' => $sponsors
+            'sponsors' => $sponsors,
         ]);
     }
 

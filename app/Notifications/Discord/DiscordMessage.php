@@ -10,15 +10,17 @@ class DiscordMessage
      * @var string
      */
     public $content;
+
     public $username;
+
     public $image;
+
     public $embeds;
 
     /**
      * Set the text content of the message.
      *
-     * @param string $content
-     *
+     * @param  string  $content
      * @return $this
      */
     public function content($content)

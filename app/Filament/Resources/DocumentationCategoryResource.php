@@ -58,12 +58,12 @@ class DocumentationCategoryResource extends Resource
                 IconButtonAction::make('move up')
                     ->icon('heroicon-o-arrow-circle-up')
                     ->color(fn ($record) => $record->isFirstInOrder() ? 'gray' : 'primary')
-                    ->action(fn ($record) => !$record->isFirstInOrder() ? $record->moveOrderUp() : null),
+                    ->action(fn ($record) => ! $record->isFirstInOrder() ? $record->moveOrderUp() : null),
 
                 IconButtonAction::make('move down')
                     ->icon('heroicon-o-arrow-circle-down')
                     ->color(fn ($record) => $record->isLastInOrder() ? 'gray' : 'primary')
-                    ->action(fn ($record) => !$record->isLastInOrder() ? $record->moveOrderDown() : null)
+                    ->action(fn ($record) => ! $record->isLastInOrder() ? $record->moveOrderDown() : null),
             ])
             ->defaultSort('order_column');
     }

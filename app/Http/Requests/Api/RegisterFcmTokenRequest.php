@@ -11,8 +11,8 @@ class RegisterFcmTokenRequest extends FormRequest
         return [
             'token' => [
                 'required',
-                'string'
-            ]
+                'string',
+            ],
         ];
     }
 

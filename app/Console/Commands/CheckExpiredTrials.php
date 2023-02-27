@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\User\TrialExpiredEmail;
 use App\Models\User;
 use Illuminate\Console\Command;
-use App\Mail\User\TrialExpiredEmail;
 
 class CheckExpiredTrials extends Command
 {

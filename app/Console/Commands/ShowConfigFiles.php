@@ -42,11 +42,11 @@ class ShowConfigFiles extends Command
         $configArray = $configs->all();
         foreach ($configArray as $header => $items) {
             foreach ($items as $key => $value) {
-                if (!is_array($value)) {
+                if (! is_array($value)) {
                     $data[$header][] = [$key, $value];
                 } else {
                     foreach ($value as $arrayItem => $valueItem) {
-                        if (!is_array($valueItem)) {
+                        if (! is_array($valueItem)) {
                             $data[$header][] = [$key, $valueItem];
                         }
                     }

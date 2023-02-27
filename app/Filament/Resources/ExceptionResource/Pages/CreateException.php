@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources\ExceptionResource\Pages;
 
-use Filament\Resources\Pages\CreateRecord;
 use App\Filament\Resources\ExceptionResource;
+use Filament\Resources\Pages\CreateRecord;
 
 class CreateException extends CreateRecord
 {

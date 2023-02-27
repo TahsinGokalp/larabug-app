@@ -137,18 +137,11 @@ class AndroidNotification implements FcmResource
         return new self;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param  string|null  $title
-     * @return AndroidNotification
-     */
     public function setTitle(?string $title): self
     {
         $this->title = $title;
@@ -156,18 +149,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBody(): ?string
     {
         return $this->body;
     }
 
-    /**
-     * @param  string|null  $body
-     * @return AndroidNotification
-     */
     public function setBody(?string $body): self
     {
         $this->body = $body;
@@ -175,18 +161,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getIcon(): ?string
     {
         return $this->icon;
     }
 
-    /**
-     * @param  string|null  $icon
-     * @return AndroidNotification
-     */
     public function setIcon(?string $icon): self
     {
         $this->icon = $icon;
@@ -194,18 +173,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getColor(): ?string
     {
         return $this->color;
     }
 
-    /**
-     * @param  string|null  $color
-     * @return AndroidNotification
-     */
     public function setColor(?string $color): self
     {
         $this->color = $color;
@@ -213,18 +185,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getSound(): ?string
     {
         return $this->sound;
     }
 
-    /**
-     * @param  string|null  $sound
-     * @return AndroidNotification
-     */
     public function setSound(?string $sound): self
     {
         $this->sound = $sound;
@@ -232,18 +197,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTag(): ?string
     {
         return $this->tag;
     }
 
-    /**
-     * @param  string|null  $tag
-     * @return AndroidNotification
-     */
     public function setTag(?string $tag): self
     {
         $this->tag = $tag;
@@ -251,18 +209,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getClickAction(): ?string
     {
         return $this->clickAction;
     }
 
-    /**
-     * @param  string|null  $clickAction
-     * @return AndroidNotification
-     */
     public function setClickAction(?string $clickAction): self
     {
         $this->clickAction = $clickAction;
@@ -270,18 +221,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBodyLocKey(): ?string
     {
         return $this->bodyLocKey;
     }
 
-    /**
-     * @param  string|null  $bodyLocKey
-     * @return AndroidNotification
-     */
     public function setBodyLocKey(?string $bodyLocKey): self
     {
         $this->bodyLocKey = $bodyLocKey;
@@ -299,7 +243,6 @@ class AndroidNotification implements FcmResource
 
     /**
      * @param  string[]|null  $bodyLocArgs
-     * @return AndroidNotification
      */
     public function setBodyLocArgs(?array $bodyLocArgs): self
     {
@@ -308,18 +251,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitleLocKey(): ?string
     {
         return $this->titleLocKey;
     }
 
-    /**
-     * @param  string|null  $titleLocKey
-     * @return AndroidNotification
-     */
     public function setTitleLocKey(?string $titleLocKey): self
     {
         $this->titleLocKey = $titleLocKey;
@@ -337,7 +273,6 @@ class AndroidNotification implements FcmResource
 
     /**
      * @param  string[]|null  $titleLocArgs
-     * @return AndroidNotification
      */
     public function setTitleLocArgs(?array $titleLocArgs): self
     {
@@ -346,18 +281,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getChannelId(): ?string
     {
         return $this->channelId;
     }
 
-    /**
-     * @param  string|null  $channelId
-     * @return AndroidNotification
-     */
     public function setChannelId(?string $channelId): self
     {
         $this->channelId = $channelId;
@@ -365,18 +293,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTicker(): ?string
     {
         return $this->ticker;
     }
 
-    /**
-     * @param  string|null  $ticker
-     * @return AndroidNotification
-     */
     public function setTicker(?string $ticker): self
     {
         $this->ticker = $ticker;
@@ -384,18 +305,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getSticky(): ?bool
     {
         return $this->sticky;
     }
 
-    /**
-     * @param  bool|null  $sticky
-     * @return AndroidNotification
-     */
     public function setSticky(?bool $sticky): self
     {
         $this->sticky = $sticky;
@@ -403,18 +317,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getEventTime(): ?string
     {
         return $this->eventTime;
     }
 
-    /**
-     * @param  string|null  $eventTime
-     * @return AndroidNotification
-     */
     public function setEventTime(?string $eventTime): self
     {
         $this->eventTime = $eventTime;
@@ -422,18 +329,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getLocalOnly(): ?bool
     {
         return $this->localOnly;
     }
 
-    /**
-     * @param  bool|null  $localOnly
-     * @return AndroidNotification
-     */
     public function setLocalOnly(?bool $localOnly): self
     {
         $this->localOnly = $localOnly;
@@ -441,18 +341,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return NotificationPriority|null
-     */
     public function getNotificationPriority(): ?NotificationPriority
     {
         return $this->notificationPriority;
     }
 
-    /**
-     * @param  NotificationPriority|null  $notificationPriority
-     * @return AndroidNotification
-     */
     public function setNotificationPriority(?NotificationPriority $notificationPriority): self
     {
         $this->notificationPriority = $notificationPriority;
@@ -460,18 +353,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getDefaultSound(): ?bool
     {
         return $this->defaultSound;
     }
 
-    /**
-     * @param  bool|null  $defaultSound
-     * @return AndroidNotification
-     */
     public function setDefaultSound(?bool $defaultSound): self
     {
         $this->defaultSound = $defaultSound;
@@ -479,18 +365,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getDefaultVibrateTimings(): ?bool
     {
         return $this->defaultVibrateTimings;
     }
 
-    /**
-     * @param  bool|null  $defaultVibrateTimings
-     * @return AndroidNotification
-     */
     public function setDefaultVibrateTimings(?bool $defaultVibrateTimings): self
     {
         $this->defaultVibrateTimings = $defaultVibrateTimings;
@@ -498,18 +377,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return bool|null
-     */
     public function getDefaultLightSettings(): ?bool
     {
         return $this->defaultLightSettings;
     }
 
-    /**
-     * @param  bool|null  $defaultLightSettings
-     * @return AndroidNotification
-     */
     public function setDefaultLightSettings(?bool $defaultLightSettings): self
     {
         $this->defaultLightSettings = $defaultLightSettings;
@@ -527,7 +399,6 @@ class AndroidNotification implements FcmResource
 
     /**
      * @param  string[]|null  $vibrateTimings
-     * @return AndroidNotification
      */
     public function setVibrateTimings(?array $vibrateTimings): self
     {
@@ -536,18 +407,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return Visibility|null
-     */
     public function getVisibility(): ?Visibility
     {
         return $this->visibility;
     }
 
-    /**
-     * @param  Visibility|null  $visibility
-     * @return AndroidNotification
-     */
     public function setVisibility(?Visibility $visibility): self
     {
         $this->visibility = $visibility;
@@ -555,18 +419,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getNotificationCount(): ?int
     {
         return $this->notificationCount;
     }
 
-    /**
-     * @param  int|null  $notificationCount
-     * @return AndroidNotification
-     */
     public function setNotificationCount(?int $notificationCount): self
     {
         $this->notificationCount = $notificationCount;
@@ -574,18 +431,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return LightSettings|null
-     */
     public function getLightSettings(): ?LightSettings
     {
         return $this->lightSettings;
     }
 
-    /**
-     * @param  LightSettings|null  $lightSettings
-     * @return AndroidNotification
-     */
     public function setLightSettings(?LightSettings $lightSettings): self
     {
         $this->lightSettings = $lightSettings;
@@ -593,18 +443,11 @@ class AndroidNotification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getImage(): ?string
     {
         return $this->image;
     }
 
-    /**
-     * @param  string|null  $image
-     * @return AndroidNotification
-     */
     public function setImage(?string $image): self
     {
         $this->image = $image;

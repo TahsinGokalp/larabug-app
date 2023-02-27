@@ -5,7 +5,6 @@ namespace App\Tests\Feature\Auth;
 use App\Models\User;
 
 test('registration screen can be rendered', function () {
-
     $response = $this->get(route('register'));
 
     $response->assertViewIs('frontend.register');
@@ -13,7 +12,6 @@ test('registration screen can be rendered', function () {
 });
 
 test('new users can register', function () {
-
     $response = $this->post(route('register'), [
         'name' => 'Test User',
         'email' => 'test@example.com',
@@ -27,7 +25,6 @@ test('new users can register', function () {
 });
 
 test('validation rules are adhered to', function () {
-
     $response = $this->post(route('register'), [
         'name' => '',
         'email' => '',
@@ -39,7 +36,6 @@ test('validation rules are adhered to', function () {
 });
 
 test('password must require a number as a minimum', function () {
-
     $response = $this->post(route('register'), [
         'name' => 'Test User',
         'email' => 'test@example.com',
@@ -51,7 +47,6 @@ test('password must require a number as a minimum', function () {
 });
 
 test('authenticated users get redirected away from /register', function () {
-
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)->get(route('register'));

@@ -175,7 +175,7 @@ return [
             'tries' => 1,
             'timeout' => 60,
             'nice' => 0,
-        ]
+        ],
     ],
 
     'environments' => [

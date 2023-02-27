@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use App\Models\SocialUser;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Response;
-use Spatie\Honeypot\ProtectAgainstSpam;
-use Laravel\Socialite\Facades\Socialite;
+use App\Models\SocialUser;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Laravel\Socialite\Facades\Socialite;
+use Spatie\Honeypot\ProtectAgainstSpam;
 
 class LoginController extends Controller
 {
@@ -23,7 +23,7 @@ class LoginController extends Controller
     protected $redirectTo = '/panel';
 
     protected $supportedProviders = [
-        'github'
+        'github',
     ];
 
     public function showLoginForm()
@@ -33,7 +33,6 @@ class LoginController extends Controller
 
     /**
      * Create a new controller instance.
-     *
      */
     public function __construct()
     {
@@ -44,7 +43,6 @@ class LoginController extends Controller
     /**
      * Log the user out of the application.
      *
-     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function logout(Request $request)
@@ -61,15 +59,14 @@ class LoginController extends Controller
     /**
      * Redirect the user to the GitHub authentication page.
      *
-     * @param string $provider
-     *
+     * @param  string  $provider
      * @return Response
      */
     public function redirectToProvider($provider = 'facebook')
     {
-        if (!in_array($provider, $this->supportedProviders)) {
+        if (! in_array($provider, $this->supportedProviders)) {
             return redirect()->route('login')->withErrors([
-                'provider' => 'This provider (' . $provider . ') is not supported.'
+                'provider' => 'This provider ('.$provider.') is not supported.',
             ]);
         }
 
@@ -79,8 +76,7 @@ class LoginController extends Controller
     /**
      * Obtain the user information from GitHub.
      *
-     * @param string $provider
-     *
+     * @param  string  $provider
      * @return Response
      */
     public function handleProviderCallback(Request $request, $provider = 'facebook')
@@ -106,38 +102,38 @@ class LoginController extends Controller
 
             if ($request->user() && $socialUser->user_id != $request->user()->id) {
                 return redirect()->route('login')->withErrors([
-                    'provider' => 'This ' . $provider . ' provider is already linked to another account.'
+                    'provider' => 'This '.$provider.' provider is already linked to another account.',
                 ]);
             }
         } elseif ($request->user()) {
             $user = $request->user();
         } else {
-            if (!$social->getEmail()) {
+            if (! $social->getEmail()) {
                 return redirect()->route('login')->withErrors([
-                    'provider' => 'We did not receive a e-mail address to log you in with, please evaluate your login from the third party.'
+                    'provider' => 'We did not receive a e-mail address to log you in with, please evaluate your login from the third party.',
                 ]);
             }
 
             $user = User::query()->where('email', $social->getEmail())
                 ->first();
 
-            if (!$user) {
+            if (! $user) {
                 $user = User::query()->create([
                     'name' => $social->getName(),
                     'email' => $social->getEmail(),
-                    'password' => str_random()
+                    'password' => str_random(),
                 ]);
             }
         }
 
-        if (!$socialUser) {
+        if (! $socialUser) {
             $socialUser = $user->social_users()->create([
                 'provider' => $provider,
                 'provider_id' => $social->getId(),
             ]);
         }
 
-        if (!auth()->check()) {
+        if (! auth()->check()) {
             auth()->guard()->login($user);
         }
 

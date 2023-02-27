@@ -8,7 +8,7 @@ class SocialUser extends Model
 {
     protected $fillable = [
         'provider',
-        'provider_id'
+        'provider_id',
     ];
 
     public function user()

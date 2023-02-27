@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Spatie\EloquentSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
 class Documentation extends Model implements Sortable
@@ -12,7 +12,7 @@ class Documentation extends Model implements Sortable
 
     protected $fillable = [
         'title',
-        'content'
+        'content',
     ];
 
     public $sortable = [
@@ -24,8 +24,8 @@ class Documentation extends Model implements Sortable
     {
         return [
             'slug' => [
-                'source' => 'title'
-            ]
+                'source' => 'title',
+            ],
         ];
     }
 

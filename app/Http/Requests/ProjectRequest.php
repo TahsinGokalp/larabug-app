@@ -38,13 +38,13 @@ class ProjectRequest extends FormRequest
                 'url',
                 'nullable',
                 'required_if:slack_webhook_enabled,true',
-                new StartsWith('https://hooks.slack.com/services/')
+                new StartsWith('https://hooks.slack.com/services/'),
             ],
             'discord_webhook' => [
                 'url',
                 'nullable',
                 'required_if:discord_webhook_enabled,true',
-                new StartsWith(['https://discordapp.com/api/webhooks/', 'https://discord.com/api/webhooks/', 'https://canary.discord.com/api/webhooks'])
+                new StartsWith(['https://discordapp.com/api/webhooks/', 'https://discord.com/api/webhooks/', 'https://canary.discord.com/api/webhooks']),
             ],
             'custom_webhook' => [
                 'url',
@@ -52,22 +52,22 @@ class ProjectRequest extends FormRequest
                 'required_if:custom_webhook_enabled,true',
             ],
             'receive_email' => [
-                'boolean'
+                'boolean',
             ],
             'notifications_enabled' => [
-                'boolean'
+                'boolean',
             ],
             'mobile_notifications_enabled' => [
-                'boolean'
+                'boolean',
             ],
             'slack_webhook_enabled' => [
-                'boolean'
+                'boolean',
             ],
             'discord_webhook_enabled' => [
-                'boolean'
+                'boolean',
             ],
             'custom_webhook_enabled' => [
-                'boolean'
+                'boolean',
             ],
         ];
     }

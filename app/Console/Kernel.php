@@ -2,14 +2,14 @@
 
 namespace App\Console;
 
-use App\Console\Commands\MailExceptions;
-use App\Console\Commands\GenerateSitemap;
-use App\Console\Commands\ShowConfigFiles;
-use App\Console\Commands\RotateExceptions;
 use App\Console\Commands\CheckExpiredPlans;
-use Illuminate\Console\Scheduling\Schedule;
 use App\Console\Commands\CheckExpiredTrials;
+use App\Console\Commands\GenerateSitemap;
+use App\Console\Commands\MailExceptions;
+use App\Console\Commands\RotateExceptions;
 use App\Console\Commands\RunProjectScreenshots;
+use App\Console\Commands\ShowConfigFiles;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -32,7 +32,6 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      *
-     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      *
      * @return void
      */

@@ -10,9 +10,7 @@ class PaidPlan
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -22,12 +20,12 @@ class PaidPlan
 
         if (
             $user &&
-            !$user->subscribed('default') &&
-            !$user->onTrial()
+            ! $user->subscribed('default') &&
+            ! $user->onTrial()
         ) {
             if ($request->expectsJson()) {
                 return response()->json([
-                    'error' => 'Your subscription is not sufficient to do this.'
+                    'error' => 'Your subscription is not sufficient to do this.',
                 ])->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
             }
             // This user is not a paying customer...

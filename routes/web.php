@@ -1,14 +1,14 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\DocumentationController;
+use App\Http\Controllers\ExceptionController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IssuesController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\FeedbackController;
-use App\Http\Controllers\ExceptionController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\ProjectController;
 
 Route::permanentRedirect('terms', 'terms-of-service');
 Route::permanentRedirect('privacy', 'privacy-policy');
@@ -40,7 +40,7 @@ Route::get('exception/{exception:publish_hash}', [PageController::class, 'except
 
 Auth::routes([
     'register' => config('auth.register_enabled'),
-    'verify' => config('auth.verify_enabled')
+    'verify' => config('auth.verify_enabled'),
 ]);
 
 Route::get('login/{provider}', [LoginController::class, 'redirectToProvider'])->name('socialite.login');

@@ -9,7 +9,7 @@ class DiscordChannel
     protected $discord;
 
     /**
-     * @param \App\Utilities\Discord\Discord $discord
+     * @param  \App\Utilities\Discord\Discord  $discord
      */
     public function __construct(Discord $discord)
     {
@@ -19,8 +19,7 @@ class DiscordChannel
     /**
      * Send the given notification.
      *
-     * @param  mixed                                  $notifiable
-     * @param  \Illuminate\Notifications\Notification $notification
+     * @param  mixed  $notifiable
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -29,7 +28,7 @@ class DiscordChannel
         $message = $notification->toDiscord($notifiable);
         $route = $notifiable->routeNotificationForDiscord($notification);
 
-        $this->discord->send($notifiable, $route,  [
+        $this->discord->send($notifiable, $route, [
             'content' => str_limit($message->content, 1500),
             'username' => $message->username,
             'avatar_url' => $message->image,

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddIndexes extends Migration
 {
@@ -16,14 +16,14 @@ class AddIndexes extends Migration
         Schema::table('projects', function (Blueprint $table) {
             $table->index([
                 'created_at',
-                'key'
+                'key',
             ]);
         });
 
         Schema::table('exceptions', function (Blueprint $table) {
             $table->index([
                 'created_at',
-                'project_id'
+                'project_id',
             ]);
         });
     }

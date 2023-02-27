@@ -27,18 +27,11 @@ class ApnsConfig implements FcmResource
         return new self;
     }
 
-    /**
-     * @return array|null
-     */
     public function getHeaders(): ?array
     {
         return $this->headers;
     }
 
-    /**
-     * @param  array|null  $headers
-     * @return ApnsConfig
-     */
     public function setHeaders(?array $headers): self
     {
         $this->headers = $headers;
@@ -46,18 +39,11 @@ class ApnsConfig implements FcmResource
         return $this;
     }
 
-    /**
-     * @return array|null
-     */
     public function getPayload(): ?array
     {
         return $this->payload;
     }
 
-    /**
-     * @param  array|null  $payload
-     * @return ApnsConfig
-     */
     public function setPayload(?array $payload): self
     {
         $this->payload = $payload;
@@ -65,18 +51,11 @@ class ApnsConfig implements FcmResource
         return $this;
     }
 
-    /**
-     * @return ApnsFcmOptions|null
-     */
     public function getFcmOptions(): ?ApnsFcmOptions
     {
         return $this->fcmOptions;
     }
 
-    /**
-     * @param  ApnsFcmOptions  $fcmOptions
-     * @return ApnsConfig
-     */
     public function setFcmOptions(ApnsFcmOptions $fcmOptions): self
     {
         $this->fcmOptions = $fcmOptions;

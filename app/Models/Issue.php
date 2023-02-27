@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Kblais\Uuid\Uuid;
-use EloquentFilter\Filterable;
 use App\Models\Concerns\HasSparklines;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Kblais\Uuid\Uuid;
 
 class Issue extends Model
 {
@@ -48,7 +48,7 @@ class Issue extends Model
 
     public function getStatusTextAttribute()
     {
-        return trans('status.' . strtoupper($this->status));
+        return trans('status.'.strtoupper($this->status));
     }
 
     public function getLastOccurredAtHumanAttribute()

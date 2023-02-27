@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\Projects\GetSiteScreenshot;
 use App\Models\Project;
 use Illuminate\Console\Command;
-use App\Jobs\Projects\GetSiteScreenshot;
 
 class RunProjectScreenshots extends Command
 {

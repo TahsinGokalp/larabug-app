@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Exception;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\ExceptionResource;
+use App\Models\Exception;
+use Illuminate\Http\Request;
 
 class ExceptionController extends Controller
 {

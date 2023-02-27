@@ -17,6 +17,6 @@ class RotateExceptions extends Command
     {
         $rotate = Exception::query()->where('created_at', '<', now()->subDays(20))->delete();
 
-        $this->info('Rotated ' . $rotate . ' exceptions!');
+        $this->info('Rotated '.$rotate.' exceptions!');
     }
 }

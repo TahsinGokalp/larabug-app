@@ -4,9 +4,9 @@ namespace App\Mail\User;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class WelcomeEmail extends Mailable implements ShouldQueue
 {
@@ -32,7 +32,7 @@ class WelcomeEmail extends Mailable implements ShouldQueue
     public function build()
     {
         return $this
-            ->subject('Welcome to ' . config('app.name') . ' 🐞')
+            ->subject('Welcome to '.config('app.name').' 🐞')
             ->markdown('emails.user.welcome');
     }
 }

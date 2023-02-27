@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Profile;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Profile\UpdateProfileRequest;
 use App\Http\Requests\Profile\ChangePasswordRequest;
+use App\Http\Requests\Profile\UpdateProfileRequest;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {

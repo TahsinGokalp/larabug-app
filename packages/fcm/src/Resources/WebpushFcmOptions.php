@@ -22,18 +22,11 @@ class WebpushFcmOptions implements FcmResource
         return new self;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLink(): ?string
     {
         return $this->link;
     }
 
-    /**
-     * @param  string|null  $link
-     * @return WebpushFcmOptions
-     */
     public function setLink(?string $link): self
     {
         $this->link = $link;
@@ -41,18 +34,11 @@ class WebpushFcmOptions implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAnalyticsLabel(): ?string
     {
         return $this->analyticsLabel;
     }
 
-    /**
-     * @param  string|null  $analyticsLabel
-     * @return WebpushFcmOptions
-     */
     public function setAnalyticsLabel(?string $analyticsLabel): self
     {
         $this->analyticsLabel = $analyticsLabel;

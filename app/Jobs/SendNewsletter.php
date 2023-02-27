@@ -4,27 +4,26 @@ namespace App\Jobs;
 
 use App\Models\Newsletter;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SendNewsletter implements ShouldQueue
 {
     use InteractsWithQueue, Queueable, SerializesModels;
 
     protected $users;
+
     protected $subject;
+
     protected $content;
+
     protected $newsletter;
 
     /**
      * Create a new job instance.
-     *
-     * @param \Illuminate\Support\Collection $users
-     * @param                                $subject
-     * @param                                $content
      */
     public function __construct(Collection $users, $subject, $content, Newsletter $newsletter)
     {

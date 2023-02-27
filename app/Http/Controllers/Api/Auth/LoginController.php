@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Api\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\UserResource;
 
 class LoginController extends Controller
 {
@@ -30,7 +30,7 @@ class LoginController extends Controller
 
         return response()->json([
             'user' => new UserResource($user),
-            'token' => $user->api_token
+            'token' => $user->api_token,
         ], Response::HTTP_OK);
     }
 

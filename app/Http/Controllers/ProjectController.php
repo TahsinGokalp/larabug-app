@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
-use Illuminate\Http\Request;
-use App\Notifications\TestWebhook;
 use App\Http\Requests\ProjectRequest;
+use App\Models\Project;
+use App\Notifications\TestWebhook;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -81,14 +81,14 @@ class ProjectController extends Controller
             ->projects()
             ->findOrFail($id);
 
-        if (!$project->isOwner()) {
+        if (! $project->isOwner()) {
             return redirect()->route('panel.projects.show', $project)->withErrors([
-                'You are not the main owner of this project, therefore you cannot edit the project.'
+                'You are not the main owner of this project, therefore you cannot edit the project.',
             ]);
         }
 
         return inertia('Projects/Edit', [
-            'project' => $project
+            'project' => $project,
         ]);
     }
 
@@ -100,9 +100,9 @@ class ProjectController extends Controller
 
         $previousUrl = $project->url;
 
-        if (!$project->isOwner()) {
+        if (! $project->isOwner()) {
             return redirect()->route('panel.projects.show', $project)->withErrors([
-                'You are not the main owner of this project, therefore you cannot edit the project.'
+                'You are not the main owner of this project, therefore you cannot edit the project.',
             ]);
         }
 
@@ -128,9 +128,9 @@ class ProjectController extends Controller
             ->projects()
             ->findOrFail($id);
 
-        if (!$project->isOwner()) {
+        if (! $project->isOwner()) {
             return redirect()->route('panel.projects.show', $project)->withErrors([
-                'You are not the main owner of this project, therefore you cannot edit the project.'
+                'You are not the main owner of this project, therefore you cannot edit the project.',
             ]);
         }
 
@@ -146,7 +146,7 @@ class ProjectController extends Controller
             ->findOrFail($id);
 
         return inertia('Projects/Installation', [
-            'project' => $project
+            'project' => $project,
         ]);
     }
 
@@ -157,7 +157,7 @@ class ProjectController extends Controller
             ->findOrFail($id);
 
         return inertia('Projects/FeedbackInstallation', [
-            'project' => $project
+            'project' => $project,
         ]);
     }
 
@@ -174,7 +174,7 @@ class ProjectController extends Controller
 
     protected function attachGroup(Request $request, Project $project)
     {
-        if (!$request->user()->canManageGroups()) {
+        if (! $request->user()->canManageGroups()) {
             return;
         }
 
@@ -183,7 +183,7 @@ class ProjectController extends Controller
         /*
          * If no group is found, then dissociate it.
          */
-        if (!$group) {
+        if (! $group) {
             $group = null;
         }
 

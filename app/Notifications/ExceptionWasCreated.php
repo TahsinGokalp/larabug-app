@@ -3,34 +3,33 @@
 namespace App\Notifications;
 
 use App\Models\Exception;
-use Illuminate\Support\Str;
-use Illuminate\Bus\Queueable;
-use NotificationChannels\Fcm\FcmChannel;
-use NotificationChannels\Fcm\FcmMessage;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Notifications\Discord\DiscordChannel;
-use App\Notifications\Discord\DiscordMessage;
-use NotificationChannels\Fcm\Resources\ApnsConfig;
 use App\Notifications\CustomWebhook\WebhookChannel;
 use App\Notifications\CustomWebhook\WebhookMessage;
+use App\Notifications\Discord\DiscordChannel;
+use App\Notifications\Discord\DiscordMessage;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\SlackMessage;
+use Illuminate\Notifications\Notification;
+use Illuminate\Support\Str;
+use NotificationChannels\Fcm\FcmChannel;
+use NotificationChannels\Fcm\FcmMessage;
 use NotificationChannels\Fcm\Resources\AndroidConfig;
-use NotificationChannels\Fcm\Resources\ApnsFcmOptions;
 use NotificationChannels\Fcm\Resources\AndroidFcmOptions;
 use NotificationChannels\Fcm\Resources\AndroidNotification;
+use NotificationChannels\Fcm\Resources\ApnsConfig;
+use NotificationChannels\Fcm\Resources\ApnsFcmOptions;
 
 class ExceptionWasCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
     private $project;
+
     private $exception;
 
     /**
      * Create a new notification instance.
-     *
-     * @param \App\Models\Exception $exception
      */
     public function __construct(Exception $exception)
     {
@@ -41,8 +40,7 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
-     *
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -71,20 +69,19 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param mixed $notifiable
-     *
+     * @param  mixed  $notifiable
      * @return SlackMessage
      */
     public function toSlack($notifiable)
     {
         return (new SlackMessage)
             ->error()
-            ->content('[' . $this->project->title . '] New exception thrown')
+            ->content('['.$this->project->title.'] New exception thrown')
             ->attachment(function ($attachment) {
                 $attachment->title($this->exception->exception, $this->exception->route_url)
                     ->fields([
                         'Class' => $this->exception->class,
-                        'Date' => $this->exception->created_at->format('Y-m-d H:i:s') . ' (UTC)',
+                        'Date' => $this->exception->created_at->format('Y-m-d H:i:s').' (UTC)',
                         'File' => $this->exception->file,
                         'Line' => $this->exception->line,
                     ]);
@@ -99,18 +96,18 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
             ->embeds([
                 [
                     'color' => 13772369,
-                    'title' => '[' . $this->project->title . '] New exception thrown',
+                    'title' => '['.$this->project->title.'] New exception thrown',
                     'description' => $this->exception->exception,
                     'fields' => [
                         [
                             'name' => 'Class',
                             'value' => $this->exception->class ?? 'no value',
-                            'inline' => true
+                            'inline' => true,
                         ],
                         [
                             'name' => 'Date',
-                            'value' => $this->exception->created_at->format('Y-m-d H:i:s') . ' (UTC)',
-                            'inline' => true
+                            'value' => $this->exception->created_at->format('Y-m-d H:i:s').' (UTC)',
+                            'inline' => true,
                         ],
                         [
                             'name' => 'File',
@@ -126,8 +123,8 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
                             'name' => 'View',
                             'value' => $this->exception->route_url,
                             'inline' => false,
-                        ]
-                    ]
+                        ],
+                    ],
                 ],
             ]);
     }
@@ -135,8 +132,7 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
     /**
      * Get the webhook representation of the notification.
      *
-     * @param mixed $notifiable
-     *
+     * @param  mixed  $notifiable
      * @return WebhookMessage
      */
     public function toWebhook($notifiable)
@@ -146,11 +142,11 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
                 'Exception' => $this->exception->exception,
                 'RouteUrl' => $this->exception->route_url,
                 'Class' => $this->exception->class,
-                'Date' => $this->exception->created_at->format('Y-m-d H:i:s') . ' (UTC)',
+                'Date' => $this->exception->created_at->format('Y-m-d H:i:s').' (UTC)',
                 'File' => $this->exception->file,
                 'Line' => $this->exception->line,
             ])
-            ->userAgent("LaraBug");
+            ->userAgent('LaraBug');
     }
 
     public function toFcm($notifiable)
@@ -159,7 +155,7 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
             ->setData(['exception_id' => $this->exception->id, 'project_id' => $this->project->id])
             ->setNotification(
                 \NotificationChannels\Fcm\Resources\Notification::create()
-                    ->setTitle('New exception in project ' . $this->project->title)
+                    ->setTitle('New exception in project '.$this->project->title)
                     ->setBody(Str::limit($this->exception->exception))
                     ->setImage('https://www.larabug.com/favicon.ico')
             )
@@ -181,8 +177,7 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
-     *
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

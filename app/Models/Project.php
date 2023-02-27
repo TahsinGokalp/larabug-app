@@ -3,16 +3,15 @@
 namespace App\Models;
 
 use App\Notifications\IssueStatusUpdatedNotification;
+use EloquentFilter\Filterable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Kblais\Uuid\Uuid;
-use EloquentFilter\Filterable;
-use Illuminate\Database\Eloquent\Model;
-use App\Notifications\ProjectWasCreated;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Kblais\Uuid\Uuid;
 
 /**
  * @property string slack_webhook
@@ -20,12 +19,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  * @property string discord_webhook
  * @property string title
  * @property mixed pivot
- * @property boolean receive_email
- * @property boolean notifications_enabled
- * @property boolean mobile_notifications_enabled
- * @property boolean slack_webhook_enabled
- * @property boolean discord_webhook_enabled
- * @property boolean custom_webhook_enabled
+ * @property bool receive_email
+ * @property bool notifications_enabled
+ * @property bool mobile_notifications_enabled
+ * @property bool slack_webhook_enabled
+ * @property bool discord_webhook_enabled
+ * @property bool custom_webhook_enabled
  * @property string key
  * @property mixed url
  */
@@ -62,7 +61,7 @@ class Project extends Model
     protected $dates = [
         'last_exception_at',
         'created_at',
-        'updated_at'
+        'updated_at',
     ];
 
     protected $casts = [
@@ -81,7 +80,7 @@ class Project extends Model
 
     protected $appends = [
         'route_url',
-        'feedback_script_html'
+        'feedback_script_html',
     ];
 
     public function getRouteUrlAttribute()
@@ -96,7 +95,7 @@ class Project extends Model
 
     public function getFeedbackScriptHtmlAttribute()
     {
-        return '<script src="' . $this->getFeedbackScriptUrl() . '"></script>';
+        return '<script src="'.$this->getFeedbackScriptUrl().'"></script>';
     }
 
     public function routeNotificationForSlack($notification)
@@ -179,7 +178,7 @@ class Project extends Model
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
-                $query->where('title', 'like', '%' . $search . '%');
+                $query->where('title', 'like', '%'.$search.'%');
             });
         });
     }

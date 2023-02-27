@@ -17,12 +17,12 @@ class ProjectFilter extends ModelFilter
 
     public function search($value)
     {
-        return $this->where('title', 'like', '%' . $value . '%');
+        return $this->where('title', 'like', '%'.$value.'%');
     }
 
     public function hasOpenExceptions($value)
     {
-        if (!$value) {
+        if (! $value) {
             return $this;
         }
 

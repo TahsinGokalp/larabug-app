@@ -17,18 +17,11 @@ class AndroidFcmOptions implements FcmResource
         return new self;
     }
 
-    /**
-     * @return string|null
-     */
     public function getAnalyticsLabel(): ?string
     {
         return $this->analyticsLabel;
     }
 
-    /**
-     * @param  string|null  $analyticsLabel
-     * @return AndroidFcmOptions
-     */
     public function setAnalyticsLabel(?string $analyticsLabel): self
     {
         $this->analyticsLabel = $analyticsLabel;

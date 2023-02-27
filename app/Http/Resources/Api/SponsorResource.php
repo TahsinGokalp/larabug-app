@@ -17,7 +17,7 @@ class SponsorResource extends JsonResource
         return [
             'name' => $this->name,
             'avatar' => $this->avatar,
-            'url' => $this->url
+            'url' => $this->url,
         ];
     }
 }

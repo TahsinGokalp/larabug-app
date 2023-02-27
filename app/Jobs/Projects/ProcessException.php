@@ -4,25 +4,25 @@ namespace App\Jobs\Projects;
 
 use App\Models\Project;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class ProcessException implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $project;
+
     public $data;
+
     public $date;
 
     /**
      * Create a new job instance.
      *
-     * @param array $data
-     * @param \App\Models\Project $project
-     * @param \Illuminate\Support\Carbon $date
+     * @param  \Illuminate\Support\Carbon  $date
      */
     public function __construct(array $data, Project $project, $date = null)
     {

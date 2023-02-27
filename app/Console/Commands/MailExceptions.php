@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Models\User;
-use App\Models\Exception;
 use App\Mail\ExceptionEmail;
+use App\Models\Exception;
+use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 
@@ -50,7 +50,7 @@ class MailExceptions extends Command
                             'id' => $project->id,
                             'title' => $project->title,
                             'exceptions' => $project->exceptions->map(function (Exception $exception) {
-                                if (!$exception->mailed) {
+                                if (! $exception->mailed) {
                                     $exception->markAsMailed();
                                 }
 
@@ -60,9 +60,9 @@ class MailExceptions extends Command
                                     'project_id' => $exception->project_id,
                                     'created_at' => $exception->created_at,
                                 ];
-                            })
+                            }),
                         ];
-                    })
+                    }),
                 ];
             });
 

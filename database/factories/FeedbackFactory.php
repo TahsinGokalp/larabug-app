@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Feedback;
 use App\Models\Exception;
+use App\Models\Feedback;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FeedbackFactory extends Factory
@@ -26,7 +26,7 @@ class FeedbackFactory extends Factory
             'exception_id' => Exception::factory(),
             'name' => $this->faker->name,
             'email' => $this->faker->email,
-            'feedback' => $this->faker->sentence
+            'feedback' => $this->faker->sentence,
         ];
     }
 }

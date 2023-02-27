@@ -1,18 +1,23 @@
-<?php namespace App\Traits;
+<?php
 
-use ReCaptcha\ReCaptcha;
+namespace App\Traits;
+
 use Illuminate\Http\Request;
+use ReCaptcha\ReCaptcha;
 
 /**
  * Captcha Trait
  *
  * @param $time
  * @param $tz
- *
  * @return bool
+ *
  * @version 1.0
+ *
  * @author Dennis Smink
+ *
  * @website http://www.dennissmink.nl
+ *
  * @date 07-11-2016
  */
 trait Captcha

@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Kblais\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Kblais\Uuid\Uuid;
 
 class ProjectGroup extends Model
 {
@@ -11,7 +11,7 @@ class ProjectGroup extends Model
 
     protected $fillable = [
         'title',
-        'description'
+        'description',
     ];
 
     public function projects()

@@ -25,7 +25,7 @@ class NewsletterRequest extends FormRequest
     {
         return [
             'subject' => 'required',
-            'content' => 'required'
+            'content' => 'required',
         ];
     }
 }

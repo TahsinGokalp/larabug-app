@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Validator;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Traits\Captcha;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
-use Spatie\Honeypot\ProtectAgainstSpam;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
+use Spatie\Honeypot\ProtectAgainstSpam;
+use Validator;
 
 class RegisterController extends Controller
 {
@@ -36,7 +36,6 @@ class RegisterController extends Controller
 
     /**
      * Create a new controller instance.
-     *
      */
     public function __construct()
     {
@@ -47,7 +46,6 @@ class RegisterController extends Controller
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param array $data
      *
      * @return \Illuminate\Contracts\Validation\Validator
      */
@@ -62,8 +60,8 @@ class RegisterController extends Controller
                 Password::min(8)
                     ->letters()
                     ->numbers()
-                    ->uncompromised()
-            ]
+                    ->uncompromised(),
+            ],
         ];
 
         return Validator::make($data, $rules);
@@ -72,7 +70,6 @@ class RegisterController extends Controller
     /**
      * Handle a registration request for the application.
      *
-     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function register(Request $request)
@@ -96,7 +93,6 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param array $data
      *
      * @return User
      */
@@ -105,10 +101,9 @@ class RegisterController extends Controller
         return User::query()->create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => $data['password']
+            'password' => $data['password'],
         ]);
     }
-
 
     public function showRegistrationForm()
     {

@@ -12,9 +12,6 @@ class WebhookChannel
     /** @var Client */
     protected $client;
 
-    /**
-     * @param Client $client
-     */
     public function __construct(Client $client)
     {
         $this->client = $client;
@@ -23,9 +20,7 @@ class WebhookChannel
     /**
      * Send the given notification.
      *
-     * @param mixed $notifiable
-     * @param \Illuminate\Notifications\Notification $notification
-     *
+     * @param  mixed  $notifiable
      * @return \GuzzleHttp\Psr7\Response
      *
      * @throws \NotificationChannels\Webhook\Exceptions\CouldNotSendNotification

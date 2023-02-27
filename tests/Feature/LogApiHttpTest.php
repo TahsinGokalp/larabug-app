@@ -1,14 +1,14 @@
 <?php
 
-use App\Models\User;
 use App\Models\Project;
-use function Pest\Laravel\be;
-use Illuminate\Support\Facades\Mail;
-use NotificationChannels\Fcm\FcmChannel;
-use App\Notifications\ExceptionWasCreated;
-use Illuminate\Support\Facades\Notification;
-use App\Notifications\Discord\DiscordChannel;
+use App\Models\User;
 use App\Notifications\CustomWebhook\WebhookChannel;
+use App\Notifications\Discord\DiscordChannel;
+use App\Notifications\ExceptionWasCreated;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
+use NotificationChannels\Fcm\FcmChannel;
+use function Pest\Laravel\be;
 
 beforeEach(function () {
     Notification::fake();

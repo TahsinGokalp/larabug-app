@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use Ramsey\Uuid\Uuid;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\FeedbackRequest;
+use App\Jobs\Projects\ProcessException;
 use App\Models\Exception;
-use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use App\Http\Controllers\Controller;
-use App\Jobs\Projects\ProcessException;
-use App\Http\Requests\Api\FeedbackRequest;
+use Illuminate\Support\Arr;
+use Ramsey\Uuid\Uuid;
 
 class ApiController extends Controller
 {
@@ -18,9 +18,9 @@ class ApiController extends Controller
         /* @var $user \App\Models\User */
         $user = $request->user();
 
-        if (!$user->hasVerifiedEmail()) {
+        if (! $user->hasVerifiedEmail()) {
             return response()->json([
-                'error' => 'This is not an verified account.'
+                'error' => 'This is not an verified account.',
             ])->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
@@ -32,10 +32,10 @@ class ApiController extends Controller
         }
 
         if (
-            !Arr::get($request->input('exception'), 'exception')
+            ! Arr::get($request->input('exception'), 'exception')
         ) {
             return response()->json([
-                'error' => 'Did not receive the correct parameters to process this exception'
+                'error' => 'Did not receive the correct parameters to process this exception',
             ])->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
@@ -59,7 +59,7 @@ class ApiController extends Controller
         ], $project, now()));
 
         return response([
-            'id' => $id
+            'id' => $id,
         ]);
     }
 
@@ -71,12 +71,12 @@ class ApiController extends Controller
             $request->only([
                 'name',
                 'email',
-                'feedback'
+                'feedback',
             ])
         );
 
         return response([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

@@ -10,6 +10,6 @@ class IssueFilter extends ModelFilter
 
     public function search($value)
     {
-        return $this->where('exception', 'like', '%' . $value . '%');
+        return $this->where('exception', 'like', '%'.$value.'%');
     }
 }

@@ -32,18 +32,11 @@ class WebpushConfig implements FcmResource
         return new self;
     }
 
-    /**
-     * @return array|null
-     */
     public function getHeaders(): ?array
     {
         return $this->headers;
     }
 
-    /**
-     * @param  array|null  $headers
-     * @return WebpushConfig
-     */
     public function setHeaders(?array $headers): self
     {
         $this->headers = $headers;
@@ -51,18 +44,11 @@ class WebpushConfig implements FcmResource
         return $this;
     }
 
-    /**
-     * @return array|null
-     */
     public function getData(): ?array
     {
         return $this->data;
     }
 
-    /**
-     * @param  array|null  $data
-     * @return WebpushConfig
-     */
     public function setData(?array $data): self
     {
         $this->data = $data;
@@ -70,18 +56,11 @@ class WebpushConfig implements FcmResource
         return $this;
     }
 
-    /**
-     * @return array|null
-     */
     public function getNotification(): ?array
     {
         return $this->notification;
     }
 
-    /**
-     * @param  array|null  $notification
-     * @return WebpushConfig
-     */
     public function setNotification(?array $notification): self
     {
         $this->notification = $notification;
@@ -89,18 +68,11 @@ class WebpushConfig implements FcmResource
         return $this;
     }
 
-    /**
-     * @return WebpushFcmOptions|null
-     */
     public function getFcmOptions(): ?WebpushFcmOptions
     {
         return $this->fcmOptions;
     }
 
-    /**
-     * @param  WebpushFcmOptions|null  $fcmOptions
-     * @return WebpushConfig
-     */
     public function setFcmOptions(?WebpushFcmOptions $fcmOptions): self
     {
         $this->fcmOptions = $fcmOptions;

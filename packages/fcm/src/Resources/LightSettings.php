@@ -27,18 +27,11 @@ class LightSettings implements FcmResource
         return new self;
     }
 
-    /**
-     * @return Color
-     */
     public function getColor(): Color
     {
         return $this->color;
     }
 
-    /**
-     * @param  Color  $color
-     * @return LightSettings
-     */
     public function setColor(Color $color): self
     {
         $this->color = $color;
@@ -46,18 +39,11 @@ class LightSettings implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLightOnDuration(): ?string
     {
         return $this->lightOnDuration;
     }
 
-    /**
-     * @param  string|null  $lightOnDuration
-     * @return LightSettings
-     */
     public function setLightOnDuration(?string $lightOnDuration): self
     {
         $this->lightOnDuration = $lightOnDuration;
@@ -65,18 +51,11 @@ class LightSettings implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLightOffDuration(): ?string
     {
         return $this->lightOffDuration;
     }
 
-    /**
-     * @param  string|null  $lightOffDuration
-     * @return LightSettings
-     */
     public function setLightOffDuration(?string $lightOffDuration): self
     {
         $this->lightOffDuration = $lightOffDuration;

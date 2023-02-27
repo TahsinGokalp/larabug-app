@@ -1,11 +1,10 @@
 <?php
 
-use Tests\CreatesApplication;
-use function Pest\Laravel\seed;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Foundation\Testing\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
-
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
+use function Pest\Laravel\seed;
+use Tests\CreatesApplication;
 
 uses(
     TestCase::class,

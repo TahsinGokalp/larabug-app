@@ -3,14 +3,15 @@
 namespace App\Models\Concerns;
 
 use App\Models\Exception;
-use Illuminate\Support\Str;
-use Illuminate\Support\HtmlString;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\HtmlString;
+use Illuminate\Support\Str;
 
 trait HasSparklines
 {
     private static int $cacheMinutes = 5;
+
     private static int $cacheVersion = 1;
 
     public function getSparkline(int $days = 32): string

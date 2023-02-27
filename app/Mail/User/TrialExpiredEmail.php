@@ -4,9 +4,9 @@ namespace App\Mail\User;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class TrialExpiredEmail extends Mailable implements ShouldQueue
 {
@@ -16,8 +16,6 @@ class TrialExpiredEmail extends Mailable implements ShouldQueue
 
     /**
      * Create a new message instance.
-     *
-     * @param \App\Models\User $user
      */
     public function __construct(User $user)
     {

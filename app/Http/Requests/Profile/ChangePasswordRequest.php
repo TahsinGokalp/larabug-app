@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\Profile;
 
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class ChangePasswordRequest extends FormRequest
 {
@@ -17,7 +17,7 @@ class ChangePasswordRequest extends FormRequest
                 Password::min(8)
                     ->letters()
                     ->numbers()
-                    ->uncompromised()
+                    ->uncompromised(),
             ],
         ];
     }

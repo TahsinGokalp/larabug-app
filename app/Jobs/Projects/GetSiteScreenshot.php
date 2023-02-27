@@ -4,11 +4,11 @@ namespace App\Jobs\Projects;
 
 use App\Models\Project;
 use Illuminate\Bus\Queueable;
-use Spatie\Browsershot\Browsershot;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
+use Spatie\Browsershot\Browsershot;
 
 class GetSiteScreenshot implements ShouldQueue
 {
@@ -18,8 +18,6 @@ class GetSiteScreenshot implements ShouldQueue
 
     /**
      * Create a new job instance.
-     *
-     * @param \App\Models\Project $project
      */
     public function __construct(Project $project)
     {
@@ -30,6 +28,7 @@ class GetSiteScreenshot implements ShouldQueue
      * Execute the job.
      *
      * @return void
+     *
      * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded
      */
     public function handle()
@@ -40,12 +39,12 @@ class GetSiteScreenshot implements ShouldQueue
                 ->windowSize(1280, 720)
                 ->waitUntilNetworkIdle()
                 ->timeout(10)
-                ->save(md5($this->project->title) . '.jpg');
+                ->save(md5($this->project->title).'.jpg');
 
             $this->project->clearMediaCollection('projectSiteScreenshot');
 
             $this->project
-                ->addMedia(base_path(md5($this->project->title) . '.jpg'))
+                ->addMedia(base_path(md5($this->project->title).'.jpg'))
                 ->toMediaCollection('projectSiteScreenshot');
         } catch (\Exception $e) {
             info($e->getMessage());

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Project;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\ProjectRequest;
-use App\Http\Resources\Api\ProjectResource;
 use App\Http\Resources\Api\ExceptionResource;
+use App\Http\Resources\Api\ProjectResource;
+use App\Models\Project;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -17,7 +17,7 @@ class ProjectController extends Controller
             $request->user()
                 ->projects()
                 ->when($request->input('search'), function ($query, $value) {
-                    return $query->where('title', 'like', '%' . $value . '%');
+                    return $query->where('title', 'like', '%'.$value.'%');
                 })
                 ->withCount('unreadExceptions')
                 ->latest('last_error_at')
@@ -42,7 +42,7 @@ class ProjectController extends Controller
         return ExceptionResource::collection(
             $project->exceptions()
                 ->when($request->input('search'), function ($query, $value) {
-                    return $query->where('exception', 'like', '%' . $value . '%');
+                    return $query->where('exception', 'like', '%'.$value.'%');
                 })
                 ->latest()
                 ->paginate()

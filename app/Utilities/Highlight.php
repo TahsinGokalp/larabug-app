@@ -27,15 +27,13 @@ class Highlight
                 (0x|\#)[\da-f]+|
                 \d+|
                 \d+(px|em|cm|mm|rem|s|\%)
-            )(?!\w)/ix'
-            => '<span style="color:#8CD0D3;">$1</span>',
+            )(?!\w)/ix' => '<span style="color:#8CD0D3;">$1</span>',
 
             // Make the bold assumption that an
             // all uppercase word has a special meaning
             '/(?<!\w|>|\#)(
                 [A-Z_0-9]{2,}
-            )(?!\w)/x'
-            => '<span style="color:#FFFFFF">$1</span>',
+            )(?!\w)/x' => '<span style="color:#FFFFFF">$1</span>',
 
             // Keywords
             '/(?<!\w|\$|\%|\@|>)(
@@ -45,14 +43,12 @@ class Highlight
                 real|string|array|global|const|static|public|private|protected|
                 published|extends|switch|true|false|null|void|this|self|struct|
                 char|signed|unsigned|short|long
-            )(?!\w|=")/ix'
-            => '<span style="color:#DFC47D">$1</span>',
+            )(?!\w|=")/ix' => '<span style="color:#DFC47D">$1</span>',
 
             // PHP/Perl-Style Vars: $var, %var, @var
             '/(?<!\w)(
                 (\$|\%|\@)(\-&gt;|\w)+
-            )(?!\w)/ix'
-            => '<span style="color:#CEDF99">$1</span>',
+            )(?!\w)/ix' => '<span style="color:#CEDF99">$1</span>',
         ];
 
         // Comments/Strings
@@ -86,14 +82,15 @@ class Highlight
     private function replaceId($matches)
     {
         $match = $matches[0];
-        $id = "##r" . uniqid() . "##";
+        $id = '##r'.uniqid().'##';
 
         // String or Comment?
         if (substr($match, 0, 2) == '//' || substr($match, 0, 2) == '/*' || substr($match, 0, 2) == '##' || substr($match, 0, 7) == '&lt;!--') {
-            $this->tokens[$id] = '<span style="color:#7F9F7F">' . $match . '</span>';
+            $this->tokens[$id] = '<span style="color:#7F9F7F">'.$match.'</span>';
         } else {
-            $this->tokens[$id] = '<span style="color:#CC9385">' . $match . '</span>';
+            $this->tokens[$id] = '<span style="color:#CC9385">'.$match.'</span>';
         }
+
         return $id;
     } // end replaceId
 }

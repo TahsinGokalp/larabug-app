@@ -55,7 +55,7 @@ class IssueStatusUpdatedNotification extends Notification
             ->embeds([
                 [
                     'color' => 13772369,
-                    'title' => '[' . $this->issue->project->title . '] Issue status changed',
+                    'title' => '['.$this->issue->project->title.'] Issue status changed',
                     'description' => $this->issue->exception,
                     'fields' => [
                         [
@@ -63,7 +63,7 @@ class IssueStatusUpdatedNotification extends Notification
                             'value' => $this->issue->status_text ?? 'test',
                             'inline' => true,
                         ],
-                    ]
+                    ],
                 ],
             ]);
     }
@@ -72,7 +72,7 @@ class IssueStatusUpdatedNotification extends Notification
     {
         return (new SlackMessage())
             ->error()
-            ->content('[' . $this->issue->project->title . '] Issue status changed')
+            ->content('['.$this->issue->project->title.'] Issue status changed')
             ->attachment(function ($attachment) {
                 $attachment->title($this->issue->exception, route('panel.issues.show', $this->issue->id))
                     ->fields([
@@ -90,7 +90,7 @@ class IssueStatusUpdatedNotification extends Notification
                 'Status' => $this->issue->status,
                 'StatusText' => $this->issue->status_text,
             ])
-            ->userAgent("LaraBug");
+            ->userAgent('LaraBug');
     }
 
     public function toFcm()
@@ -99,8 +99,8 @@ class IssueStatusUpdatedNotification extends Notification
             ->setData(['issue_id' => $this->issue->id, 'project_id' => $this->issue->project_id])
             ->setNotification(
                 \NotificationChannels\Fcm\Resources\Notification::create()
-                    ->setTitle('Issue status changed to ' . $this->issue->status_text)
-                    ->setBody(Str::limit($this->issue->exception) . ' - ' . $this->issue->project->title)
+                    ->setTitle('Issue status changed to '.$this->issue->status_text)
+                    ->setBody(Str::limit($this->issue->exception).' - '.$this->issue->project->title)
                     ->setImage('https://www.larabug.com/favicon.ico')
             )
             // Android sound

@@ -2,8 +2,8 @@
 
 namespace App\Utilities;
 
-use App\Models\Order;
 use App\Models\Exception;
+use App\Models\Order;
 
 /**
  * @property mixed orderGrowth
@@ -24,7 +24,7 @@ class Stats
         $stats = [];
 
         foreach ($exceptions as $exception) {
-            if (!isset($stats[$exception->created_at->format('d-m-Y')])) {
+            if (! isset($stats[$exception->created_at->format('d-m-Y')])) {
                 $stats[$exception->created_at->format('d-m-Y')]['total'] = 0;
             }
 
@@ -43,13 +43,13 @@ class Stats
         $orders = Order::paid()->where('created_at', '>=', carbon()->subDays(30))
             ->where('created_at', '<=', carbon())
             ->get([
-                'created_at'
+                'created_at',
             ]);
 
         $stats = [];
 
         foreach ($orders as $order) {
-            if (!isset($stats[$order->created_at->format('d-m-Y')])) {
+            if (! isset($stats[$order->created_at->format('d-m-Y')])) {
                 $stats[$order->created_at->format('d-m-Y')]['total'] = 0;
             }
 
@@ -61,8 +61,8 @@ class Stats
     }
 
     /**
-     * @param $property
      * @return mixed
+     *
      * @throws \Exception
      */
     public function __get($property)

@@ -2,17 +2,17 @@
 
 namespace App\Models;
 
-use Sushi\Sushi;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
+use Sushi\Sushi;
 
 class Sponsor extends Model
 {
     use Sushi;
 
     protected $casts = [
-        'created_at' => 'datetime'
+        'created_at' => 'datetime',
     ];
 
     public function getRows()
@@ -102,7 +102,7 @@ class Sponsor extends Model
 
         $allSponsors = array_merge($runningSponsors, $sponsors);
 
-        if (!$hasNextPage) {
+        if (! $hasNextPage) {
             return $allSponsors;
         }
 

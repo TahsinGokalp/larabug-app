@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Spatie\MediaLibrary\Media as BaseMedia;
@@ -10,7 +11,6 @@ class Media extends BaseMedia
 {
     /**
      * Sets the main image for a model, and resets the others.
-     *
      */
     public function setAsMainImage()
     {

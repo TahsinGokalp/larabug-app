@@ -3,8 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Project;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ProjectFactory extends Factory
 {
@@ -26,7 +26,7 @@ class ProjectFactory extends Factory
             'title' => $this->faker->company,
             'description' => $this->faker->text(50),
             'url' => $this->faker->url,
-            'key' => Str::random(25)
+            'key' => Str::random(25),
         ];
     }
 }

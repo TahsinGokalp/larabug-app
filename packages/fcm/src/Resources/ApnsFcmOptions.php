@@ -14,18 +14,11 @@ class ApnsFcmOptions implements FcmResource
      */
     protected $image;
 
-    /**
-     * @return string|null
-     */
     public function getAnalyticsLabel(): ?string
     {
         return $this->analyticsLabel;
     }
 
-    /**
-     * @param  string|null  $analyticsLabel
-     * @return ApnsFcmOptions
-     */
     public function setAnalyticsLabel(?string $analyticsLabel): self
     {
         $this->analyticsLabel = $analyticsLabel;
@@ -33,18 +26,11 @@ class ApnsFcmOptions implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getImage(): ?string
     {
         return $this->image;
     }
 
-    /**
-     * @param  string|null  $image
-     * @return ApnsFcmOptions
-     */
     public function setImage(?string $image): self
     {
         $this->image = $image;

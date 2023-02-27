@@ -9,18 +9,11 @@ class FcmOptions implements FcmResource
      */
     protected $analyticsLabel;
 
-    /**
-     * @return string|null
-     */
     public function getAnalyticsLabel(): ?string
     {
         return $this->analyticsLabel;
     }
 
-    /**
-     * @param  string|null  $analyticsLabel
-     * @return FcmOptions
-     */
     public function setAnalyticsLabel(?string $analyticsLabel): self
     {
         $this->analyticsLabel = $analyticsLabel;

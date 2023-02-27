@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Kblais\Uuid\Uuid;
 use EloquentFilter\Filterable;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Kblais\Uuid\Uuid;
 
 class Feedback extends Model
 {
@@ -16,11 +16,11 @@ class Feedback extends Model
     protected $fillable = [
         'name',
         'email',
-        'feedback'
+        'feedback',
     ];
 
     protected $appends = [
-        'avatar'
+        'avatar',
     ];
 
     public function exception()
@@ -35,6 +35,6 @@ class Feedback extends Model
 
     public function getGravatar($size = 150)
     {
-        return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->attributes['email']))) . '?s=' . (int)$size;
+        return 'https://www.gravatar.com/avatar/'.md5(strtolower(trim($this->attributes['email']))).'?s='.(int) $size;
     }
 }

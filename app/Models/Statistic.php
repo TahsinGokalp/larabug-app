@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Statistic extends Model
 {
     protected $fillable = [
-        'total_exceptions'
+        'total_exceptions',
     ];
 
     public static function getStatistics($key = 'total_exceptions')
@@ -19,7 +19,7 @@ class Statistic extends Model
     {
         $stats = self::query()->first();
 
-        $stats->{$key} ++;
+        $stats->{$key}++;
         $stats->save();
     }
 }

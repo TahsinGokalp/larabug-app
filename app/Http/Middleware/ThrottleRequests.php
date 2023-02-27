@@ -3,12 +3,12 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use RuntimeException;
-use Illuminate\Support\Str;
 use Illuminate\Cache\RateLimiter;
-use Illuminate\Support\InteractsWithTime;
-use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Illuminate\Support\InteractsWithTime;
+use Illuminate\Support\Str;
+use RuntimeException;
+use Symfony\Component\HttpFoundation\Response;
 
 class ThrottleRequests
 {
@@ -24,7 +24,6 @@ class ThrottleRequests
     /**
      * Create a new request throttler.
      *
-     * @param  \Illuminate\Cache\RateLimiter  $limiter
      * @return void
      */
     public function __construct(RateLimiter $limiter)
@@ -36,7 +35,6 @@ class ThrottleRequests
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
      * @param  int|string  $maxAttempts
      * @param  float|int  $decayMinutes
      * @param  string  $prefix
@@ -144,7 +142,6 @@ class ThrottleRequests
     /**
      * Add the limit header information to the given response.
      *
-     * @param  \Symfony\Component\HttpFoundation\Response  $response
      * @param  int  $maxAttempts
      * @param  int  $remainingAttempts
      * @param  int|null  $retryAfter

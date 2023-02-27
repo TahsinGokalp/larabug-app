@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property bool default
@@ -20,15 +20,15 @@ class Plan extends Model
         'max_projects',
         'max_retention_in_days',
         'max_exceptions_per_minute',
-        'has_group_management'
+        'has_group_management',
     ];
 
-    public function sluggable():array
+    public function sluggable(): array
     {
         return [
             'slug' => [
-                'source' => 'title'
-            ]
+                'source' => 'title',
+            ],
         ];
     }
 

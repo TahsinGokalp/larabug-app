@@ -2,10 +2,10 @@
 
 namespace App\Notifications\Discord;
 
+use App\Exceptions\CouldNotSendNotification;
 use Exception;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Exception\RequestException;
-use App\Exceptions\CouldNotSendNotification;
 
 class Discord
 {
@@ -15,19 +15,14 @@ class Discord
     /** @var \GuzzleHttp\Client */
     protected $httpClient;
 
-    /**
-     * @param  \GuzzleHttp\Client $http
-     */
     public function __construct(HttpClient $http)
     {
         $this->httpClient = $http;
     }
 
     /**
-     * @param        $notifiable
-     * @param  array $data
-     *
      * @return array
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function send($notifiable, string $route, array $data)
@@ -36,9 +31,9 @@ class Discord
     }
 
     /**
-     * @param  mixed $user
-     *
+     * @param  mixed  $user
      * @return string
+     *
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getPrivateChannel($user)
@@ -47,10 +42,7 @@ class Discord
     }
 
     /**
-     * @param         $verb
-     * @param  string $endpoint
-     * @param  array  $data
-     *
+     * @param  string  $endpoint
      * @return array
      *
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -65,18 +57,18 @@ class Discord
             $response = $this->httpClient->request($verb, $url, [
                 'json' => $data,
                 'headers' => [
-                    'Content-Type' => 'application/json'
-                ]
+                    'Content-Type' => 'application/json',
+                ],
             ]);
         } catch (RequestException $exception) {
-            info('DSERROR1:' . $exception->getMessage());
+            info('DSERROR1:'.$exception->getMessage());
 //            throw CouldNotSendNotification::serviceRespondedWithAnHttpError($exception->getResponse());
         } catch (Exception $exception) {
-            info('DSERROR2:' .$exception->getMessage());
+            info('DSERROR2:'.$exception->getMessage());
 //            throw CouldNotSendNotification::serviceCommunicationError($exception);
         }
 
-        if (!$response) {
+        if (! $response) {
             return;
         }
 

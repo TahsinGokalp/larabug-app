@@ -2,16 +2,16 @@
 
 namespace NotificationChannels\Fcm;
 
-use Throwable;
-use ReflectionException;
-use Kreait\Firebase\Messaging\Message;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Events\Dispatcher;
-use Kreait\Firebase\Messaging\CloudMessage;
-use Kreait\Firebase\Exception\MessagingException;
-use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Notifications\Events\NotificationFailed;
+use Illuminate\Notifications\Notification;
+use Kreait\Firebase\Exception\MessagingException;
+use Kreait\Firebase\Messaging\CloudMessage;
+use Kreait\Firebase\Messaging\Message;
 use NotificationChannels\Fcm\Exceptions\CouldNotSendNotification;
+use ReflectionException;
+use Throwable;
 
 class FcmChannel
 {
@@ -24,8 +24,6 @@ class FcmChannel
 
     /**
      * FcmChannel constructor.
-     *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $dispatcher
      */
     public function __construct(Dispatcher $dispatcher)
     {
@@ -41,7 +39,6 @@ class FcmChannel
      * Send the given notification.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
      * @return array
      *
      * @throws \NotificationChannels\Fcm\Exceptions\CouldNotSendNotification
@@ -104,8 +101,6 @@ class FcmChannel
     }
 
     /**
-     * @param  \Kreait\Firebase\Messaging\Message  $fcmMessage
-     * @param $token
      * @return array
      *
      * @throws \Kreait\Firebase\Exception\MessagingException
@@ -125,8 +120,6 @@ class FcmChannel
     }
 
     /**
-     * @param $fcmMessage
-     * @param  array  $tokens
      * @return \Kreait\Firebase\Messaging\MulticastSendReport
      *
      * @throws \Kreait\Firebase\Exception\MessagingException
@@ -141,8 +134,6 @@ class FcmChannel
      * Dispatch failed event.
      *
      * @param  mixed  $notifiable
-     * @param  \Illuminate\Notifications\Notification  $notification
-     * @param  \Throwable  $exception
      * @return array|null
      */
     protected function failedNotification($notifiable, Notification $notification, Throwable $exception)

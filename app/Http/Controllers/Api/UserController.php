@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\UserResource;
 use App\Http\Requests\Api\RegisterFcmTokenRequest;
+use App\Http\Resources\Api\UserResource;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         return $request->user('api')->fcmTokens()->create([
             'token' => $request->input('token'),
-            'device' => $request->input('device')
+            'device' => $request->input('device'),
         ]);
     }
 }

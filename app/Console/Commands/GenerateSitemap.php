@@ -24,7 +24,7 @@ class GenerateSitemap extends Command
 
     protected $disabledUrls = [
         '/login/github',
-        '/login/bitbucket'
+        '/login/bitbucket',
     ];
 
     /**

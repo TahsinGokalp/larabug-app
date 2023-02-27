@@ -12,7 +12,7 @@ class ProjectResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'unread_exceptions' => $this->unread_exceptions_count,
-            'total_exceptions' => (int)$this->total_exceptions,
+            'total_exceptions' => (int) $this->total_exceptions,
             'last_error_at' => $this->last_error_at,
             'created_at' => $this->created_at,
         ];

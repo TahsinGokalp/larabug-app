@@ -19,18 +19,11 @@ class Notification implements FcmResource
      */
     protected $image;
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    /**
-     * @param  string|null  $title
-     * @return Notification
-     */
     public function setTitle(?string $title): self
     {
         $this->title = $title;
@@ -38,18 +31,11 @@ class Notification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getBody(): ?string
     {
         return $this->body;
     }
 
-    /**
-     * @param  string|null  $body
-     * @return Notification
-     */
     public function setBody(?string $body): self
     {
         $this->body = $body;
@@ -57,18 +43,11 @@ class Notification implements FcmResource
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getImage(): ?string
     {
         return $this->image;
     }
 
-    /**
-     * @param  string|null  $image
-     * @return Notification
-     */
     public function setImage(?string $image): self
     {
         $this->image = $image;

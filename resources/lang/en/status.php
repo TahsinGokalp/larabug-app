@@ -5,5 +5,5 @@ return [
     'READ' => 'Read',
     'OPEN' => 'Open',
     'FIXED' => 'Fixed',
-    'DONE' => 'Done'
+    'DONE' => 'Done',
 ];
