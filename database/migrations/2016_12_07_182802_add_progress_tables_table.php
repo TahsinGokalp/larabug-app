@@ -14,7 +14,7 @@ class AddProgressTablesTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('total_logins')->after('google2fa_secret')->default(0);
+            $table->integer('total_logins')->default(0);
         });
 
         Schema::table('statistics', function (Blueprint $table) {

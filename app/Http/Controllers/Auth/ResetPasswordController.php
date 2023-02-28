@@ -20,7 +20,7 @@ class ResetPasswordController extends Controller
 
     use ResetsPasswords;
 
-    protected $redirectTo = '/panel';
+    protected string $redirectTo = '/panel';
 
     /**
      * Create a new controller instance.
@@ -30,14 +30,7 @@ class ResetPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    /**
-     * Reset the given user's password.
-     *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
-     * @param  string  $password
-     * @return void
-     */
-    protected function resetPassword($user, $password)
+    protected function resetPassword($user, $password): void
     {
         $user->forceFill([
             'password' => $password,

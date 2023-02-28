@@ -18,7 +18,6 @@ class UsersTableSeeder extends Seeder
         $item->name = 'Admin';
         $item->email = 'info@kodrika.com.tr';
         $item->password = 123456;
-        $item->is_admin = true;
         $item->email_verified_at = now();
         $item->save();
     }

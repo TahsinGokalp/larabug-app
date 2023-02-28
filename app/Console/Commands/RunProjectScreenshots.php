@@ -23,21 +23,11 @@ class RunProjectScreenshots extends Command
     protected $description = 'Grab a screenshot from the project\'s website for awesomeness.';
 
     /**
-     * Create a new command instance.
+     * Execute the console command.
      *
      * @return void
      */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
-    public function handle()
+    public function handle(): void
     {
         $projects = Project::whereNotNull('url')->where('url', '!=', '')->get();
 

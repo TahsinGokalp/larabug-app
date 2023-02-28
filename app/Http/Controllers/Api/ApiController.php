@@ -15,7 +15,6 @@ class ApiController extends Controller
 {
     public function log(Request $request)
     {
-        /* @var $user \App\Models\User */
         $user = $request->user();
 
         if (! $user->hasVerifiedEmail()) {

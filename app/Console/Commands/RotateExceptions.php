@@ -11,9 +11,9 @@ class RotateExceptions extends Command
 
     protected $description = 'Rotates all the exceptions that are expired';
 
-    protected $starterRetention = 30;
+    protected int $starterRetention = 30;
 
-    public function handle()
+    public function handle(): void
     {
         $rotate = Exception::query()->where('created_at', '<', now()->subDays(20))->delete();
 

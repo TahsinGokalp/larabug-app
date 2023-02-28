@@ -14,7 +14,7 @@ class MailExceptions extends Command
 
     protected $description = 'Command description';
 
-    public function handle()
+    public function handle(): void
     {
         $users = User::query()->where('receive_email', true)
             ->whereHas('projects', function ($query) {

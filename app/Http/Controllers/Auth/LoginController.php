@@ -18,7 +18,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/panel';
+    protected string $redirectTo = '/panel';
 
     public function showLoginForm()
     {
@@ -34,11 +34,6 @@ class LoginController extends Controller
         $this->middleware(ProtectAgainstSpam::class)->only('login');
     }
 
-    /**
-     * Log the user out of the application.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function logout(Request $request)
     {
         $this->guard()->logout();

@@ -9,10 +9,61 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Mail;
 
 /**
+ * App\Models\User
+ *
  * @property mixed plan
  * @property string api_token
  * @property mixed is_admin
  * @property bool plan_notified
+ * @property int $id
+ * @property string|null $name
+ * @property string $email
+ * @property string $password
+ * @property string|null $api_token
+ * @property int $first_setup
+ * @property bool $receive_email
+ * @property string|null $remember_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $total_logins
+ * @property string|null $last_mobile_login_at
+ * @property array|null $settings
+ * @property array|null $abilities
+ * @property string|null $email_verified_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserFcmToken> $fcmTokens
+ * @property-read int|null $fcm_tokens_count
+ * @property-read mixed $first_name
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProjectGroup> $projectGroups
+ * @property-read int|null $project_groups_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project> $projects
+ * @property-read int|null $projects_count
+ * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User wantsEmail()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereAbilities($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereApiToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereFirstSetup($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastMobileLoginAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereReceiveEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereSettings($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTotalLogins($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserFcmToken> $fcmTokens
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProjectGroup> $projectGroups
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project> $projects
+ * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -104,49 +155,9 @@ class User extends Authenticatable implements MustVerifyEmail
         $this->save();
     }
 
-    public function isAdmin()
-    {
-        return $this->is_admin;
-    }
-
     public function scopeWantsEmail($query)
     {
         return $query->where('receive_email', true);
-    }
-
-    public function scopeExpired($query)
-    {
-        return $query->where(function ($query) {
-            return $query
-                ->whereNotNull('plan_expires_at')
-                ->where('plan_expires_at', '<', carbon())
-                ->where('plan_notified', false);
-        });
-    }
-
-    public function scopePaidPlan($query)
-    {
-        return $query->whereNotNull('plan_expires_at');
-    }
-
-    public function newsletters()
-    {
-        return $this->belongsToMany(Newsletter::class)->latest();
-    }
-
-    public function plan()
-    {
-        return $this->belongsTo(Plan::class);
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
-
-    public function ordersLatest()
-    {
-        return $this->hasMany(Order::class)->latest();
     }
 
     public function projects()
@@ -157,16 +168,6 @@ class User extends Authenticatable implements MustVerifyEmail
     public function projectGroups()
     {
         return $this->hasMany(ProjectGroup::class);
-    }
-
-    public function social_users()
-    {
-        return $this->hasMany(SocialUser::class);
-    }
-
-    public function socialUsersLatest()
-    {
-        return $this->hasMany(SocialUser::class)->latest();
     }
 
     public function fcmTokens()
@@ -182,10 +183,6 @@ class User extends Authenticatable implements MustVerifyEmail
             $user->api_token = str_random(50);
         });
 
-        static::created(function ($user) {
-            Mail::to($user)->send(new WelcomeEmail($user));
-        });
-
         static::deleting(function (self $user) {
             foreach ($user->projects as $project) {
                 $project->exceptions()->delete();
@@ -194,9 +191,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
                 $project->delete();
             }
-
-            $user->social_users()->delete();
-            $user->newsletters()->detach();
         });
     }
 

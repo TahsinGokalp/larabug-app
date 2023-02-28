@@ -14,7 +14,7 @@ class AddSettingsToUserColumn extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->json('settings')->nullable()->after('billing_details');
+            $table->json('settings')->nullable();
         });
     }
 

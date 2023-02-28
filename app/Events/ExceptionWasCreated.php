@@ -10,7 +10,7 @@ class ExceptionWasCreated
 {
     use InteractsWithSockets, SerializesModels;
 
-    public $exception;
+    public Exception $exception;
 
     /**
      * Create a new event instance.

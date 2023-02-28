@@ -78,51 +78,6 @@
           </template>
         </Card>
 
-        <Card contained>
-            <template #header>
-                <h2 class="text-xl font-bold">Preferences</h2>
-            </template>
-
-            <form class="space-y-6" action="">
-                <h3 class="text-base font-bold">General</h3>
-
-                <div class="flex items-center space-x-2">
-                    <input
-                            :class="[
-        'text-primary-600 rounded border-gray-300 transition',
-        'focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-offset-0',
-      ]"
-                            id="newsletter"
-                            type="checkbox"
-                            v-model="form.newsletter"
-                    />
-
-                    <label class="text-sm font-medium" for="newsletter">
-                        Receive newsletter
-                    </label>
-                </div>
-            </form>
-
-            <template #footer>
-                <div class="flex items-center space-x-3">
-                    <Button @click="updateSettings" primary :disabled="form.processing">Save preferences</Button>
-                </div>
-            </template>
-        </Card>
-
-        <Card contained>
-            <template #header>
-                <h2 class="text-xl font-bold">Mobile devices</h2>
-            </template>
-
-            <form class="space-y-6" action="">
-                <h3 class="text-base font-bold">Manage devices</h3>
-
-                <div class="flex items-center space-x-2">
-                    <Button as="inertia-link" :href="route('panel.profile.fcm-tokens.index')" primary>Manage mobile devices</Button>
-                </div>
-            </form>
-        </Card>
     </div>
 </template>
 
@@ -159,7 +114,6 @@ export default {
                 name: this.user.name,
                 email: this.user.email,
                 password: this.user.password,
-                newsletter: this.user.newsletter,
                 settings: this.settings
             }, {
               key: 'form'
