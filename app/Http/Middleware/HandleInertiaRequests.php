@@ -49,8 +49,6 @@ class HandleInertiaRequests extends Middleware
                         'avatar' => Auth::user()->getGravatar(),
                         'email' => Auth::user()->email,
                         'api_token' => Auth::user()->api_token,
-                        'billing_details' => Auth::user()->billing_details,
-                        'settings' => Auth::user()->settings,
                     ] : null,
                 ];
             },

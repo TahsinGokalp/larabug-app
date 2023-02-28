@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ExceptionController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;

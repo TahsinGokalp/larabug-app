@@ -2,13 +2,10 @@
 
 namespace App\Providers;
 
-use App\Events\ExceptionWasCreated;
 use App\Models\Exception;
 use App\Models\Issue;
 use App\Observers\ExceptionObserver;
 use App\Observers\IssueObserver;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
 

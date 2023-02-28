@@ -2,7 +2,6 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\MinimalFrontendMode;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -65,7 +64,5 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'is.admin' => \App\Http\Middleware\AdminMiddleware::class,
-        'minimal' => MinimalFrontendMode::class,
     ];
 }
