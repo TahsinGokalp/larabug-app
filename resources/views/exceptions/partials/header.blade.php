@@ -42,9 +42,6 @@
         <span class="text-gray-600 p-4 w-full h-12 flex justify-start items-center">Navigation</span>
         <a class="p-4 w-full h-12 flex justify-start items-center  @if(request()->is('/')) bg-primary-200 text-primary-600 rounded @endif"
            href="/">Home</a>
-        <a class="p-4 w-full h-12 flex justify-start items-center @if(request()->is('features')) bg-primary-200 text-primary-600 rounded @endif" href="{{ route('features') }}">Features</a>
-        <a class="p-4 w-full h-12 flex justify-start items-center @if(request()->is('pricing')) bg-primary-200 text-primary-600 rounded @endif" href="{{ route('pricing') }}">Pricing</a>
-        <a class="p-4 w-full h-12 flex justify-start items-center @if(request()->is('docs*')) text-primary-500 @endif" href="{{ route('docs.show', ['general', 'welcome']) }}">Docs</a>
         @guest
             <a class="p-4 w-full h-12 flex justify-start items-center @if(request()->is('login')) text-primary-500 @endif" href="{{ route('login') }}">Login</a>
         @endguest

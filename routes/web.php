@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\ExceptionController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
@@ -9,32 +8,14 @@ use App\Http\Controllers\IssuesController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\ProjectController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
-Route::permanentRedirect('terms', 'terms-of-service');
-Route::permanentRedirect('privacy', 'privacy-policy');
 Route::permanentRedirect('dashboard', 'panel');
-Route::permanentRedirect('what-is-larabug', 'features');
 
 Route::redirect('discord', 'https://discord.gg/AWrdVpc');
 
 Route::get('/', [PageController::class, 'home'])->name('home')->middleware('minimal');
-
-Route::group([
-    'middleware' => [
-        'minimal',
-    ],
-], function () {
-    Route::get('features', [PageController::class, 'features'])->name('features');
-    Route::get('pricing', [PageController::class, 'pricing'])->name('pricing');
-    Route::get('branding', [PageController::class, 'branding'])->name('branding');
-    Route::get('larabug-is-free', [PageController::class, 'larabugIsFree'])->name('larabug-is-free');
-
-    Route::get('terms-of-service', [PageController::class, 'terms'])->name('terms');
-    Route::get('privacy-policy', [PageController::class, 'policy'])->name('privacy');
-
-    Route::get('docs', [DocumentationController::class, 'index'])->name('docs.index');
-    Route::get('docs/{category}/{item}', [DocumentationController::class, 'show'])->name('docs.show');
-});
 
 Route::get('exception/{exception:publish_hash}', [PageController::class, 'exception'])->name('public.exception');
 

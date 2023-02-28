@@ -31,7 +31,6 @@
     "reinink/remember-query-strings": "^0.1.0",
     "spatie/browsershot": "^3.4",
     "spatie/eloquent-sortable": "^4.0.1",
-    "spatie/laravel-cookie-consent": "^3.2",
     "spatie/laravel-honeypot": "^4.0",
     "spatie/laravel-ray": "^1.26",
     "spatie/laravel-sitemap": "^6.0.4",
