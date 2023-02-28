@@ -2,9 +2,7 @@
 
 namespace App\Models;
 
-use App\Mail\User\WelcomeEmail;
 use App\Traits\Planable;
-use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,7 +15,7 @@ use Illuminate\Support\Facades\Mail;
  * @property mixed is_admin
  * @property bool plan_notified
  */
-class User extends Authenticatable implements FilamentUser, MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable,
         Planable,
@@ -60,8 +58,6 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         'first_name',
         'settings',
     ];
-
-    public static $filamentUserColumn = 'is_admin';
 
     public function setPasswordAttribute($value)
     {
@@ -209,10 +205,5 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     public function hasAbility($key)
     {
         return isset($this->abilities[$key]) && $this->abilities[$key];
-    }
-
-    public function canAccessFilament(): bool
-    {
-        return $this->isAdmin();
     }
 }

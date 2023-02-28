@@ -3,8 +3,6 @@
 namespace App\Providers;
 
 use App\Events\ExceptionWasCreated;
-use App\Listeners\UpdateLoginData;
-use App\Listeners\UpdateStatistics;
 use App\Models\Exception;
 use App\Models\Issue;
 use App\Observers\ExceptionObserver;
@@ -22,17 +20,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        ExceptionWasCreated::class => [
-            //UpdateStatistics::class,
-        ],
 
-        \Illuminate\Auth\Events\Login::class => [
-            UpdateLoginData::class,
-        ],
-
-        Registered::class => [
-            SendEmailVerificationNotification::class,
-        ],
     ];
 
     /**
