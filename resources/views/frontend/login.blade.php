@@ -1,7 +1,5 @@
 @extends('layouts.frontend')
 
-@section('title', 'Login')
-
 @section('content')
     <div class="pt-16 overflow-hidden mb-8">
         <article class="w-full max-w-2xl mx-auto px-4">
@@ -55,10 +53,6 @@
           | focus:outline-none focus:ring focus:ring-primary-200 | hover:bg-primary-400">
                     {{ __('Login') }}
                 </button>
-
-                @if(config('services.github.client_id') && config('services.github.client_secret'))
-                <a class="text-primary-500 mr-4 border-r pr-5" href="{{ route('socialite.login', 'github') }}">GitHub Login</a>
-                @endif
 
                 <a class="text-primary-500" href="{{ route('password.request') }}">Forgot password</a>
             </form>

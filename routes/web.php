@@ -11,21 +11,15 @@ use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+Route::permanentRedirect('/', 'login');
 Route::permanentRedirect('dashboard', 'panel');
-
-Route::redirect('discord', 'https://discord.gg/AWrdVpc');
-
-Route::get('/', [PageController::class, 'home'])->name('home')->middleware('minimal');
 
 Route::get('exception/{exception:publish_hash}', [PageController::class, 'exception'])->name('public.exception');
 
 Auth::routes([
-    'register' => config('auth.register_enabled'),
-    'verify' => config('auth.verify_enabled'),
+    'register' => false,
+    'verify' => false,
 ]);
-
-Route::get('login/{provider}', [LoginController::class, 'redirectToProvider'])->name('socialite.login');
-Route::get('login/{provider}/callback', [LoginController::class, 'handleProviderCallback'])->name('socialite.callback');
 
 Route::get('scripts/feedback', [FeedbackController::class, 'script'])->name('feedback.script');
 
