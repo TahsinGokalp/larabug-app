@@ -1,3 +1,12 @@
+[![Build Status](https://github.com/tahsingokalp/lett-tracker/workflows/tests/badge.svg)](https://github.com/tahsingokalp/lett-tracker/actions)
+[![StyleCI](https://github.styleci.io/repos/607028357/shield?branch=development)](https://github.styleci.io/repos/607028357?branch=development)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_lett-tracker&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_lett-tracker)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_lett-tracker&metric=bugs)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_lett-tracker)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_lett-tracker&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_lett-tracker)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_lett-tracker&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_lett-tracker)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_lett-tracker&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_lett-tracker)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=TahsinGokalp_lett-tracker&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=TahsinGokalp_lett-tracker)
+
 Let is a simple to use and implement error tracker built for the Laravel framework.
 
 ## Requirements
