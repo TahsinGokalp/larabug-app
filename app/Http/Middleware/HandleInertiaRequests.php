@@ -43,20 +43,20 @@ class HandleInertiaRequests extends Middleware
             'auth' => function () {
                 return [
                     'user' => Auth::user() ? [
-                        'id' => Auth::user()->id,
-                        'name' => Auth::user()->name,
+                        'id'         => Auth::user()->id,
+                        'name'       => Auth::user()->name,
                         'first_name' => Auth::user()->first_name,
-                        'avatar' => Auth::user()->getGravatar(),
-                        'email' => Auth::user()->email,
-                        'api_token' => Auth::user()->api_token,
+                        'avatar'     => Auth::user()->getGravatar(),
+                        'email'      => Auth::user()->email,
+                        'api_token'  => Auth::user()->api_token,
                     ] : null,
                 ];
             },
             'flash' => function () {
                 return [
                     'success' => Session::get('success'),
-                    'info' => Session::get('info'),
-                    'error' => Session::get('error'),
+                    'info'    => Session::get('info'),
+                    'error'   => Session::get('error'),
                 ];
             },
             'errors' => function () {

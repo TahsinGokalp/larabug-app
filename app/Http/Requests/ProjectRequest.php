@@ -33,7 +33,7 @@ class ProjectRequest extends FormRequest
                 'nullable',
                 'max:500',
             ],
-            'url' => 'url|nullable',
+            'url'           => 'url|nullable',
             'slack_webhook' => [
                 'url',
                 'nullable',

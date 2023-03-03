@@ -17,7 +17,7 @@ class UserController extends Controller
     public function registerFcmToken(RegisterFcmTokenRequest $request)
     {
         return $request->user('api')->fcmTokens()->create([
-            'token' => $request->input('token'),
+            'token'  => $request->input('token'),
             'device' => $request->input('device'),
         ]);
     }

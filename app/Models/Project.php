@@ -14,7 +14,7 @@ use Illuminate\Notifications\Notifiable;
 use Kblais\Uuid\Uuid;
 
 /**
- * App\Models\Project
+ * App\Models\Project.
  *
  * @property string slack_webhook
  * @property string discord_channel
@@ -29,35 +29,35 @@ use Kblais\Uuid\Uuid;
  * @property bool custom_webhook_enabled
  * @property string key
  * @property mixed url
- * @property string $id
- * @property string|null $title
- * @property string|null $url
- * @property string|null $key
- * @property string|null $description
- * @property string|null $slack_webhook
- * @property string|null $discord_webhook
- * @property string|null $custom_webhook
- * @property string $total_exceptions
- * @property bool $receive_email
- * @property bool $notifications_enabled
- * @property bool $mobile_notifications_enabled
- * @property bool $slack_webhook_enabled
- * @property bool $discord_webhook_enabled
- * @property bool $custom_webhook_enabled
- * @property string|null $group_id
- * @property int|null $user_id
- * @property string|null $last_error_at
+ * @property string                          $id
+ * @property string|null                     $title
+ * @property string|null                     $url
+ * @property string|null                     $key
+ * @property string|null                     $description
+ * @property string|null                     $slack_webhook
+ * @property string|null                     $discord_webhook
+ * @property string|null                     $custom_webhook
+ * @property string                          $total_exceptions
+ * @property bool                            $receive_email
+ * @property bool                            $notifications_enabled
+ * @property bool                            $mobile_notifications_enabled
+ * @property bool                            $slack_webhook_enabled
+ * @property bool                            $discord_webhook_enabled
+ * @property bool                            $custom_webhook_enabled
+ * @property string|null                     $group_id
+ * @property int|null                        $user_id
+ * @property string|null                     $last_error_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $deleted_at
- * @property bool $issue_receive_email
- * @property bool $issue_mobile_notifications_enabled
- * @property bool $issue_slack_webhook_enabled
- * @property bool $issue_discord_webhook_enabled
- * @property bool $issue_custom_webhook_enabled
- * @property string|null $issue_slack_webhook
- * @property string|null $issue_discord_webhook
- * @property string|null $issue_custom_webhook
+ * @property string|null                     $deleted_at
+ * @property bool                            $issue_receive_email
+ * @property bool                            $issue_mobile_notifications_enabled
+ * @property bool                            $issue_slack_webhook_enabled
+ * @property bool                            $issue_discord_webhook_enabled
+ * @property bool                            $issue_custom_webhook_enabled
+ * @property string|null                     $issue_slack_webhook
+ * @property string|null                     $issue_discord_webhook
+ * @property string|null                     $issue_custom_webhook
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $exceptions
  * @property-read int|null $exceptions_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feedback> $feedback
@@ -71,6 +71,7 @@ use Kblais\Uuid\Uuid;
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
  * @property-read int|null $users_count
+ *
  * @method static \Database\Factories\ProjectFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Project filter(array $filters)
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
@@ -111,6 +112,7 @@ use Kblais\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUserId($value)
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $exceptions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feedback> $feedback
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Issue> $issues
@@ -120,10 +122,10 @@ use Kblais\Uuid\Uuid;
  */
 class Project extends Model
 {
-    use Uuid,
-        Filterable,
-        Notifiable,
-        HasFactory;
+    use Uuid;
+    use Filterable;
+    use Notifiable;
+    use HasFactory;
 
     protected $fillable = [
         'url',
@@ -155,17 +157,17 @@ class Project extends Model
     ];
 
     protected $casts = [
-        'receive_email' => 'boolean',
-        'notifications_enabled' => 'boolean',
-        'mobile_notifications_enabled' => 'boolean',
-        'slack_webhook_enabled' => 'boolean',
-        'discord_webhook_enabled' => 'boolean',
-        'custom_webhook_enabled' => 'boolean',
-        'issue_receive_email' => 'boolean',
+        'receive_email'                      => 'boolean',
+        'notifications_enabled'              => 'boolean',
+        'mobile_notifications_enabled'       => 'boolean',
+        'slack_webhook_enabled'              => 'boolean',
+        'discord_webhook_enabled'            => 'boolean',
+        'custom_webhook_enabled'             => 'boolean',
+        'issue_receive_email'                => 'boolean',
         'issue_mobile_notifications_enabled' => 'boolean',
-        'issue_slack_webhook_enabled' => 'boolean',
-        'issue_discord_webhook_enabled' => 'boolean',
-        'issue_custom_webhook_enabled' => 'boolean',
+        'issue_slack_webhook_enabled'        => 'boolean',
+        'issue_discord_webhook_enabled'      => 'boolean',
+        'issue_custom_webhook_enabled'       => 'boolean',
     ];
 
     protected $appends = [

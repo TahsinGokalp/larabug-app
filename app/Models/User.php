@@ -6,30 +6,29 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Mail;
 
 /**
- * App\Models\User
+ * App\Models\User.
  *
  * @property mixed plan
  * @property string api_token
  * @property mixed is_admin
  * @property bool plan_notified
- * @property int $id
- * @property string|null $name
- * @property string $email
- * @property string $password
- * @property string|null $api_token
- * @property int $first_setup
- * @property bool $receive_email
- * @property string|null $remember_token
+ * @property int                             $id
+ * @property string|null                     $name
+ * @property string                          $email
+ * @property string                          $password
+ * @property string|null                     $api_token
+ * @property int                             $first_setup
+ * @property bool                            $receive_email
+ * @property string|null                     $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property int $total_logins
- * @property string|null $last_mobile_login_at
- * @property array|null $settings
- * @property array|null $abilities
- * @property string|null $email_verified_at
+ * @property int                             $total_logins
+ * @property string|null                     $last_mobile_login_at
+ * @property array|null                      $settings
+ * @property array|null                      $abilities
+ * @property string|null                     $email_verified_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserFcmToken> $fcmTokens
  * @property-read int|null $fcm_tokens_count
  * @property-read mixed $first_name
@@ -39,6 +38,7 @@ use Illuminate\Support\Facades\Mail;
  * @property-read int|null $project_groups_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project> $projects
  * @property-read int|null $projects_count
+ *
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
@@ -59,6 +59,7 @@ use Illuminate\Support\Facades\Mail;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSettings($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereTotalLogins($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserFcmToken> $fcmTokens
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProjectGroup> $projectGroups
@@ -67,8 +68,8 @@ use Illuminate\Support\Facades\Mail;
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable,
-        HasFactory;
+    use Notifiable;
+    use HasFactory;
 
     protected $fillable = [
         'abilities',
@@ -88,13 +89,13 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $casts = [
-        'settings' => 'array',
-        'is_admin' => 'boolean',
-        'newsletter' => 'boolean',
-        'receive_email' => 'boolean',
-        'plan_notified' => 'boolean',
+        'settings'             => 'array',
+        'is_admin'             => 'boolean',
+        'newsletter'           => 'boolean',
+        'receive_email'        => 'boolean',
+        'plan_notified'        => 'boolean',
         'projects.pivot.owner' => 'boolean',
-        'abilities' => 'array',
+        'abilities'            => 'array',
     ];
 
     protected $dates = [
@@ -120,7 +121,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getSettingsAttribute($value)
     {
-        if (! $value) {
+        if (!$value) {
             return [
                 'code_preview' => [
                     'rainbow' => false,

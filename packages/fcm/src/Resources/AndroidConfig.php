@@ -44,7 +44,7 @@ class AndroidConfig implements FcmResource
      */
     public static function create(): self
     {
-        return new self;
+        return new self();
     }
 
     public function getCollapseKey(): ?string
@@ -137,13 +137,13 @@ class AndroidConfig implements FcmResource
     public function toArray(): array
     {
         return [
-            'collapse_key' => $this->getCollapseKey(),
-            'priority' => ! is_null($this->getPriority()) ? $this->getPriority()->label ?? $this->getPriority()->getValue() : null,
-            'ttl' => $this->getTtl(),
+            'collapse_key'            => $this->getCollapseKey(),
+            'priority'                => !is_null($this->getPriority()) ? $this->getPriority()->label ?? $this->getPriority()->getValue() : null,
+            'ttl'                     => $this->getTtl(),
             'restricted_package_name' => $this->getRestrictedPackageName(),
-            'data' => $this->getData(),
-            'notification' => ! is_null($this->getNotification()) ? $this->getNotification()->toArray() : null,
-            'fcm_options' => ! is_null($this->getFcmOptions()) ? $this->getFcmOptions()->toArray() : null,
+            'data'                    => $this->getData(),
+            'notification'            => !is_null($this->getNotification()) ? $this->getNotification()->toArray() : null,
+            'fcm_options'             => !is_null($this->getFcmOptions()) ? $this->getFcmOptions()->toArray() : null,
         ];
     }
 }

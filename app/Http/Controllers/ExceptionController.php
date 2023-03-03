@@ -17,7 +17,7 @@ class ExceptionController extends Controller
         $exceptions = $project
             ->exceptions();
 
-        if (! $request->input('status')) {
+        if (!$request->input('status')) {
             $exceptions = $exceptions->whereNotIn('status', [
                 'DONE',
                 'FIXED',
@@ -62,17 +62,17 @@ class ExceptionController extends Controller
         /*
          * Mark exception as read
          */
-        if (! $exception->status || $exception->status == Exception::OPEN) {
+        if (!$exception->status || $exception->status == Exception::OPEN) {
             $exception->markAsRead();
         }
 
         // If it was not mailed yet (delay in cronjob which is ok), then mark as e-mail, saves resources & emails :)
-        if (! $exception->isMarkedAsMailed()) {
+        if (!$exception->isMarkedAsMailed()) {
             $exception->markAsMailed();
         }
 
         return inertia('Exceptions/Show', [
-            'project' => $project,
+            'project'   => $project,
             'exception' => $exception,
         ]);
     }

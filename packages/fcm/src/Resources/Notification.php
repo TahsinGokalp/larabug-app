@@ -60,7 +60,7 @@ class Notification implements FcmResource
      */
     public static function create(): self
     {
-        return new self;
+        return new self();
     }
 
     /**
@@ -70,7 +70,7 @@ class Notification implements FcmResource
     {
         return [
             'title' => $this->getTitle(),
-            'body' => $this->getBody(),
+            'body'  => $this->getBody(),
             'image' => $this->getImage(),
         ];
     }

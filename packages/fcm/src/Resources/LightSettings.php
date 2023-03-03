@@ -24,7 +24,7 @@ class LightSettings implements FcmResource
      */
     public static function create(): self
     {
-        return new self;
+        return new self();
     }
 
     public function getColor(): Color
@@ -69,8 +69,8 @@ class LightSettings implements FcmResource
     public function toArray(): array
     {
         return [
-            'color' => ! is_null($this->getColor()) ? $this->getColor()->toArray() : null,
-            'light_on_duration' => $this->getLightOnDuration(),
+            'color'              => !is_null($this->getColor()) ? $this->getColor()->toArray() : null,
+            'light_on_duration'  => $this->getLightOnDuration(),
             'light_off_duration' => $this->getLightOffDuration(),
         ];
     }

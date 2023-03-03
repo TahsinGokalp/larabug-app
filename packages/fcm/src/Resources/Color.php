@@ -29,7 +29,7 @@ class Color implements FcmResource
      */
     public static function create(): self
     {
-        return new self;
+        return new self();
     }
 
     public function getRed(): ?float
@@ -86,9 +86,9 @@ class Color implements FcmResource
     public function toArray(): array
     {
         return [
-            'red' => $this->getRed(),
+            'red'   => $this->getRed(),
             'green' => $this->getGreen(),
-            'blue' => $this->getBlue(),
+            'blue'  => $this->getBlue(),
             'alpha' => $this->getAlpha(),
         ];
     }

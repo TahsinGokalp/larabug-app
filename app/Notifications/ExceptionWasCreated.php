@@ -40,7 +40,8 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function via($notifiable)
@@ -69,21 +70,22 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return SlackMessage
      */
     public function toSlack($notifiable)
     {
-        return (new SlackMessage)
+        return (new SlackMessage())
             ->error()
             ->content('['.$this->project->title.'] New exception thrown')
             ->attachment(function ($attachment) {
                 $attachment->title($this->exception->exception, $this->exception->route_url)
                     ->fields([
                         'Class' => $this->exception->class,
-                        'Date' => $this->exception->created_at->format('Y-m-d H:i:s').' (UTC)',
-                        'File' => $this->exception->file,
-                        'Line' => $this->exception->line,
+                        'Date'  => $this->exception->created_at->format('Y-m-d H:i:s').' (UTC)',
+                        'File'  => $this->exception->file,
+                        'Line'  => $this->exception->line,
                     ]);
             });
     }
@@ -95,33 +97,33 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
             ->image(asset('images/larabug-logo-small.png'))
             ->embeds([
                 [
-                    'color' => 13772369,
-                    'title' => '['.$this->project->title.'] New exception thrown',
+                    'color'       => 13772369,
+                    'title'       => '['.$this->project->title.'] New exception thrown',
                     'description' => $this->exception->exception,
-                    'fields' => [
+                    'fields'      => [
                         [
-                            'name' => 'Class',
-                            'value' => $this->exception->class ?? 'no value',
+                            'name'   => 'Class',
+                            'value'  => $this->exception->class ?? 'no value',
                             'inline' => true,
                         ],
                         [
-                            'name' => 'Date',
-                            'value' => $this->exception->created_at->format('Y-m-d H:i:s').' (UTC)',
+                            'name'   => 'Date',
+                            'value'  => $this->exception->created_at->format('Y-m-d H:i:s').' (UTC)',
                             'inline' => true,
                         ],
                         [
-                            'name' => 'File',
-                            'value' => $this->exception->file,
+                            'name'   => 'File',
+                            'value'  => $this->exception->file,
                             'inline' => false,
                         ],
                         [
-                            'name' => 'Line',
-                            'value' => $this->exception->line,
+                            'name'   => 'Line',
+                            'value'  => $this->exception->line,
                             'inline' => false,
                         ],
                         [
-                            'name' => 'View',
-                            'value' => $this->exception->route_url,
+                            'name'   => 'View',
+                            'value'  => $this->exception->route_url,
                             'inline' => false,
                         ],
                     ],
@@ -132,7 +134,8 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
     /**
      * Get the webhook representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return WebhookMessage
      */
     public function toWebhook($notifiable)
@@ -140,11 +143,11 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
         return WebhookMessage::create()
             ->data([
                 'Exception' => $this->exception->exception,
-                'RouteUrl' => $this->exception->route_url,
-                'Class' => $this->exception->class,
-                'Date' => $this->exception->created_at->format('Y-m-d H:i:s').' (UTC)',
-                'File' => $this->exception->file,
-                'Line' => $this->exception->line,
+                'RouteUrl'  => $this->exception->route_url,
+                'Class'     => $this->exception->class,
+                'Date'      => $this->exception->created_at->format('Y-m-d H:i:s').' (UTC)',
+                'File'      => $this->exception->file,
+                'Line'      => $this->exception->line,
             ])
             ->userAgent('LaraBug');
     }
@@ -177,7 +180,8 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function toArray($notifiable)

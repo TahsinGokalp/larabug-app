@@ -24,7 +24,7 @@ it('logs an exception', function () {
         ->toHaveCount(0);
 
     be($this->user, 'api')->post(route('exceptions.log'), [
-        'project' => $this->project->key,
+        'project'   => $this->project->key,
         'exception' => [
             'exception' => 'Whoops something seems to have gone wrong..',
         ],
@@ -46,7 +46,7 @@ it('logs an exception without notification', function () {
         ->toHaveCount(0);
 
     be($this->user, 'api')->post(route('exceptions.log'), [
-        'project' => $this->project->key,
+        'project'   => $this->project->key,
         'exception' => [
             'exception' => 'Whoops something seems to have gone wrong..',
         ],
@@ -67,7 +67,7 @@ it('logs an exception and sends notification to discord', function () {
         ->toHaveCount(0);
 
     be($this->user, 'api')->post(route('exceptions.log'), [
-        'project' => $this->project->key,
+        'project'   => $this->project->key,
         'exception' => [
             'exception' => 'Whoops something seems to have gone wrong..',
         ],
@@ -91,7 +91,7 @@ it('logs an exception and sends notification to custom webhook', function () {
         ->toHaveCount(0);
 
     be($this->user, 'api')->post(route('exceptions.log'), [
-        'project' => $this->project->key,
+        'project'   => $this->project->key,
         'exception' => [
             'exception' => 'Whoops something seems to have gone wrong..',
         ],
@@ -113,7 +113,7 @@ it('logs an exception and sends notification to slack', function () {
         ->toHaveCount(0);
 
     be($this->user, 'api')->post(route('exceptions.log'), [
-        'project' => $this->project->key,
+        'project'   => $this->project->key,
         'exception' => [
             'exception' => 'Whoops something seems to have gone wrong..',
         ],
@@ -137,7 +137,7 @@ it('logs an exception and sends notification to fcm', function () {
         ->toHaveCount(0);
 
     be($this->user, 'api')->post(route('exceptions.log'), [
-        'project' => $this->project->key,
+        'project'   => $this->project->key,
         'exception' => [
             'exception' => 'Whoops something seems to have gone wrong..',
         ],
@@ -167,7 +167,7 @@ it('logs an exception and sends multiple notifications', function () {
         ->toHaveCount(0);
 
     be($this->user, 'api')->post(route('exceptions.log'), [
-        'project' => $this->project->key,
+        'project'   => $this->project->key,
         'exception' => [
             'exception' => 'Whoops something seems to have gone wrong..',
         ],

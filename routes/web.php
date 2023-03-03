@@ -17,7 +17,7 @@ Route::get('exception/{exception:publish_hash}', [PageController::class, 'except
 
 Auth::routes([
     'register' => false,
-    'verify' => false,
+    'verify'   => false,
 ]);
 
 Route::get('scripts/feedback', [FeedbackController::class, 'script'])->name('feedback.script');

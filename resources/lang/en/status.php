@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'NEW' => 'New',
-    'READ' => 'Read',
-    'OPEN' => 'Open',
+    'NEW'   => 'New',
+    'READ'  => 'Read',
+    'OPEN'  => 'Open',
     'FIXED' => 'Fixed',
-    'DONE' => 'Done',
+    'DONE'  => 'Done',
 ];

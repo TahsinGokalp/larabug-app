@@ -46,9 +46,9 @@ test('password can be reset with a valid token', function () {
 
     Notification::assertSentTo($user, ResetPassword::class, function ($notification) use ($user) {
         $response = $this->post(route('password.reset', [
-            'token' => $notification->token,
-            'email' => $user->email,
-            'password' => 'password',
+            'token'                 => $notification->token,
+            'email'                 => $user->email,
+            'password'              => 'password',
             'password_confirmation' => 'password',
         ]));
 

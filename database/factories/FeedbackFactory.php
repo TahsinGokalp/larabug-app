@@ -24,9 +24,9 @@ class FeedbackFactory extends Factory
     {
         return [
             'exception_id' => Exception::factory(),
-            'name' => $this->faker->name,
-            'email' => $this->faker->email,
-            'feedback' => $this->faker->sentence,
+            'name'         => $this->faker->name,
+            'email'        => $this->faker->email,
+            'feedback'     => $this->faker->sentence,
         ];
     }
 }
