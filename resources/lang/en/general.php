@@ -2,5 +2,5 @@
 
 return [
     'projects' => 'project|projects',
-    'groups' => 'group|groups',
+    'groups'   => 'group|groups',
 ];

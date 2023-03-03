@@ -1,8 +1,8 @@
 <?php
 
-if (! function_exists('carbon')) {
+if (!function_exists('carbon')) {
     /**
-     * Carbon helper
+     * Carbon helper.
      *
      *
      * @return Carbon\Carbon

@@ -99,12 +99,12 @@ return [
     */
 
     'trim' => [
-        'recent' => 60,
-        'pending' => 60,
-        'completed' => 60,
+        'recent'        => 60,
+        'pending'       => 60,
+        'completed'     => 60,
         'recent_failed' => 60,
-        'failed' => 10080,
-        'monitored' => 1000,
+        'failed'        => 10080,
+        'monitored'     => 1000,
     ],
 
     /*
@@ -120,7 +120,7 @@ return [
 
     'metrics' => [
         'trim_snapshots' => [
-            'job' => 24,
+            'job'   => 24,
             'queue' => 24,
         ],
     ],
@@ -167,22 +167,22 @@ return [
     'defaults' => [
         'supervisor-1' => [
             'connection' => 'redis',
-            'queue' => ['default'],
-            'balance' => 'auto',
-            'maxTime' => 0,
-            'maxJobs' => 0,
-            'memory' => 128,
-            'tries' => 1,
-            'timeout' => 60,
-            'nice' => 0,
+            'queue'      => ['default'],
+            'balance'    => 'auto',
+            'maxTime'    => 0,
+            'maxJobs'    => 0,
+            'memory'     => 128,
+            'tries'      => 1,
+            'timeout'    => 60,
+            'nice'       => 0,
         ],
     ],
 
     'environments' => [
         'production' => [
             'supervisor-1' => [
-                'minProcesses' => 1,
-                'maxProcesses' => 3,
+                'minProcesses'    => 1,
+                'maxProcesses'    => 3,
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 3,
             ],
@@ -190,8 +190,8 @@ return [
 
         'local' => [
             'supervisor-1' => [
-                'minProcesses' => 1,
-                'maxProcesses' => 5,
+                'minProcesses'    => 1,
+                'maxProcesses'    => 5,
                 'balanceMaxShift' => 1,
                 'balanceCooldown' => 3,
             ],

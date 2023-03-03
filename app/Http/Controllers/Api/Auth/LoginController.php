@@ -29,7 +29,7 @@ class LoginController extends Controller
         $user->save();
 
         return response()->json([
-            'user' => new UserResource($user),
+            'user'  => new UserResource($user),
             'token' => $user->api_token,
         ], Response::HTTP_OK);
     }

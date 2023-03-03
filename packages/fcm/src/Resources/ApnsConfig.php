@@ -24,7 +24,7 @@ class ApnsConfig implements FcmResource
      */
     public static function create(): self
     {
-        return new self;
+        return new self();
     }
 
     public function getHeaders(): ?array
@@ -69,9 +69,9 @@ class ApnsConfig implements FcmResource
     public function toArray(): array
     {
         return [
-            'headers' => $this->getHeaders(),
-            'payload' => $this->getPayload(),
-            'fcm_options' => ! is_null($this->getFcmOptions()) ? $this->getFcmOptions()->toArray() : null,
+            'headers'     => $this->getHeaders(),
+            'payload'     => $this->getPayload(),
+            'fcm_options' => !is_null($this->getFcmOptions()) ? $this->getFcmOptions()->toArray() : null,
         ];
     }
 }

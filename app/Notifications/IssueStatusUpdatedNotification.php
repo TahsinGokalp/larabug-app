@@ -54,13 +54,13 @@ class IssueStatusUpdatedNotification extends Notification
             ->image(asset('images/larabug-logo-small.png'))
             ->embeds([
                 [
-                    'color' => 13772369,
-                    'title' => '['.$this->issue->project->title.'] Issue status changed',
+                    'color'       => 13772369,
+                    'title'       => '['.$this->issue->project->title.'] Issue status changed',
                     'description' => $this->issue->exception,
-                    'fields' => [
+                    'fields'      => [
                         [
-                            'name' => 'Status',
-                            'value' => $this->issue->status_text ?? 'test',
+                            'name'   => 'Status',
+                            'value'  => $this->issue->status_text ?? 'test',
                             'inline' => true,
                         ],
                     ],
@@ -85,9 +85,9 @@ class IssueStatusUpdatedNotification extends Notification
     {
         return WebhookMessage::create()
             ->data([
-                'Exception' => $this->issue->exception,
-                'RouteUrl' => route('panel.issues.show', $this->issue->id),
-                'Status' => $this->issue->status,
+                'Exception'  => $this->issue->exception,
+                'RouteUrl'   => route('panel.issues.show', $this->issue->id),
+                'Status'     => $this->issue->status,
                 'StatusText' => $this->issue->status_text,
             ])
             ->userAgent('LaraBug');

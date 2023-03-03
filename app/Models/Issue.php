@@ -10,15 +10,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Kblais\Uuid\Uuid;
 
 /**
- * App\Models\Issue
+ * App\Models\Issue.
  *
- * @property string $id
- * @property string $exception
- * @property string $line
- * @property string $project_id
- * @property string $exception_id
- * @property string|null $status
- * @property mixed|null $tags
+ * @property string                          $id
+ * @property string                          $exception
+ * @property string                          $line
+ * @property string                          $project_id
+ * @property string                          $exception_id
+ * @property string|null                     $status
+ * @property mixed|null                      $tags
  * @property \Illuminate\Support\Carbon|null $last_occurred_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -28,6 +28,7 @@ use Kblais\Uuid\Uuid;
  * @property-read mixed $sparkline
  * @property-read mixed $status_text
  * @property-read \App\Models\Project|null $project
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Issue filter(array $input = [], $filter = null)
  * @method static \Illuminate\Database\Eloquent\Builder|Issue newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Issue newQuery()
@@ -47,13 +48,16 @@ use Kblais\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|Issue whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Issue whereTags($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Issue whereUpdatedAt($value)
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $exceptions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $exceptions
  * @mixin \Eloquent
  */
 class Issue extends Model
 {
-    use Uuid, Filterable, HasSparklines;
+    use Uuid;
+    use Filterable;
+    use HasSparklines;
 
     protected $guarded = [
         'id',

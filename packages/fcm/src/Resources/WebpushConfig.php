@@ -29,7 +29,7 @@ class WebpushConfig implements FcmResource
      */
     public static function create(): self
     {
-        return new self;
+        return new self();
     }
 
     public function getHeaders(): ?array
@@ -86,10 +86,10 @@ class WebpushConfig implements FcmResource
     public function toArray(): array
     {
         return [
-            'headers' => $this->getHeaders(),
-            'data' => $this->getData(),
+            'headers'      => $this->getHeaders(),
+            'data'         => $this->getData(),
             'notification' => $this->getNotification(),
-            'fcm_options' => ! is_null($this->getFcmOptions()) ? $this->getFcmOptions()->toArray() : null,
+            'fcm_options'  => !is_null($this->getFcmOptions()) ? $this->getFcmOptions()->toArray() : null,
         ];
     }
 }

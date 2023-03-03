@@ -43,7 +43,7 @@ class ApnsFcmOptions implements FcmResource
      */
     public static function create(): self
     {
-        return new self;
+        return new self();
     }
 
     /**
@@ -53,7 +53,7 @@ class ApnsFcmOptions implements FcmResource
     {
         return [
             'analytics_label' => $this->getAnalyticsLabel(),
-            'image' => $this->getImage(),
+            'image'           => $this->getImage(),
         ];
     }
 }

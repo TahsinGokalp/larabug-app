@@ -6,14 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\ChangePasswordRequest;
 use App\Http\Requests\Profile\UpdateProfileRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
     public function show()
     {
         return inertia('Profile/Index', [
-            'user' => auth()->user(),
+            'user'     => auth()->user(),
             'settings' => auth()->user()->settings,
         ]);
     }

@@ -22,9 +22,9 @@ it('adds feedback to an exception', function () {
     withoutExceptionHandling();
 
     post(route('api.feedback'), [
-        'id' => $exception->id,
-        'name' => $this->faker->name,
-        'email' => $this->faker->email,
+        'id'       => $exception->id,
+        'name'     => $this->faker->name,
+        'email'    => $this->faker->email,
         'feedback' => $this->faker->sentence,
     ])->assertOk();
 });

@@ -19,7 +19,7 @@ class WebpushFcmOptions implements FcmResource
      */
     public static function create(): self
     {
-        return new self;
+        return new self();
     }
 
     public function getLink(): ?string
@@ -52,7 +52,7 @@ class WebpushFcmOptions implements FcmResource
     public function toArray(): array
     {
         return [
-            'link' => $this->getLink(),
+            'link'            => $this->getLink(),
             'analytics_label' => $this->getAnalyticsLabel(),
         ];
     }

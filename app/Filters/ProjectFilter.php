@@ -22,7 +22,7 @@ class ProjectFilter extends ModelFilter
 
     public function hasOpenExceptions($value)
     {
-        if (! $value) {
+        if (!$value) {
             return $this;
         }
 

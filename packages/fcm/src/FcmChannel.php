@@ -38,11 +38,12 @@ class FcmChannel
     /**
      * Send the given notification.
      *
-     * @param  mixed  $notifiable
-     * @return array
+     * @param mixed $notifiable
      *
      * @throws \NotificationChannels\Fcm\Exceptions\CouldNotSendNotification
      * @throws \Kreait\Firebase\Exception\FirebaseException
+     *
+     * @return array
      */
     public function send($notifiable, Notification $notification)
     {
@@ -55,7 +56,7 @@ class FcmChannel
         // Get the message from the notification class
         $fcmMessage = $notification->toFcm($notifiable);
 
-        if (! $fcmMessage instanceof Message) {
+        if (!$fcmMessage instanceof Message) {
             throw CouldNotSendNotification::invalidMessage();
         }
 
@@ -78,6 +79,7 @@ class FcmChannel
             }
         } catch (MessagingException $exception) {
             $this->failedNotification($notifiable, $notification, $exception);
+
             throw CouldNotSendNotification::serviceRespondedWithAnError($exception);
         }
 
@@ -101,10 +103,10 @@ class FcmChannel
     }
 
     /**
-     * @return array
-     *
      * @throws \Kreait\Firebase\Exception\MessagingException
      * @throws \Kreait\Firebase\Exception\FirebaseException
+     *
+     * @return array
      */
     protected function sendToFcm(Message $fcmMessage, $token)
     {
@@ -120,10 +122,10 @@ class FcmChannel
     }
 
     /**
-     * @return \Kreait\Firebase\Messaging\MulticastSendReport
-     *
      * @throws \Kreait\Firebase\Exception\MessagingException
      * @throws \Kreait\Firebase\Exception\FirebaseException
+     *
+     * @return \Kreait\Firebase\Messaging\MulticastSendReport
      */
     protected function sendToFcmMulticast($fcmMessage, array $tokens)
     {
@@ -133,7 +135,8 @@ class FcmChannel
     /**
      * Dispatch failed event.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array|null
      */
     protected function failedNotification($notifiable, Notification $notification, Throwable $exception)
@@ -143,7 +146,7 @@ class FcmChannel
             $notification,
             self::class,
             [
-                'message' => $exception->getMessage(),
+                'message'   => $exception->getMessage(),
                 'exception' => $exception,
             ]
         ));

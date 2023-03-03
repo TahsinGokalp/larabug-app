@@ -13,9 +13,9 @@ test('registration screen can be rendered', function () {
 
 test('new users can register', function () {
     $response = $this->post(route('register'), [
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => 'D&#t@EVMXhfkpx*kLv3F',
+        'name'                  => 'Test User',
+        'email'                 => 'test@example.com',
+        'password'              => 'D&#t@EVMXhfkpx*kLv3F',
         'password_confirmation' => 'D&#t@EVMXhfkpx*kLv3F',
     ]);
 
@@ -26,9 +26,9 @@ test('new users can register', function () {
 
 test('validation rules are adhered to', function () {
     $response = $this->post(route('register'), [
-        'name' => '',
-        'email' => '',
-        'password' => '',
+        'name'                  => '',
+        'email'                 => '',
+        'password'              => '',
         'password_confirmation' => '',
     ]);
 
@@ -37,9 +37,9 @@ test('validation rules are adhered to', function () {
 
 test('password must require a number as a minimum', function () {
     $response = $this->post(route('register'), [
-        'name' => 'Test User',
-        'email' => 'test@example.com',
-        'password' => 'password',
+        'name'                  => 'Test User',
+        'email'                 => 'test@example.com',
+        'password'              => 'password',
         'password_confirmation' => 'password',
     ]);
 

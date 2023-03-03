@@ -4,7 +4,7 @@ return [
 
     /**
      * What attributes do we use to build the slug?
-     * This can be a single field, like "name" which will build a slug from:
+     * This can be a single field, like "name" which will build a slug from:.
      *
      *     $model->name;
      *
@@ -51,7 +51,7 @@ return [
     /**
      * Enforce uniqueness of slugs?  Defaults to true.
      * If a generated slug already exists, an incremental numeric
-     * value will be appended to the end until a unique slug is found.  e.g.:
+     * value will be appended to the end until a unique slug is found.  e.g.:.
      *
      *     my-slug
      *     my-slug-1
@@ -81,7 +81,7 @@ return [
      * An array of slug names that can never be used for this model,
      * e.g. to prevent collisions with existing routes or controller methods, etc..
      * Defaults to null (i.e. no reserved names).
-     * Can be a static array, e.g.:
+     * Can be a static array, e.g.:.
      *
      *    'reserved' => array('add', 'delete'),
      *

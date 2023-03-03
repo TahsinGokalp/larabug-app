@@ -6,16 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 use Kblais\Uuid\Uuid;
 
 /**
- * App\Models\ProjectGroup
+ * App\Models\ProjectGroup.
  *
- * @property string $id
- * @property string|null $title
- * @property string|null $description
- * @property int|null $user_id
+ * @property string                          $id
+ * @property string|null                     $title
+ * @property string|null                     $description
+ * @property int|null                        $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project> $projects
  * @property-read int|null $projects_count
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectGroup newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectGroup newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectGroup query()
@@ -25,6 +26,7 @@ use Kblais\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectGroup whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectGroup whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ProjectGroup whereUserId($value)
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Project> $projects
  * @mixin \Eloquent
  */

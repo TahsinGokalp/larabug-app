@@ -134,7 +134,7 @@ class AndroidNotification implements FcmResource
      */
     public static function create(): self
     {
-        return new self;
+        return new self();
     }
 
     public function getTitle(): ?string
@@ -242,7 +242,7 @@ class AndroidNotification implements FcmResource
     }
 
     /**
-     * @param  string[]|null  $bodyLocArgs
+     * @param string[]|null $bodyLocArgs
      */
     public function setBodyLocArgs(?array $bodyLocArgs): self
     {
@@ -272,7 +272,7 @@ class AndroidNotification implements FcmResource
     }
 
     /**
-     * @param  string[]|null  $titleLocArgs
+     * @param string[]|null $titleLocArgs
      */
     public function setTitleLocArgs(?array $titleLocArgs): self
     {
@@ -398,7 +398,7 @@ class AndroidNotification implements FcmResource
     }
 
     /**
-     * @param  string[]|null  $vibrateTimings
+     * @param string[]|null $vibrateTimings
      */
     public function setVibrateTimings(?array $vibrateTimings): self
     {
@@ -461,29 +461,29 @@ class AndroidNotification implements FcmResource
     public function toArray(): array
     {
         return [
-            'title' => $this->getTitle(),
-            'body' => $this->getBody(),
-            'icon' => $this->getIcon(),
-            'color' => $this->getColor(),
-            'sound' => $this->getSound(),
-            'tag' => $this->getTag(),
-            'click_action' => $this->getClickAction(),
-            'body_loc_key' => $this->getBodyLocKey(),
-            'body_loc_args' => $this->getBodyLocArgs(),
-            'title_loc_key' => $this->getTitleLocKey(),
-            'title_loc_args' => $this->getTitleLocArgs(),
-            'channel_id' => $this->getChannelId(),
-            'ticker' => $this->getTicker(),
-            'sticky' => $this->getSticky(),
-            'event_time' => $this->getEventTime(),
-            'local_only' => $this->getLocalOnly(),
-            'notification_priority' => ! is_null($this->getNotificationPriority()) ? $this->getNotificationPriority()->label ?? $this->getNotificationPriority()->getValue() : null,
-            'default_sound' => $this->getDefaultSound(),
+            'title'                   => $this->getTitle(),
+            'body'                    => $this->getBody(),
+            'icon'                    => $this->getIcon(),
+            'color'                   => $this->getColor(),
+            'sound'                   => $this->getSound(),
+            'tag'                     => $this->getTag(),
+            'click_action'            => $this->getClickAction(),
+            'body_loc_key'            => $this->getBodyLocKey(),
+            'body_loc_args'           => $this->getBodyLocArgs(),
+            'title_loc_key'           => $this->getTitleLocKey(),
+            'title_loc_args'          => $this->getTitleLocArgs(),
+            'channel_id'              => $this->getChannelId(),
+            'ticker'                  => $this->getTicker(),
+            'sticky'                  => $this->getSticky(),
+            'event_time'              => $this->getEventTime(),
+            'local_only'              => $this->getLocalOnly(),
+            'notification_priority'   => !is_null($this->getNotificationPriority()) ? $this->getNotificationPriority()->label ?? $this->getNotificationPriority()->getValue() : null,
+            'default_sound'           => $this->getDefaultSound(),
             'default_vibrate_timings' => $this->getDefaultVibrateTimings(),
-            'default_light_settings' => $this->getDefaultLightSettings(),
-            'vibrate_timings' => $this->getVibrateTimings(),
-            'visibility' => ! is_null($this->getVisibility()) ? $this->getVisibility()->label ?? $this->getVisibility()->getValue() : null,
-            'notification_count' => $this->getNotificationCount(),
+            'default_light_settings'  => $this->getDefaultLightSettings(),
+            'vibrate_timings'         => $this->getVibrateTimings(),
+            'visibility'              => !is_null($this->getVisibility()) ? $this->getVisibility()->label ?? $this->getVisibility()->getValue() : null,
+            'notification_count'      => $this->getNotificationCount(),
             //'light_setings' => ! is_null($this->getLightSettings()) ? $this->getLightSettings()->toArray() : null,
             'image' => $this->getImage(),
         ];

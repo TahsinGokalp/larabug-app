@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\UserFcmToken
+ * App\Models\UserFcmToken.
  *
- * @property int $id
- * @property mixed|null $token
- * @property array|null $device
- * @property int|null $user_id
+ * @property int                             $id
+ * @property mixed|null                      $token
+ * @property array|null                      $device
+ * @property int|null                        $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|UserFcmToken newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserFcmToken newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserFcmToken query()
@@ -31,7 +32,7 @@ class UserFcmToken extends Model
     use HasFactory;
 
     public $casts = [
-        'token' => 'encrypted',
+        'token'  => 'encrypted',
         'device' => 'array',
     ];
 

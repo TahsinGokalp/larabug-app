@@ -23,10 +23,10 @@ class ProjectFactory extends Factory
     public function definition()
     {
         return [
-            'title' => $this->faker->company,
+            'title'       => $this->faker->company,
             'description' => $this->faker->text(50),
-            'url' => $this->faker->url,
-            'key' => Str::random(25),
+            'url'         => $this->faker->url,
+            'key'         => Str::random(25),
         ];
     }
 }

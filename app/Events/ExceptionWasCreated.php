@@ -8,7 +8,8 @@ use Illuminate\Queue\SerializesModels;
 
 class ExceptionWasCreated
 {
-    use InteractsWithSockets, SerializesModels;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public Exception $exception;
 

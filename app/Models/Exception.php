@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Kblais\Uuid\Uuid;
 
 /**
- * App\Models\Exception
+ * App\Models\Exception.
  *
  * @property mixed exception
  * @property mixed class
@@ -24,31 +24,31 @@ use Kblais\Uuid\Uuid;
  * @property bool mailed
  * @property string publish_hash
  * @property null published_at
- * @property string $id
- * @property string|null $host
- * @property string|null $method
- * @property string|null $fullUrl
- * @property string|null $previousUrl
- * @property array|null $executor
- * @property string|null $exception
- * @property string|null $environment
- * @property array|null $additional
- * @property string|null $error
- * @property string|null $line
- * @property array|null $storage
- * @property string|null $file
- * @property string $file_type
- * @property string|null $class
- * @property array|null $user
- * @property string|null $status
- * @property bool $mailed
- * @property string|null $project_id
- * @property string|null $issue_id
- * @property string|null $publish_password
- * @property string|null $publish_hash
- * @property string|null $project_version
- * @property string|null $published_at
- * @property string|null $snooze_until
+ * @property string                          $id
+ * @property string|null                     $host
+ * @property string|null                     $method
+ * @property string|null                     $fullUrl
+ * @property string|null                     $previousUrl
+ * @property array|null                      $executor
+ * @property string|null                     $exception
+ * @property string|null                     $environment
+ * @property array|null                      $additional
+ * @property string|null                     $error
+ * @property string|null                     $line
+ * @property array|null                      $storage
+ * @property string|null                     $file
+ * @property string                          $file_type
+ * @property string|null                     $class
+ * @property array|null                      $user
+ * @property string|null                     $status
+ * @property bool                            $mailed
+ * @property string|null                     $project_id
+ * @property string|null                     $issue_id
+ * @property string|null                     $publish_password
+ * @property string|null                     $publish_hash
+ * @property string|null                     $project_version
+ * @property string|null                     $published_at
+ * @property string|null                     $snooze_until
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feedback> $feedback
@@ -65,6 +65,7 @@ use Kblais\Uuid\Uuid;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Exception> $occurences
  * @property-read int|null $occurences_count
  * @property-read \App\Models\Project|null $project
+ *
  * @method static \Database\Factories\ExceptionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Exception filter(array $input = [], $filter = null)
  * @method static \Illuminate\Database\Eloquent\Builder|Exception new()
@@ -104,6 +105,7 @@ use Kblais\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|Exception whereStorage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Exception whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Exception whereUser($value)
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feedback> $feedback
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Exception> $occurences
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feedback> $feedback
@@ -112,12 +114,12 @@ use Kblais\Uuid\Uuid;
  */
 class Exception extends Model
 {
-    use Uuid,
-        Filterable,
-        HasFactory;
+    use Uuid;
+    use Filterable;
+    use HasFactory;
 
     /**
-     * Status vars
+     * Status vars.
      */
     const OPEN = 'OPEN';
 
@@ -140,10 +142,10 @@ class Exception extends Model
      * @var array
      */
     protected $casts = [
-        'user' => 'array',
-        'storage' => 'array',
-        'executor' => 'array',
-        'mailed' => 'boolean',
+        'user'       => 'array',
+        'storage'    => 'array',
+        'executor'   => 'array',
+        'mailed'     => 'boolean',
         'additional' => 'array',
     ];
 
@@ -170,7 +172,7 @@ class Exception extends Model
 
     public function getPublicRouteUrlAttribute(): ?string
     {
-        if (! $this->publish_hash) {
+        if (!$this->publish_hash) {
             return null;
         }
 
@@ -179,7 +181,7 @@ class Exception extends Model
 
     public function getIssueRouteUrlAttribute(): ?string
     {
-        if (! $this->issue_id) {
+        if (!$this->issue_id) {
             return null;
         }
 
@@ -229,7 +231,7 @@ class Exception extends Model
 
     public function getShortExceptionTextAttribute(): string
     {
-        if (! $this->exception) {
+        if (!$this->exception) {
             return '-No exception text-';
         }
 
@@ -281,7 +283,7 @@ class Exception extends Model
     }
 
     /**
-     * @param  string  $status
+     * @param string $status
      */
     public function markAs($status = self::FIXED)
     {

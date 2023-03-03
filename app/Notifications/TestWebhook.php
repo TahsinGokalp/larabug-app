@@ -21,7 +21,7 @@ class TestWebhook extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      *
-     * @param  string  $type
+     * @param string $type
      */
     public function __construct(Project $project, $type = 'slack')
     {
@@ -32,7 +32,8 @@ class TestWebhook extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function via($notifiable)
@@ -46,7 +47,7 @@ class TestWebhook extends Notification implements ShouldQueue
 
     public function toSlack($notifiable)
     {
-        return (new SlackMessage)
+        return (new SlackMessage())
             ->content('['.$notifiable->title.'] - If you see this message then you have succesfully tested your Slack webhook.');
     }
 
@@ -58,7 +59,8 @@ class TestWebhook extends Notification implements ShouldQueue
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
+     *
      * @return array
      */
     public function toArray($notifiable)

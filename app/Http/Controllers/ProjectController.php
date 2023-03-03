@@ -22,7 +22,7 @@ class ProjectController extends Controller
             ->paginate();
 
         return inertia('Projects/Index', [
-            'filters' => request()->only('search'),
+            'filters'  => request()->only('search'),
             'projects' => $projects,
         ]);
     }
@@ -69,9 +69,9 @@ class ProjectController extends Controller
             ->paginate(10);
 
         return inertia('Projects/Show', [
-            'project' => $project,
+            'project'    => $project,
             'exceptions' => $exceptions->appends($request->except('page')),
-            'filters' => request()->all('search', 'status', 'has_feedback'),
+            'filters'    => request()->all('search', 'status', 'has_feedback'),
         ]);
     }
 
@@ -81,7 +81,7 @@ class ProjectController extends Controller
             ->projects()
             ->findOrFail($id);
 
-        if (! $project->isOwner()) {
+        if (!$project->isOwner()) {
             return redirect()->route('panel.projects.show', $project)->withErrors([
                 'You are not the main owner of this project, therefore you cannot edit the project.',
             ]);
@@ -100,7 +100,7 @@ class ProjectController extends Controller
 
         $previousUrl = $project->url;
 
-        if (! $project->isOwner()) {
+        if (!$project->isOwner()) {
             return redirect()->route('panel.projects.show', $project)->withErrors([
                 'You are not the main owner of this project, therefore you cannot edit the project.',
             ]);
@@ -128,7 +128,7 @@ class ProjectController extends Controller
             ->projects()
             ->findOrFail($id);
 
-        if (! $project->isOwner()) {
+        if (!$project->isOwner()) {
             return redirect()->route('panel.projects.show', $project)->withErrors([
                 'You are not the main owner of this project, therefore you cannot edit the project.',
             ]);
@@ -174,7 +174,7 @@ class ProjectController extends Controller
 
     protected function attachGroup(Request $request, Project $project)
     {
-        if (! $request->user()->canManageGroups()) {
+        if (!$request->user()->canManageGroups()) {
             return;
         }
 
@@ -183,7 +183,7 @@ class ProjectController extends Controller
         /*
          * If no group is found, then dissociate it.
          */
-        if (! $group) {
+        if (!$group) {
             $group = null;
         }
 

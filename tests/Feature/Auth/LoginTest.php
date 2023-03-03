@@ -15,7 +15,7 @@ test('users can login using the view', function () {
     $user = User::factory()->create();
 
     $response = $this->post(route('login'), [
-        'email' => $user->email,
+        'email'    => $user->email,
         'password' => 'password',
     ]);
 
@@ -27,7 +27,7 @@ test('users cannot authenticate with an incorrect password', function () {
     $user = User::factory()->create();
 
     $response = $this->from(route('login'))->post(route('login'), [
-        'email' => $user->email,
+        'email'    => $user->email,
         'password' => 'wrong-password',
     ]);
 

@@ -8,17 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 use Kblais\Uuid\Uuid;
 
 /**
- * App\Models\Feedback
+ * App\Models\Feedback.
  *
- * @property string $id
- * @property string $exception_id
- * @property string $name
- * @property string $email
- * @property string $feedback
+ * @property string                          $id
+ * @property string                          $exception_id
+ * @property string                          $name
+ * @property string                          $email
+ * @property string                          $feedback
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Exception|null $exception
  * @property-read mixed $avatar
+ *
  * @method static \Database\Factories\FeedbackFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Feedback filter(array $input = [], $filter = null)
  * @method static \Illuminate\Database\Eloquent\Builder|Feedback newModelQuery()
@@ -40,9 +41,9 @@ use Kblais\Uuid\Uuid;
  */
 class Feedback extends Model
 {
-    use Uuid,
-        Filterable,
-        HasFactory;
+    use Uuid;
+    use Filterable;
+    use HasFactory;
 
     protected $fillable = [
         'name',
