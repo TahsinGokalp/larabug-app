@@ -23,7 +23,7 @@ git clone https://github.com/tahsingokalp/let-tracker.git
 composer install
 
 npm i
-npm run watch
+npm run dev
 # or
 npm run dev
 ```
