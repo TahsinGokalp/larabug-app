@@ -67,16 +67,16 @@
 </template>
 
 <script>
-import AppLayout from '@/Layouts/AppLayout'
+import AppLayout from '@/Layouts/AppLayout.vue'
 
-import Breadcrumbs from '@/Components/Breadcrumbs'
-import BreadcrumbsItem from '@/Components/BreadcrumbsItem'
-import Card from '@/Components/Card'
-import Button from '@/Components/Button'
-import Paginator from '@/Components/Paginator'
+import Breadcrumbs from '@/Components/Breadcrumbs.vue'
+import BreadcrumbsItem from '@/Components/BreadcrumbsItem.vue'
+import Card from '@/Components/Card.vue'
+import Button from '@/Components/Button.vue'
+import Paginator from '@/Components/Paginator.vue'
 import pickBy from 'lodash/pickBy'
 import throttle from 'lodash/throttle'
-import Badge from "../../Components/Badge";
+import Badge from "../../Components/Badge.vue";
 
 export default {
   layout: AppLayout,

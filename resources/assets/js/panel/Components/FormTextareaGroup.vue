@@ -24,10 +24,10 @@
 </template>
 
 <script>
-import Label from '@/Components/Label'
-import Textarea from '@/Components/Textarea'
-import FormErrorText from '@/Components/FormErrorText'
-import FormHelperText from '@/Components/FormHelperText'
+import Label from '@/Components/Label.vue'
+import Textarea from '@/Components/Textarea.vue'
+import FormErrorText from '@/Components/FormErrorText.vue'
+import FormHelperText from '@/Components/FormHelperText.vue'
 
 export default {
     inheritAttrs: false,

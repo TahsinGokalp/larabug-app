@@ -126,10 +126,10 @@
 </template>
 
 <script>
-import NavList from '@/Components/NavList'
-import NavListItem from '@/Components/NavListItem'
-import Container from '@/Components/Container'
-import VStack from '@/Components/VStack'
+import NavList from '@/Components/NavList.vue'
+import NavListItem from '@/Components/NavListItem.vue'
+import Container from '@/Components/Container.vue'
+import VStack from '@/Components/VStack.vue'
 import {useToast} from "vue-toastification";
 
 export default {

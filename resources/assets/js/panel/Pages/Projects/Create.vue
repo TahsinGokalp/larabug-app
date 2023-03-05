@@ -168,15 +168,15 @@
 </template>
 
 <script>
-import AppLayout from '@/Layouts/AppLayout'
+import AppLayout from '@/Layouts/AppLayout.vue'
 
-import Breadcrumbs from '@/Components/Breadcrumbs'
-import BreadcrumbsItem from '@/Components/BreadcrumbsItem'
-import BreadcrumbsDivider from '@/Components/BreadcrumbsDivider'
-import Card from '@/Components/Card'
-import Button from '@/Components/Button'
-import FormInputGroup from '@/Components/FormInputGroup'
-import FormTextareaGroup from '@/Components/FormTextareaGroup'
+import Breadcrumbs from '@/Components/Breadcrumbs.vue'
+import BreadcrumbsItem from '@/Components/BreadcrumbsItem.vue'
+import BreadcrumbsDivider from '@/Components/BreadcrumbsDivider.vue'
+import Card from '@/Components/Card.vue'
+import Button from '@/Components/Button.vue'
+import FormInputGroup from '@/Components/FormInputGroup.vue'
+import FormTextareaGroup from '@/Components/FormTextareaGroup.vue'
 import { useForm } from '@inertiajs/inertia-vue3'
 
 export default {

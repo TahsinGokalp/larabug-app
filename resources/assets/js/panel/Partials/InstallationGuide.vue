@@ -96,9 +96,9 @@ LB_PROJECT_KEY=hN4Ui90S4CzaRqsADo0lZLA2WuDiG9MgTwebHTuLtjo32EWzvf
 </template>
 
 <script>
-import Card from '@/Components/Card'
-import Button from '@/Components/Button'
-import Modal from '@/Components/Modal'
+import Card from '@/Components/Card.vue'
+import Button from '@/Components/Button.vue'
+import Modal from '@/Components/Modal.vue'
 
 export default {
     components: {

@@ -70,14 +70,14 @@
 </template>
 
 <script>
-import AppLayout from '@/Layouts/AppLayout'
+import AppLayout from '@/Layouts/AppLayout.vue'
 
-import Breadcrumbs from '@/Components/Breadcrumbs'
-import BreadcrumbsItem from '@/Components/BreadcrumbsItem'
-import Badge from '@/Components/Badge'
-import Card from '@/Components/Card'
-import Button from '@/Components/Button'
-import Paginator from '@/Components/Paginator'
+import Breadcrumbs from '@/Components/Breadcrumbs.vue'
+import BreadcrumbsItem from '@/Components/BreadcrumbsItem.vue'
+import Badge from '@/Components/Badge.vue'
+import Card from '@/Components/Card.vue'
+import Button from '@/Components/Button.vue'
+import Paginator from '@/Components/Paginator.vue'
 
 export default {
     layout: AppLayout,

@@ -112,19 +112,19 @@ LB_PROJECT_KEY={{ project.key }}
 </template>
 
 <script>
-import AppLayout from '@/Layouts/AppLayout'
+import AppLayout from '@/Layouts/AppLayout.vue'
 
-import Breadcrumbs from '@/Components/Breadcrumbs'
-import BreadcrumbsItem from '@/Components/BreadcrumbsItem'
-import BreadcrumbsDivider from '@/Components/BreadcrumbsDivider'
-import Card from '@/Components/Card'
-import Badge from '@/Components/Badge'
-import Button from '@/Components/Button'
-import ButtonRack from '@/Components/ButtonRack'
-import ButtonRackItem from '@/Components/ButtonRackItem'
-import Paginator from '@/Components/Paginator'
-import InstallationGuide from '@/Partials/InstallationGuide'
-import EditProject from '@/Partials/EditProject'
+import Breadcrumbs from '@/Components/Breadcrumbs.vue'
+import BreadcrumbsItem from '@/Components/BreadcrumbsItem.vue'
+import BreadcrumbsDivider from '@/Components/BreadcrumbsDivider.vue'
+import Card from '@/Components/Card.vue'
+import Badge from '@/Components/Badge.vue'
+import Button from '@/Components/Button.vue'
+import ButtonRack from '@/Components/ButtonRack.vue'
+import ButtonRackItem from '@/Components/ButtonRackItem.vue'
+import Paginator from '@/Components/Paginator.vue'
+import InstallationGuide from '@/Partials/InstallationGuide.vue'
+import EditProject from '@/Partials/EditProject.vue'
 
 export default {
     layout: AppLayout,
