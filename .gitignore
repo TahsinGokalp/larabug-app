@@ -24,3 +24,5 @@ rr
 .rr.yaml
 
 /docker/db-data
+
+/public/build
