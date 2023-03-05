@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Spatie\Honeypot\ProtectAgainstSpam;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class LoginController extends Controller
 {
@@ -18,11 +18,6 @@ class LoginController extends Controller
      * @var string
      */
     protected string $redirectTo = '/panel';
-
-    public function showLoginForm()
-    {
-        return view('frontend.login');
-    }
 
     /**
      * Create a new controller instance.
@@ -41,6 +36,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return response('', Response::HTTP_CONFLICT)->header('x-inertia-location', '/');
+        return response('', ResponseAlias::HTTP_CONFLICT)->header('x-inertia-location', '/');
     }
 }

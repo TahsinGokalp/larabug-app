@@ -21,7 +21,7 @@
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                         Email address
                     </label>
-                    <input type="email" name="email" id="email" class="mb-4 bg-gray-100 placeholder-gray-400 border border-gray-100 rounded px-4 h-12 w-full appearance-none
+                    <input type="email" name="email" id="email" required class="mb-4 bg-gray-100 placeholder-gray-400 border border-gray-100 rounded px-4 h-12 w-full appearance-none
         | focus:outline-none focus:ring focus:ring-primary-200 focus:bg-white focus:border-primary-200
         | lg:mb-0 lg:mr-4 @error('email') border border-red-500 @enderror" type="email" placeholder="Enter your email address">
 

@@ -53,8 +53,4 @@ class HomeController extends Controller
         ]);
     }
 
-    public function introduction()
-    {
-        return inertia('Dashboard/Introduction');
-    }
 }

@@ -123,8 +123,8 @@ return [
     |
     */
 
-    'register_enabled' => env('AUTH_REGISTER_ENABLED', true),
-    'verify_enabled'   => env('AUTH_VERIFY_ENABLED', true),
+    'register_enabled' => env('AUTH_REGISTER_ENABLED', false),
+    'verify_enabled'   => env('AUTH_VERIFY_ENABLED', false),
 
     /*
     |--------------------------------------------------------------------------

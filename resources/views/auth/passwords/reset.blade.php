@@ -23,7 +23,7 @@
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                         Email address
                     </label>
-                    <input type="email" value="{{ old('email') }}" name="email" id="email" class="mb-4 bg-gray-100 placeholder-gray-400 border border-gray-100 rounded px-4 h-12 w-full appearance-none
+                    <input type="email" value="{{ old('email') }}" required name="email" id="email" class="mb-4 bg-gray-100 placeholder-gray-400 border border-gray-100 rounded px-4 h-12 w-full appearance-none
         | focus:outline-none focus:ring focus:ring-primary-200 focus:bg-white focus:border-primary-200
         | lg:mb-0 lg:mr-4 @error('email') border border-red-500 @enderror" placeholder="Enter your email address">
 
@@ -36,7 +36,7 @@
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                         New password
                     </label>
-                    <input type="password" name="password" id="password" class="mb-4 bg-gray-100 placeholder-gray-400 border border-gray-100 rounded px-4 h-12 w-full appearance-none
+                    <input type="password" name="password" id="password" required class="mb-4 bg-gray-100 placeholder-gray-400 border border-gray-100 rounded px-4 h-12 w-full appearance-none
         | focus:outline-none focus:ring focus:ring-primary-200 focus:bg-white focus:border-primary-200
         | lg:mb-0 lg:mr-4 @error('password') border border-red-500 @enderror" placeholder="Enter a new password">
 
@@ -49,7 +49,7 @@
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="password_confirmation">
                         Repeat new password
                     </label>
-                    <input type="password" name="password_confirmation" id="password_confirmation" class="mb-4 bg-gray-100 placeholder-gray-400 border border-gray-100 rounded px-4 h-12 w-full appearance-none
+                    <input type="password" name="password_confirmation" required id="password_confirmation" class="mb-4 bg-gray-100 placeholder-gray-400 border border-gray-100 rounded px-4 h-12 w-full appearance-none
         | focus:outline-none focus:ring focus:ring-primary-200 focus:bg-white focus:border-primary-200
         | lg:mb-0 lg:mr-4 @error('password_confirmation') border border-red-500 @enderror" placeholder="Repeat your new password">
 
