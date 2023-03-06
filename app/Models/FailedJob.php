@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $payload
  * @property string $exception
  * @property string $failed_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|FailedJob newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|FailedJob newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|FailedJob query()

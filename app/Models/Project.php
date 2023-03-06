@@ -71,6 +71,7 @@ use Kblais\Uuid\Uuid;
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
  * @property-read int|null $users_count
+ *
  * @method static \Database\Factories\ProjectFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Project filter(array $filters)
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
@@ -111,6 +112,7 @@ use Kblais\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUserId($value)
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $exceptions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feedback> $feedback
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Issue> $issues
