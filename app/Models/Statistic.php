@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int                             $total_fixed_exceptions
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ *
  * @method static \Illuminate\Database\Eloquent\Builder|Statistic newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Statistic newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Statistic query()
