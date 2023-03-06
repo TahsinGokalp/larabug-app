@@ -65,7 +65,6 @@ use Kblais\Uuid\Uuid;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Exception> $occurences
  * @property-read int|null $occurences_count
  * @property-read \App\Models\Project|null $project
- *
  * @method static \Database\Factories\ExceptionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Exception filter(array $input = [], $filter = null)
  * @method static \Illuminate\Database\Eloquent\Builder|Exception new()
@@ -105,7 +104,8 @@ use Kblais\Uuid\Uuid;
  * @method static \Illuminate\Database\Eloquent\Builder|Exception whereStorage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Exception whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Exception whereUser($value)
- *
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feedback> $feedback
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Exception> $occurences
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feedback> $feedback
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Exception> $occurences
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feedback> $feedback

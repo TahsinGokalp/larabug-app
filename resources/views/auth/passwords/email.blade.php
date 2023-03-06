@@ -23,7 +23,7 @@
                     </label>
                     <input type="email" name="email" id="email" required class="mb-4 bg-gray-100 placeholder-gray-400 border border-gray-100 rounded px-4 h-12 w-full appearance-none
         | focus:outline-none focus:ring focus:ring-primary-200 focus:bg-white focus:border-primary-200
-        | lg:mb-0 lg:mr-4 @error('email') border border-red-500 @enderror" type="email" placeholder="Enter your email address">
+        | lg:mb-0 lg:mr-4 @error('email') border border-red-500 @enderror" placeholder="Enter your email address">
 
                     @error('email')
                     <p class="text-red-500 italic">{{ $message }}</p>
