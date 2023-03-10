@@ -7,6 +7,8 @@ use Inertia\Inertia;
 
 Route::permanentRedirect('/', 'login');
 
+Route::get('scripts/feedback', [ProjectController::class, 'script'])->name('feedback.script');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

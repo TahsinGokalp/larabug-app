@@ -8,8 +8,8 @@ import FormTextareaGroup from '@/Components/FormTextareaGroup.vue'
 import { useForm } from '@inertiajs/vue3'
 
 export default {
-    layout: AppLayout,
     components: {
+        AppLayout,
         Card,
         Button,
         FormInputGroup,

@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('issues', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('exception');
             $table->string('line');
-            $table->uuid('project_id');
-            $table->uuid('exception_id');
+            $table->foreignUuid('project_id')->references('id')->on('projects');
+            $table->foreignUuid('exception_id')->references('id')->on('exceptions');
             $table->string('status')->nullable();
             $table->json('tags')->nullable();
             $table->timestamp('last_occurred_at')->nullable();

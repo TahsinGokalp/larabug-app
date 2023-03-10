@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('projects', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('title')->nullable();
             $table->string('url')->nullable();
             $table->string('key')->nullable();
@@ -23,8 +23,6 @@ return new class extends Migration
             $table->boolean('telegram_notification_enabled')->default(false);
             //TODO : Check and delete
             $table->string('total_exceptions')->default(0);
-            $table->boolean('issue_receive_email')->default(false);
-            $table->boolean('issue_telegram_notification_enabled')->default(false);
             $table->timestamps();
             $table->softDeletes();
 

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('exceptions', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('host')->nullable();
             $table->string('method')->nullable();
             $table->text('fullUrl')->nullable();
@@ -34,8 +34,8 @@ return new class extends Migration
             $table->longText('executor')->nullable();
             $table->timestamp('snooze_until')->nullable();
             $table->string('project_version')->nullable();
-            $table->unsignedBigInteger('issue_id')->nullable();
-            $table->foreignId('project_id')->nullable()->constrained('projects')->onDelete('cascade');
+            $table->uuid('issue_id')->nullable();
+            $table->foreignUuid('project_id')->references('id')->on('projects');
             $table->timestamps();
 
             $table->index([

@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\StartsWith;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProjectRequest extends FormRequest
@@ -12,7 +11,7 @@ class ProjectRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return auth()->check();
     }
@@ -22,7 +21,7 @@ class ProjectRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'title' => [
@@ -34,39 +33,13 @@ class ProjectRequest extends FormRequest
                 'max:500',
             ],
             'url'           => 'url|nullable',
-            'slack_webhook' => [
-                'url',
-                'nullable',
-                'required_if:slack_webhook_enabled,true',
-                new StartsWith('https://hooks.slack.com/services/'),
-            ],
-            'discord_webhook' => [
-                'url',
-                'nullable',
-                'required_if:discord_webhook_enabled,true',
-                new StartsWith(['https://discordapp.com/api/webhooks/', 'https://discord.com/api/webhooks/', 'https://canary.discord.com/api/webhooks']),
-            ],
-            'custom_webhook' => [
-                'url',
-                'nullable',
-                'required_if:custom_webhook_enabled,true',
-            ],
             'receive_email' => [
                 'boolean',
             ],
             'notifications_enabled' => [
                 'boolean',
             ],
-            'mobile_notifications_enabled' => [
-                'boolean',
-            ],
-            'slack_webhook_enabled' => [
-                'boolean',
-            ],
-            'discord_webhook_enabled' => [
-                'boolean',
-            ],
-            'custom_webhook_enabled' => [
+            'telegram_notification_enabled' => [
                 'boolean',
             ],
         ];

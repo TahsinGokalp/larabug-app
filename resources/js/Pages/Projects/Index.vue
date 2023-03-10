@@ -56,7 +56,7 @@ export default {
                 </header>
                 <ul class="divide-y divide-gray-200">
                     <li v-for="project in projects.data" :key="project.id">
-                        <Link :href="route('projects.show', project.id)" class="flex items-center px-6 py-4 space-x-6 hover:bg-gray-100">
+                        <inertia-link :href="route('projects.show', project.id)" class="flex items-center px-6 py-4 space-x-6 hover:bg-gray-100">
                             <div class="w-2 h-2 rounded-full" :class="{'bg-red-600' : project.unread_exceptions_count, 'bg-gray-300' : !project.unread_exceptions_count }"></div>
                             <div class="flex-1">
                                 <p class="font-medium text-bold">{{ project.title }}</p>
@@ -75,7 +75,7 @@ export default {
                                         clip-rule="evenodd"
                                 ></path>
                             </svg>
-                        </Link>
+                        </inertia-link>
                     </li>
                 </ul>
 

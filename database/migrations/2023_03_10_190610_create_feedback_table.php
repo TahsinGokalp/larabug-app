@@ -12,12 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('feedback', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('exception_id')->index();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email');
             $table->text('feedback');
+            $table->foreignUuid('exception_id')->references('id')->on('exceptions');
             $table->timestamps();
+
+            $table->index('exception_id');
         });
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
 use App\Notifications\TestWebhook;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -12,17 +13,12 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = [];
-        /*
-         * auth()->user()
-            ->projects()
-            ->select('id', 'title', 'total_exceptions')
+        $projects = Project::select('id', 'title', 'total_exceptions')
             ->withCount('unreadExceptions')
             ->filter(request()->only('search'))
             ->latest('last_error_at')
             ->latest('created_at')
-            ->paginate()
-         */
+            ->paginate();
 
         return inertia('Projects/Index', [
             'filters'  => request()->only('search'),
@@ -35,33 +31,23 @@ class ProjectController extends Controller
         return inertia('Projects/Create');
     }
 
-    public function store(ProjectRequest $request)
+    public function store(ProjectRequest $request): RedirectResponse
     {
-        $project = Project::query()->create($request->only([
+        $project = Project::create($request->only([
             'title',
             'url',
             'description',
             'receive_email',
             'notifications_enabled',
-            'slack_webhook',
-            'discord_webhook',
-            'custom_webhook',
-            'mobile_notifications_enabled',
-            'slack_webhook_enabled',
-            'discord_webhook_enabled',
-            'custom_webhook_enabled',
+            'telegram_notification_enabled',
         ]));
 
-        $request->user()->projects()->save($project, ['owner' => true]);
-
-        return redirect()->route('panel.projects.installation', $project);
+        return redirect()->route('projects.installation', $project);
     }
 
     public function show(Request $request, $id)
     {
-        $project = auth()->user()
-            ->projects()
-            ->withCount('unreadExceptions')
+        $project = Project::withCount('unreadExceptions')
             ->findOrFail($id);
 
         $exceptions = $project
@@ -80,73 +66,34 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
-        $project = auth()->user()
-            ->projects()
-            ->findOrFail($id);
-
-        if (!$project->isOwner()) {
-            return redirect()->route('panel.projects.show', $project)->withErrors([
-                'You are not the main owner of this project, therefore you cannot edit the project.',
-            ]);
-        }
+        $project = Project::findOrFail($id);
 
         return inertia('Projects/Edit', [
             'project' => $project,
         ]);
     }
 
-    public function update(ProjectRequest $request, $id)
+    public function update(ProjectRequest $request, $id): RedirectResponse
     {
-        $project = $request->user()
-            ->projects()
-            ->findOrFail($id);
+        $project = Project::findOrFail($id);
 
-        $previousUrl = $project->url;
+        $project->update($request->all());
 
-        if (!$project->isOwner()) {
-            return redirect()->route('panel.projects.show', $project)->withErrors([
-                'You are not the main owner of this project, therefore you cannot edit the project.',
-            ]);
-        }
-
-        $project->update($request->except('group_id'));
-
-        /*
-         * Attach group if the id is not the same
-         */
-        if ($project->group_id != $request->input('group_id')) {
-            $this->attachGroup($request, $project);
-        }
-
-        if ($previousUrl != $project->url) {
-            //dispatch(new GetSiteScreenshot($project));
-        }
-
-        return redirect()->route('panel.projects.show', $project)->with('success', 'Project has been updated');
+        return redirect()->route('projects.show', $project)->with('success', 'Project has been updated');
     }
 
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request, $id): RedirectResponse
     {
-        $project = $request->user()
-            ->projects()
-            ->findOrFail($id);
-
-        if (!$project->isOwner()) {
-            return redirect()->route('panel.projects.show', $project)->withErrors([
-                'You are not the main owner of this project, therefore you cannot edit the project.',
-            ]);
-        }
+        $project = Project::findOrFail($id);
 
         $project->delete();
 
-        return redirect()->route('panel.projects.index')->with('success', 'Project has been removed');
+        return redirect()->route('projects.index')->with('success', 'Project has been removed');
     }
 
     public function installation($id)
     {
-        $project = auth()->user()
-            ->projects()
-            ->findOrFail($id);
+        $project = Project::findOrFail($id);
 
         return inertia('Projects/Installation', [
             'project' => $project,
@@ -175,30 +122,9 @@ class ProjectController extends Controller
         return redirect()->route('panel.projects.show', $project)->withSuccess('Test notification has been send!');
     }
 
-    protected function attachGroup(Request $request, Project $project)
+    public function refreshToken(Request $request, $id): RedirectResponse
     {
-        if (!$request->user()->canManageGroups()) {
-            return;
-        }
-
-        $group = $request->user()->projectGroups()->find($request->input('group_id'));
-
-        /*
-         * If no group is found, then dissociate it.
-         */
-        if (!$group) {
-            $group = null;
-        }
-
-        $project->group()->associate($group);
-        $project->save();
-    }
-
-    public function refreshToken(Request $request, $id)
-    {
-        $project = $request->user()
-            ->projects()
-            ->findOrFail($id);
+        $project = Project::findOrFail($id);
 
         $project->key = Str::random(50);
         $project->save();
