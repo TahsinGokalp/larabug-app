@@ -3,7 +3,6 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import Card from '@/Components/Card.vue';
 import Button from '@/Components/Button.vue';
 import Paginator from '@/Components/Paginator.vue';
-import { Link } from '@inertiajs/vue3'
 import pickBy from 'lodash/pickBy';
 import throttle from 'lodash/throttle';
 
@@ -13,7 +12,6 @@ export default {
         Card,
         Button,
         Paginator,
-        Link,
     },
 
     props: {
@@ -42,11 +40,6 @@ export default {
 
 <template>
     <AppLayout title="Projects">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Projects
-            </h2>
-        </template>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <Card>
                 <template #header>
