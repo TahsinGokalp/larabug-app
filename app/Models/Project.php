@@ -4,10 +4,7 @@ namespace App\Models;
 
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Notifications\Notifiable;
@@ -29,10 +26,10 @@ class Project extends Model
     ];
 
     protected $casts = [
-        'receive_email'                      => 'boolean',
-        'notifications_enabled'              => 'boolean',
+        'receive_email'                       => 'boolean',
+        'notifications_enabled'               => 'boolean',
         'telegram_notification_enabled'       => 'boolean',
-        'last_error_at' => 'datetime',
+        'last_error_at'                       => 'datetime',
     ];
 
     protected $appends = [
@@ -84,7 +81,7 @@ class Project extends Model
         return $this->hasManyThrough(Feedback::class, Exception::class);
     }
 
-    public function scopeFilter($query, array $filters) : void
+    public function scopeFilter($query, array $filters): void
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
@@ -93,7 +90,7 @@ class Project extends Model
         });
     }
 
-    public static function boot() : void
+    public static function boot(): void
     {
         parent::boot();
 
