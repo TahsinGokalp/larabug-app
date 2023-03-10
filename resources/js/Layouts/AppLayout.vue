@@ -51,6 +51,9 @@ const logout = () => {
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
+                                <NavLink :href="route('projects.index')" :active="route().current('projects.index')">
+                                    Projects
+                                </NavLink>
                             </div>
                         </div>
 
@@ -279,7 +282,7 @@ const logout = () => {
             </header>
 
             <!-- Page Content -->
-            <main>
+            <main class="mt-4">
                 <slot />
             </main>
         </div>
