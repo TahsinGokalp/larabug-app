@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::permanentRedirect('/', 'login');
 
+Route::get('exception/{exception:publish_hash}', [DashboardController::class, 'exception'])->name('public.exception');
+
 Route::get('scripts/feedback', [ProjectController::class, 'script'])->name('feedback.script');
 
 Route::middleware([
@@ -20,8 +22,6 @@ Route::middleware([
     //Projects
     Route::resource('projects', ProjectController::class);
     Route::get('projects/{id}/installation', [ProjectController::class, 'installation'])->name('projects.installation');
-    Route::post('projects/{id}/test-webhook', [ProjectController::class, 'testWebhook'])->name('projects.test.webhook');
-    Route::post('projects/{id}/remove-image', [ProjectController::class, 'removeImage'])->name('projects.remove.image');
     Route::post('projects/{id}/refresh-token', [ProjectController::class, 'refreshToken'])->name('projects.refresh-token');
     //Exceptions
     Route::delete('projects/{id}/exceptions/delete-all', [ExceptionController::class, 'deleteAll'])->name('exceptions.delete-all');

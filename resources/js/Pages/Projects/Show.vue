@@ -264,17 +264,17 @@ export default {
                                           :href="route('exceptions.show', {id: project.id, exception: exception })">
                                 <div class="flex-1">
                                     <p class="font-medium text-bold"
-                                       v-bind:class="{'text-gray-500': exception.status === 'FIXED'}">
+                                       v-bind:class="{'text-gray-500': exception.status === 'Fixed'}">
                                         {{ exception.short_exception_text }}
                                     </p>
 
                                     <p class="text-sm text-gray-600">
-                                        <Badge success v-if="exception.status === 'FIXED'">{{
-                                                exception.status_text
+                                        <Badge success v-if="exception.status === 'Fixed'">{{
+                                                exception.status
                                             }}
                                         </Badge>
-                                        <Badge info v-if="exception.status === 'READ'">{{ exception.status_text }}</Badge>
-                                        <Badge danger v-if="exception.status === 'OPEN'">{{ exception.status_text }}</Badge>
+                                        <Badge info v-if="exception.status === 'Read'">{{ exception.status }}</Badge>
+                                        <Badge danger v-if="exception.status === 'Open'">{{ exception.status }}</Badge>
                                         <span v-if="exception.snooze_until">&centerdot; </span>
                                         <Badge info v-if="exception.snooze_until">Snoozed until {{
                                                 exception.snooze_until

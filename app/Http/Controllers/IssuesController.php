@@ -9,11 +9,8 @@ class IssuesController extends Controller
 {
     public function index()
     {
-        $projectIds = auth()->user()->projects()->pluck('id');
-
         $issues = Issue::query()
             ->with('project:id,title')
-            ->whereIn('project_id', $projectIds)
             ->filter(request()->only('search'))
             ->orderBy('last_occurred_at', 'desc')
             ->paginate();

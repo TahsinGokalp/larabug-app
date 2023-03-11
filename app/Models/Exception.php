@@ -45,30 +45,62 @@ class Exception extends Model
         'human_date',
         'public_route_url',
         'issue_route_url',
+        'project_route_url',
         'route_url',
         'short_exception_text',
         'executor_output',
         'markup_language',
     ];
 
+    public function occurences(): HasMany
+    {
+        return $this->hasMany(self::class, 'exception', 'exception')
+            ->whereRaw('id != exceptions.id and line = exceptions.line and project_id = exceptions.project_id')
+            ->where('created_at', '>', now()->subMonth());
+    }
+
+    public function markAsRead(): void
+    {
+        $this->status = ExceptionStatusEnum::Read;
+        $this->save();
+    }
+
+    public function markAsMailed(): void
+    {
+        $this->mailed = true;
+        $this->save();
+    }
+
+    public function isMarkedAsMailed(): bool
+    {
+        return $this->mailed;
+    }
+
+    public function markAs($status = ExceptionStatusEnum::Fixed): void
+    {
+        $this->status = $status;
+        $this->save();
+    }
+
+    public function makePublic(): static
+    {
+        $this->publish_hash = Str::random(15);
+        $this->published_at = now();
+        $this->save();
+
+        return $this;
+    }
+
+    public function removePublic(): static
+    {
+        $this->publish_hash = null;
+        $this->published_at = null;
+        $this->save();
+
+        return $this;
+    }
+
     /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function scopeNotMailed($query)
     {
         return $query->whereMailed(false);
@@ -80,67 +112,9 @@ class Exception extends Model
         return $query->whereStatus(self::OPEN);
     }
 
-
-
-
-
     public function issue(): BelongsTo
     {
         return $this->belongsTo(Issue::class);
-    }
-
-    public function occurences()
-    {
-        return $this->hasMany(self::class, 'exception', 'exception')
-            ->whereRaw('id != exceptions.id and line = exceptions.line and project_id = exceptions.project_id')
-            ->where('created_at', '>', now()->subMonth());
-    }
-
-    public function markAsRead()
-    {
-        $this->status = self::READ;
-        $this->save();
-    }
-
-
-    public function markAs($status = self::FIXED)
-    {
-        $this->status = $status;
-        $this->save();
-
-        if ($status == self::FIXED) {
-            Statistic::incrementStatistics('total_fixed_exceptions');
-        }
-    }
-
-
-    public function markAsMailed()
-    {
-        $this->mailed = true;
-        $this->save();
-    }
-
-    public function isMarkedAsMailed()
-    {
-        return $this->mailed;
-    }
-
-    public function makePublic()
-    {
-        $this->publish_hash = str_random(15);
-        $this->published_at = carbon();
-        $this->save();
-
-        return $this;
-    }
-
-    public function removePublic()
-    {
-        $this->publish_hash = null;
-        $this->published_at = null;
-        $this->save();
-
-        return $this;
     }
 
     public function isPublic()
@@ -223,6 +197,11 @@ class Exception extends Model
     public function getRouteUrlAttribute(): string
     {
         return route('exceptions.show', [$this->project_id, $this]);
+    }
+
+    public function getProjectRouteUrlAttribute(): string
+    {
+        return route('projects.show', $this->project_id);
     }
 
     public function getShortExceptionTextAttribute(): string

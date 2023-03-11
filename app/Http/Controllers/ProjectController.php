@@ -100,18 +100,6 @@ class ProjectController extends Controller
         ]);
     }
 
-    //TODO : Check and delete
-    public function testWebhook(Request $request, $id)
-    {
-        $project = auth()->user()
-            ->projects()
-            ->findOrFail($id);
-
-        $project->notify(new TestWebhook($project, $request->input('type', 'slack')));
-
-        return redirect()->route('panel.projects.show', $project)->withSuccess('Test notification has been send!');
-    }
-
     public function refreshToken(Request $request, $id): RedirectResponse
     {
         $project = Project::findOrFail($id);
