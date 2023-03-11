@@ -2,12 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\ExceptionStatusEnum;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Notifications\Notifiable;
@@ -18,6 +17,7 @@ class Project extends Model
     use HasUuids;
     use Filterable;
     use Notifiable;
+    use HasFactory;
 
     protected $fillable = [
         'url',
@@ -75,7 +75,7 @@ class Project extends Model
         return $this->exceptions()
             ->where(function ($query) {
                 return $query
-                    ->where('status', Exception::OPEN);
+                    ->where('status', ExceptionStatusEnum::Open->value);
             });
     }
 
@@ -84,9 +84,9 @@ class Project extends Model
         return $this->hasManyThrough(Feedback::class, Exception::class);
     }
 
-    public function scopeFilter($query, array $filters) : void
+    public function scopeFilter($query, array $input) : void
     {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
+        $query->when($input['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%'.$search.'%');
             });

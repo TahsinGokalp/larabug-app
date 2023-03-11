@@ -18,7 +18,7 @@ class ProjectController extends Controller
             ->filter(request()->only('search'))
             ->latest('last_error_at')
             ->latest('created_at')
-            ->paginate();
+            ->paginate(6);
 
         return inertia('Projects/Index', [
             'filters'  => request()->only('search'),
@@ -100,17 +100,7 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function feedbackInstallation($id)
-    {
-        $project = auth()->user()
-            ->projects()
-            ->findOrFail($id);
-
-        return inertia('Projects/FeedbackInstallation', [
-            'project' => $project,
-        ]);
-    }
-
+    //TODO : Check and delete
     public function testWebhook(Request $request, $id)
     {
         $project = auth()->user()

@@ -72,7 +72,7 @@ class Issue extends Model
         'status_text',
         'last_occurred_at_human',
     ];
-
+/*
     public function exceptions(): HasMany
     {
         return $this->hasMany(Exception::class);
@@ -101,4 +101,5 @@ class Issue extends Model
     {
         return $this->last_occurred_at->diffForHumans();
     }
+*/
 }

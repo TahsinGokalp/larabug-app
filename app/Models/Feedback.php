@@ -53,7 +53,7 @@ class Feedback extends Model
     protected $appends = [
         'avatar',
     ];
-
+/*
     public function exception()
     {
         return $this->belongsTo(Exception::class);
@@ -68,4 +68,5 @@ class Feedback extends Model
     {
         return 'https://www.gravatar.com/avatar/'.md5(strtolower(trim($this->attributes['email']))).'?s='.(int) $size;
     }
+*/
 }
