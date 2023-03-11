@@ -3,6 +3,7 @@ import AppLayout from '@/Layouts/AppLayout.vue'
 
 import Breadcrumbs from '@/Components/Breadcrumbs.vue'
 import BreadcrumbsItem from '@/Components/BreadcrumbsItem.vue'
+import BreadcrumbsItemMain from '@/Components/BreadcrumbsItemMain.vue'
 import Card from '@/Components/Card.vue'
 import Button from '@/Components/Button.vue'
 import Paginator from '@/Components/Paginator.vue'
@@ -16,6 +17,7 @@ export default {
         Badge,
         Breadcrumbs,
         BreadcrumbsItem,
+        BreadcrumbsItemMain,
         Card,
         Button,
         Paginator,
@@ -49,9 +51,8 @@ export default {
     <AppLayout title="Projects">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <Breadcrumbs>
-                <BreadcrumbsItem href="/panel/issues">Issues</BreadcrumbsItem>
+                <BreadcrumbsItemMain href="/issues">Issues</BreadcrumbsItemMain>
             </Breadcrumbs>
-
             <Card>
                 <template #header>
                     <h2 class="text-xl font-bold">Issues</h2>

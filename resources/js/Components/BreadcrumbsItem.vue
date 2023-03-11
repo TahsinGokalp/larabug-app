@@ -1,16 +1,20 @@
 <template>
     <li>
-        <InertiaLink
-            v-bind="$attrs"
-            :class="[
-        'text-base text-gray-600 font-medium transition',
-        'focus:outline-none',
-        'hover:text-gray-800',
-        'focus:underline',
+        <div class="flex items-center">
+            <InertiaLink
+                v-bind="$attrs"
+                :class="[
+        'ml-1',
+        'text-sm',
+        'font-medium',
+        'text-gray-700',
+        'hover:text-blue-600',
+        'md:ml-2'
       ]"
-        >
-            <slot></slot>
-        </InertiaLink>
+            >
+                <slot></slot>
+            </InertiaLink>
+        </div>
     </li>
 </template>
 
