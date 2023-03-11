@@ -11,9 +11,12 @@ class CreateApiTokenTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_api_tokens_can_be_created(): void
+    /**
+     * @test
+     */
+    public function api_tokens_can_be_created(): void
     {
-        if (!Features::hasApiFeatures()) {
+        if (! Features::hasApiFeatures()) {
             $this->markTestSkipped('API support is not enabled.');
 
             return;
@@ -22,7 +25,7 @@ class CreateApiTokenTest extends TestCase
         $this->actingAs($user = User::factory()->withPersonalTeam()->create());
 
         $response = $this->post('/user/api-tokens', [
-            'name'        => 'Test Token',
+            'name' => 'Test Token',
             'permissions' => [
                 'read',
                 'update',

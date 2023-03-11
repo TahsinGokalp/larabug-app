@@ -29,9 +29,9 @@ class Project extends Model
     ];
 
     protected $casts = [
-        'receive_email'                      => 'boolean',
-        'notifications_enabled'              => 'boolean',
-        'telegram_notification_enabled'       => 'boolean',
+        'receive_email' => 'boolean',
+        'notifications_enabled' => 'boolean',
+        'telegram_notification_enabled' => 'boolean',
         'last_error_at' => 'datetime',
     ];
 
@@ -39,6 +39,21 @@ class Project extends Model
         'route_url',
         'feedback_script_html',
     ];
+
+    public static function boot(): void
+    {
+        parent::boot();
+
+        static::creating(static function (self $project) {
+            $project->key = Str::random(50);
+        });
+
+        static::deleting(static function (self $project) {
+            $project->exceptions()->delete();
+            $project->issues()->delete();
+            $project->feedback()->delete();
+        });
+    }
 
     public function getRouteUrlAttribute(): string
     {
@@ -52,7 +67,7 @@ class Project extends Model
 
     public function getFeedbackScriptHtmlAttribute(): string
     {
-        return '<script src="'.$this->getFeedbackScriptUrl().'"></script>';
+        return '<script src="' . $this->getFeedbackScriptUrl() . '"></script>';
     }
 
     public function scopeWantsEmail($query)
@@ -84,27 +99,12 @@ class Project extends Model
         return $this->hasManyThrough(Feedback::class, Exception::class);
     }
 
-    public function scopeFilter($query, array $input) : void
+    public function scopeFilter($query, array $input): void
     {
         $query->when($input['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
-                $query->where('title', 'like', '%'.$search.'%');
+                $query->where('title', 'like', '%' . $search . '%');
             });
-        });
-    }
-
-    public static function boot() : void
-    {
-        parent::boot();
-
-        static::creating(static function (self $project) {
-            $project->key = Str::random(50);
-        });
-
-        static::deleting(static function (self $project) {
-            $project->exceptions()->delete();
-            $project->issues()->delete();
-            $project->feedback()->delete();
         });
     }
 }

@@ -17,7 +17,7 @@ class ExceptionController extends Controller
         $exceptions = $project
             ->exceptions();
 
-        if (!$request->input('status')) {
+        if (! $request->input('status')) {
             $exceptions = $exceptions->whereNotIn('status', [
                 'DONE',
                 'FIXED',
@@ -46,7 +46,10 @@ class ExceptionController extends Controller
             return $exceptions;
         }
 
-        return view('exceptions.index', compact('project', 'exceptions'));
+        return view('exceptions.index', [
+            'project' => $project,
+            'exceptions' => $exceptions,
+        ]);
     }
 
     public function show($id, $exception)
@@ -62,17 +65,17 @@ class ExceptionController extends Controller
         /*
          * Mark exception as read
          */
-        if (!$exception->status || $exception->status == Exception::OPEN) {
+        if (! $exception->status || $exception->status == Exception::OPEN) {
             $exception->markAsRead();
         }
 
         // If it was not mailed yet (delay in cronjob which is ok), then mark as e-mail, saves resources & emails :)
-        if (!$exception->isMarkedAsMailed()) {
+        if (! $exception->isMarkedAsMailed()) {
             $exception->markAsMailed();
         }
 
         return inertia('Exceptions/Show', [
-            'project'   => $project,
+            'project' => $project,
             'exception' => $exception,
         ]);
     }
@@ -139,7 +142,7 @@ class ExceptionController extends Controller
             return redirect()->route('panel.projects.show', $id)->with('info', 'There are no exceptions to mark as fixed');
         }
 
-        return redirect()->route('panel.projects.show', $id)->with('success', $total.' exception(s) have been marked as fixed');
+        return redirect()->route('panel.projects.show', $id)->with('success', $total . ' exception(s) have been marked as fixed');
     }
 
     public function markAllAsRead(Request $request, $id)
@@ -155,7 +158,7 @@ class ExceptionController extends Controller
             return redirect()->route('panel.projects.show', $id)->with('info', 'There are no exceptions to mark as read');
         }
 
-        return redirect()->route('panel.projects.show', $id)->with('success', $total.' exception(s) have been marked as read');
+        return redirect()->route('panel.projects.show', $id)->with('success', $total . ' exception(s) have been marked as read');
     }
 
     public function markAs(Request $request, $id)

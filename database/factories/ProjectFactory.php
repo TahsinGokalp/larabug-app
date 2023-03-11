@@ -11,7 +11,6 @@ use Illuminate\Support\Str;
  */
 class ProjectFactory extends Factory
 {
-
     protected $model = Project::class;
 
     /**
@@ -22,14 +21,14 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'                      => $this->faker->company(),
-            'url'                     => $this->faker->url(),
-            'key'         => Str::random(50),
-            'description'                  => $this->faker->text(200),
-            'last_error_at'         => $this->faker->randomElement([null, now()]),
+            'title' => $this->faker->company(),
+            'url' => $this->faker->url(),
+            'key' => Str::random(50),
+            'description' => $this->faker->text(200),
+            'last_error_at' => $this->faker->randomElement([null, now()]),
             'notifications_enabled' => $this->faker->boolean(),
-            'receive_email'            => $this->faker->boolean(),
-            'telegram_notification_enabled'        => $this->faker->boolean(),
+            'receive_email' => $this->faker->boolean(),
+            'telegram_notification_enabled' => $this->faker->boolean(),
         ];
     }
 }

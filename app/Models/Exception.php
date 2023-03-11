@@ -33,10 +33,10 @@ class Exception extends Model
      * @var array
      */
     protected $casts = [
-        'user'       => 'array',
-        'storage'    => 'array',
-        'executor'   => 'array',
-        'mailed'     => 'boolean',
+        'user' => 'array',
+        'storage' => 'array',
+        'executor' => 'array',
+        'mailed' => 'boolean',
         'additional' => 'array',
         'status' => ExceptionStatusEnum::class,
     ];
@@ -50,88 +50,6 @@ class Exception extends Model
         'executor_output',
         'markup_language',
     ];
-
-    public function getHumanDateAttribute(): string
-    {
-        return $this->created_at->diffForHumans();
-    }
-
-    public function getPublicRouteUrlAttribute(): ?string
-    {
-        if (!$this->publish_hash) {
-            return null;
-        }
-
-        return route('public.exception', $this);
-    }
-
-    public function project(): BelongsTo
-    {
-        return $this->belongsTo(Project::class);
-    }
-
-    public function getIssueRouteUrlAttribute(): ?string
-    {
-        if (!$this->issue_id) {
-            return null;
-        }
-
-        return route('issues.show', $this->issue_id);
-    }
-
-    public function getRouteUrlAttribute(): string
-    {
-        return route('exceptions.show', [$this->project_id, $this]);
-    }
-
-    public function getShortExceptionTextAttribute(): string
-    {
-        if (!$this->exception) {
-            return '-No exception text-';
-        }
-
-        return Str::limit($this->exception, 75);
-    }
-
-    public function getExecutorOutputAttribute(): string
-    {
-        return implode(PHP_EOL, collect($this->executor)->map(function ($line) {
-            return preg_replace(
-                '/^[0-9]{1,}[.]/i',
-                '',
-                str_replace(
-                    "\n",
-                    '',
-                    Arr::get($line, 'line')
-                )
-            );
-        })->toArray());
-    }
-
-    public function getMarkupLanguageAttribute(): string
-    {
-        $pathInfo = pathinfo($this->file);
-
-        $extension = (string)Arr::get($pathInfo, 'extension');
-
-        if ($extension === 'php') {
-            return 'language-php';
-        }
-
-        if ($extension === 'html') {
-            return 'language-html';
-        }
-
-        return 'language-php';
-    }
-
-    public function feedback(): HasMany
-    {
-        return $this->hasMany(Feedback::class);
-    }
-
-
-
 
     /*
 
@@ -258,7 +176,6 @@ class Exception extends Model
 
     */
 
-
     public static function boot()
     {
         parent::boot();
@@ -273,5 +190,84 @@ class Exception extends Model
                 //$exception->project->notify(new ExceptionWasCreated($exception));
             }
         });
+    }
+
+    public function getHumanDateAttribute(): string
+    {
+        return $this->created_at->diffForHumans();
+    }
+
+    public function getPublicRouteUrlAttribute(): ?string
+    {
+        if (! $this->publish_hash) {
+            return null;
+        }
+
+        return route('public.exception', $this);
+    }
+
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function getIssueRouteUrlAttribute(): ?string
+    {
+        if (! $this->issue_id) {
+            return null;
+        }
+
+        return route('issues.show', $this->issue_id);
+    }
+
+    public function getRouteUrlAttribute(): string
+    {
+        return route('exceptions.show', [$this->project_id, $this]);
+    }
+
+    public function getShortExceptionTextAttribute(): string
+    {
+        if (! $this->exception) {
+            return '-No exception text-';
+        }
+
+        return Str::limit($this->exception, 75);
+    }
+
+    public function getExecutorOutputAttribute(): string
+    {
+        return implode(PHP_EOL, collect($this->executor)->map(function ($line) {
+            return preg_replace(
+                '/^[0-9]{1,}[.]/i',
+                '',
+                str_replace(
+                    "\n",
+                    '',
+                    Arr::get($line, 'line')
+                )
+            );
+        })->toArray());
+    }
+
+    public function getMarkupLanguageAttribute(): string
+    {
+        $pathInfo = pathinfo($this->file);
+
+        $extension = (string) Arr::get($pathInfo, 'extension');
+
+        if ($extension === 'php') {
+            return 'language-php';
+        }
+
+        if ($extension === 'html') {
+            return 'language-html';
+        }
+
+        return 'language-php';
+    }
+
+    public function feedback(): HasMany
+    {
+        return $this->hasMany(Feedback::class);
     }
 }

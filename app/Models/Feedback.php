@@ -4,7 +4,6 @@ namespace App\Models;
 
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -37,6 +36,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereLike($column, $value, $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereUpdatedAt($value)
+ *
  * @mixin \Eloquent
  */
 class Feedback extends Model
@@ -53,20 +53,20 @@ class Feedback extends Model
     protected $appends = [
         'avatar',
     ];
-/*
-    public function exception()
-    {
-        return $this->belongsTo(Exception::class);
-    }
+    /*
+        public function exception()
+        {
+            return $this->belongsTo(Exception::class);
+        }
 
-    public function getAvatarAttribute()
-    {
-        return $this->getGravatar();
-    }
+        public function getAvatarAttribute()
+        {
+            return $this->getGravatar();
+        }
 
-    public function getGravatar($size = 150)
-    {
-        return 'https://www.gravatar.com/avatar/'.md5(strtolower(trim($this->attributes['email']))).'?s='.(int) $size;
-    }
-*/
+        public function getGravatar($size = 150)
+        {
+            return 'https://www.gravatar.com/avatar/'.md5(strtolower(trim($this->attributes['email']))).'?s='.(int) $size;
+        }
+    */
 }

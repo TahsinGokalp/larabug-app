@@ -21,7 +21,7 @@ class ProjectController extends Controller
             ->paginate(6);
 
         return inertia('Projects/Index', [
-            'filters'  => request()->only('search'),
+            'filters' => request()->only('search'),
             'projects' => $projects,
         ]);
     }
@@ -58,9 +58,9 @@ class ProjectController extends Controller
             ->paginate(10);
 
         return inertia('Projects/Show', [
-            'project'    => $project,
+            'project' => $project,
             'exceptions' => $exceptions->appends($request->except('page')),
-            'filters'    => request()->all('search', 'status', 'has_feedback'),
+            'filters' => request()->all('search', 'status', 'has_feedback'),
         ]);
     }
 
