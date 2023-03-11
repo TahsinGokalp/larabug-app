@@ -8,7 +8,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-
         $exceptions = Exception::query()
             ->with('project:id,title')
             ->latest('created_at')

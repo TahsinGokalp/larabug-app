@@ -38,7 +38,7 @@ class Exception extends Model
         'executor'   => 'array',
         'mailed'     => 'boolean',
         'additional' => 'array',
-        'status' => ExceptionStatusEnum::class,
+        'status'     => ExceptionStatusEnum::class,
     ];
 
     protected $appends = [
@@ -112,7 +112,7 @@ class Exception extends Model
     {
         $pathInfo = pathinfo($this->file);
 
-        $extension = (string)Arr::get($pathInfo, 'extension');
+        $extension = (string) Arr::get($pathInfo, 'extension');
 
         if ($extension === 'php') {
             return 'language-php';
@@ -129,9 +129,6 @@ class Exception extends Model
     {
         return $this->hasMany(Feedback::class);
     }
-
-
-
 
     /*
 
@@ -257,7 +254,6 @@ class Exception extends Model
     }
 
     */
-
 
     public static function boot()
     {

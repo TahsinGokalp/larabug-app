@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Exception;
 use App\Models\Project;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ProjectsTableSeeder extends Seeder
