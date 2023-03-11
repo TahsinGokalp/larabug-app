@@ -4,21 +4,24 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        $item = new User();
-        $item->name = 'Admin';
-        $item->email = 'info@kodrika.com.tr';
-        $item->password = 123456;
-        $item->email_verified_at = now();
-        $item->save();
+        $user = new User;
+        $user->name = 'Admin';
+        $user->email = 'admin@test.com';
+        $password = Hash::make('12345678');
+        if (! app()->environment(['local', 'development'])) {
+            $password = Hash::make(Str::random(25));
+        }
+        $user->password = $password;
+        $user->save();
     }
 }

@@ -1,40 +1,29 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExceptionController;
-use App\Http\Controllers\FeedbackController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IssuesController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\ProjectController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::permanentRedirect('/', 'login');
 
-Auth::routes([
-    'register' => false,
-    'verify'   => false,
-]);
+Route::get('exception/{exception:publish_hash}', [DashboardController::class, 'exception'])->name('public.exception');
 
-Route::get('exception/{exception:publish_hash}', [PageController::class, 'exception'])->name('public.exception');
+Route::get('scripts/feedback', [ProjectController::class, 'script'])->name('feedback.script');
 
-Route::get('scripts/feedback', [FeedbackController::class, 'script'])->name('feedback.script');
-
-Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
-
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    //Dashboard
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    //Projects
     Route::resource('projects', ProjectController::class);
     Route::get('projects/{id}/installation', [ProjectController::class, 'installation'])->name('projects.installation');
-    Route::get('projects/{id}/feedback-installation', [ProjectController::class, 'feedbackInstallation'])->name('projects.feedback-installation');
-    Route::post('projects/{id}/test-webhook', [ProjectController::class, 'testWebhook'])->name('projects.test.webhook');
-    Route::post('projects/{id}/remove-image', [ProjectController::class, 'removeImage'])->name('projects.remove.image');
     Route::post('projects/{id}/refresh-token', [ProjectController::class, 'refreshToken'])->name('projects.refresh-token');
-
-    Route::get('issues', [IssuesController::class, 'index'])->name('issues.index');
-    Route::get('issues/{id}', [IssuesController::class, 'show'])->name('issues.show');
-    Route::patch('issues/{id}/status', [IssuesController::class, 'updateStatus'])->name('issues.update-status');
-
+    //Exceptions
     Route::delete('projects/{id}/exceptions/delete-all', [ExceptionController::class, 'deleteAll'])->name('exceptions.delete-all');
     Route::post('projects/{id}/exceptions/delete-selected', [ExceptionController::class, 'deleteSelected'])->name('exceptions.delete-selected');
     Route::post('projects/{id}/exceptions/delete-fixed', [ExceptionController::class, 'deleteFixed'])->name('exceptions.delete-fixed');
@@ -46,14 +35,8 @@ Route::middleware('auth')->prefix('panel')->name('panel.')->group(function () {
     Route::post('projects/{id}/exceptions/mark-as', [ExceptionController::class, 'markAs'])->name('exceptions.mark-as');
     Route::post('projects/{id}/exceptions/mark-all-fixed', [ExceptionController::class, 'markAllAsFixed'])->name('exceptions.mark-all-fixed');
     Route::post('projects/{id}/exceptions/mark-all-read', [ExceptionController::class, 'markAllAsRead'])->name('exceptions.mark-all-read');
-
-    Route::get('feedback', [FeedbackController::class, 'index'])
-        ->middleware('has.feature:feedback')
-        ->name('feedback.index');
-
-    Route::group(['prefix' => 'profile'], static function () {
-        Route::get('/', [ProfileController::class, 'show'])->name('profile.show');
-        Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
-        Route::patch('password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
-    });
+    //Issues
+    Route::get('issues', [IssuesController::class, 'index'])->name('issues.index');
+    Route::get('issues/{id}', [IssuesController::class, 'show'])->name('issues.show');
+    Route::patch('issues/{id}/status', [IssuesController::class, 'updateStatus'])->name('issues.update-status');
 });

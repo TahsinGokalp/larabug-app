@@ -16,7 +16,7 @@ class ExceptionFilter extends ModelFilter
 
     public function search($search)
     {
-        return $this->where('exception', 'LIKE', '%'.$search.'%');
+        return $this->where('exception', 'LIKE', '%' . $search . '%');
     }
 
     public function status($status)

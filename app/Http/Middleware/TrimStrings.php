@@ -9,21 +9,11 @@ class TrimStrings extends Middleware
     /**
      * The names of the attributes that should not be trimmed.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $except = [
+        'current_password',
         'password',
         'password_confirmation',
-        'exception.executor.*.line',
     ];
-
-    protected function cleanArray(array $data, $keyPrefix = '')
-    {
-        return collect($data)->map(function ($value, $key) use ($keyPrefix) {
-            // convert key into wildcard if its an integer
-            $key = is_numeric($key) ? '*' : $key;
-
-            return $this->cleanValue($keyPrefix.$key, $value);
-        })->all();
-    }
 }

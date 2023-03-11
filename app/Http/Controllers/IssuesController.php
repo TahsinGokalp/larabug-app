@@ -9,18 +9,15 @@ class IssuesController extends Controller
 {
     public function index()
     {
-        $projectIds = auth()->user()->projects()->pluck('id');
-
         $issues = Issue::query()
             ->with('project:id,title')
-            ->whereIn('project_id', $projectIds)
             ->filter(request()->only('search'))
             ->orderBy('last_occurred_at', 'desc')
             ->paginate();
 
         return inertia('Issues/Index', [
             'filters' => request()->only('search'),
-            'issues'  => $issues,
+            'issues' => $issues,
         ]);
     }
 
@@ -48,13 +45,13 @@ class IssuesController extends Controller
             ->toArray();
 
         return inertia('Issues/Show', [
-            'issue'                 => $issue,
-            'exceptions'            => $exceptions,
-            'project'               => $issue->project,
-            'filters'               => request()->only('search'),
-            'affected_versions'     => implode(', ', $affectedVersions) ?: '-',
+            'issue' => $issue,
+            'exceptions' => $exceptions,
+            'project' => $issue->project,
+            'filters' => request()->only('search'),
+            'affected_versions' => implode(', ', $affectedVersions) ?: '-',
             'last_occurrence_human' => $issue->last_occurred_at->diffForHumans(),
-            'total_occurrences'     => $issue->exceptions()->count(),
+            'total_occurrences' => $issue->exceptions()->count(),
         ]);
     }
 

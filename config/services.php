@@ -15,40 +15,20 @@ return [
     */
 
     'mailgun' => [
-        'domain'   => env('MAILGUN_DOMAIN'),
-        'secret'   => env('MAILGUN_SECRET'),
+        'domain' => env('MAILGUN_DOMAIN'),
+        'secret' => env('MAILGUN_SECRET'),
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+        'scheme' => 'https',
     ],
 
     'postmark' => [
-        'token' => env('POSTMARK_SECRET'),
+        'token' => env('POSTMARK_TOKEN'),
     ],
 
     'ses' => [
-        'key'    => env('AWS_ACCESS_KEY_ID'),
+        'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'github' => [
-        'client_id'     => env('GITHUB_ID'),
-        'client_secret' => env('GITHUB_SECRET'),
-        'redirect'      => env('GITHUB_CALLBACK'),
-        'token'         => env('GITHUB_TOKEN'),
-    ],
-
-    'facebook' => [
-        'client_id'     => env('FACEBOOK_ID'),
-        'client_secret' => env('FACEBOOK_SECRET'),
-        'redirect'      => env('APP_URL').'/login/facebook/callback',
-    ],
-
-    'stripe' => [
-        'key'    => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
-    ],
-
-    'horizon' => [
-        'token' => env('HORIZON_TOKEN'),
-    ],
 ];
