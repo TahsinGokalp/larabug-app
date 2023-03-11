@@ -22,7 +22,7 @@ class ExceptionController extends Controller
 
         if (! $request->input('status')) {
             $exceptions = $exceptions->whereNotIn('status', [
-                ExceptionStatusEnum::Fixed->value
+                ExceptionStatusEnum::Fixed->value,
             ]);
         } else {
             $exceptions = $exceptions->filter($request->all());
@@ -155,7 +155,7 @@ class ExceptionController extends Controller
         foreach ($request->input('exceptions') as $exception) {
             $exception = $project->exceptions()->findOrFail($exception);
 
-            if ((string)$request->input('type') === ExceptionStatusEnum::Fixed->value) {
+            if ((string) $request->input('type') === ExceptionStatusEnum::Fixed->value) {
                 $exception->markAs(ExceptionStatusEnum::Fixed);
 
                 /*

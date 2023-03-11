@@ -52,54 +52,6 @@ class Exception extends Model
         'markup_language',
     ];
 
-    public function occurences(): HasMany
-    {
-        return $this->hasMany(self::class, 'exception', 'exception')
-            ->whereRaw('id != exceptions.id and line = exceptions.line and project_id = exceptions.project_id')
-            ->where('created_at', '>', now()->subMonth());
-    }
-
-    public function markAsRead(): void
-    {
-        $this->status = ExceptionStatusEnum::Read;
-        $this->save();
-    }
-
-    public function markAsMailed(): void
-    {
-        $this->mailed = true;
-        $this->save();
-    }
-
-    public function isMarkedAsMailed(): bool
-    {
-        return $this->mailed;
-    }
-
-    public function markAs($status = ExceptionStatusEnum::Fixed): void
-    {
-        $this->status = $status;
-        $this->save();
-    }
-
-    public function makePublic(): static
-    {
-        $this->publish_hash = Str::random(15);
-        $this->published_at = now();
-        $this->save();
-
-        return $this;
-    }
-
-    public function removePublic(): static
-    {
-        $this->publish_hash = null;
-        $this->published_at = null;
-        $this->save();
-
-        return $this;
-    }
-
     /*
     public function scopeNotMailed($query)
     {
@@ -164,6 +116,54 @@ class Exception extends Model
                 //$exception->project->notify(new ExceptionWasCreated($exception));
             }
         });
+    }
+
+    public function occurences(): HasMany
+    {
+        return $this->hasMany(self::class, 'exception', 'exception')
+            ->whereRaw('id != exceptions.id and line = exceptions.line and project_id = exceptions.project_id')
+            ->where('created_at', '>', now()->subMonth());
+    }
+
+    public function markAsRead(): void
+    {
+        $this->status = ExceptionStatusEnum::Read;
+        $this->save();
+    }
+
+    public function markAsMailed(): void
+    {
+        $this->mailed = true;
+        $this->save();
+    }
+
+    public function isMarkedAsMailed(): bool
+    {
+        return $this->mailed;
+    }
+
+    public function markAs($status = ExceptionStatusEnum::Fixed): void
+    {
+        $this->status = $status;
+        $this->save();
+    }
+
+    public function makePublic(): static
+    {
+        $this->publish_hash = Str::random(15);
+        $this->published_at = now();
+        $this->save();
+
+        return $this;
+    }
+
+    public function removePublic(): static
+    {
+        $this->publish_hash = null;
+        $this->published_at = null;
+        $this->save();
+
+        return $this;
     }
 
     public function getHumanDateAttribute(): string
