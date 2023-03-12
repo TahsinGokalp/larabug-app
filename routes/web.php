@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExceptionController;
 use App\Http\Controllers\IssuesController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::permanentRedirect('/', 'login');
@@ -39,4 +40,6 @@ Route::middleware([
     Route::get('issues', [IssuesController::class, 'index'])->name('issues.index');
     Route::get('issues/{id}', [IssuesController::class, 'show'])->name('issues.show');
     Route::patch('issues/{id}/status', [IssuesController::class, 'updateStatus'])->name('issues.update-status');
+    //Users
+    Route::resource('users', UserController::class);
 });

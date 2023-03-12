@@ -26,6 +26,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'receive_email',
     ];
 
     /**
@@ -47,6 +48,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'receive_email' => 'boolean',
     ];
 
     /**
@@ -56,5 +58,15 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+        'receive_email_text'
     ];
+
+    public function getReceiveEmailTextAttribute(): string
+    {
+        if($this->receive_email) {
+            return 'Yes';
+        }
+
+        return 'No';
+    }
 }
