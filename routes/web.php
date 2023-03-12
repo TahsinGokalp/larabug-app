@@ -21,7 +21,6 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-
     //Dashboard
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -44,7 +43,6 @@ Route::middleware([
             Route::post('mark-all-fixed', [ExceptionController::class, 'markAllAsFixed'])->name('exceptions.mark-all-fixed');
             Route::post('mark-all-read', [ExceptionController::class, 'markAllAsRead'])->name('exceptions.mark-all-read');
         });
-
     });
 
     //Issues
