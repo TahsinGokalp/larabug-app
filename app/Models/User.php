@@ -58,12 +58,12 @@ class User extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
-        'receive_email_text'
+        'receive_email_text',
     ];
 
     public function getReceiveEmailTextAttribute(): string
     {
-        if($this->receive_email) {
+        if ($this->receive_email) {
             return 'Yes';
         }
 
