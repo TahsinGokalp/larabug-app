@@ -109,10 +109,6 @@ const disableTwoFactorAuthentication = () => {
             Two Factor Authentication
         </template>
 
-        <template #description>
-            Add additional security to your account using two factor authentication.
-        </template>
-
         <template #content>
             <h3 v-if="twoFactorEnabled && ! confirming" class="text-lg font-medium text-gray-900">
                 You have enabled two factor authentication.

@@ -81,10 +81,6 @@ const clearPhotoFileInput = () => {
             Profile Information
         </template>
 
-        <template #description>
-            Update your account's profile information and email address.
-        </template>
-
         <template #form>
             <!-- Profile Photo -->
             <div v-if="$page.props.jetstream.managesProfilePhotos" class="col-span-6 sm:col-span-4">
