@@ -227,7 +227,7 @@ export default {
                 </dl>
             </Card>
 
-            <Card>
+            <Card class="mt-4">
                 <template #buttonheader>
                     <h2 class="text-xl font-bold">Exceptions</h2>
 

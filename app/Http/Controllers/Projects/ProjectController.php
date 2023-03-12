@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Projects;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::select('id', 'title', 'total_exceptions')
+        $projects = Project::select(['id', 'title', 'total_exceptions'])
             ->withCount('unreadExceptions')
             ->filter(request()->only('search'))
             ->latest('last_error_at')
@@ -81,7 +81,7 @@ class ProjectController extends Controller
         return redirect()->route('projects.show', $project)->with('success', 'Project has been updated');
     }
 
-    public function destroy(Request $request, $id): RedirectResponse
+    public function destroy($id): RedirectResponse
     {
         $project = Project::findOrFail($id);
 
@@ -90,22 +90,4 @@ class ProjectController extends Controller
         return redirect()->route('projects.index')->with('success', 'Project has been removed');
     }
 
-    public function installation($id)
-    {
-        $project = Project::findOrFail($id);
-
-        return inertia('Projects/Installation', [
-            'project' => $project,
-        ]);
-    }
-
-    public function refreshToken(Request $request, $id): RedirectResponse
-    {
-        $project = Project::findOrFail($id);
-
-        $project->key = Str::random(50);
-        $project->save();
-
-        return redirect()->back()->with('success', 'A new API token has been generated');
-    }
 }
