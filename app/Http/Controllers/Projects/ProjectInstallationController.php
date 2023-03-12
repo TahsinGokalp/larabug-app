@@ -15,5 +15,4 @@ class ProjectInstallationController extends Controller
             'project' => $project,
         ]);
     }
-
 }
