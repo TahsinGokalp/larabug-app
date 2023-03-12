@@ -6,6 +6,10 @@ import SectionBorder from '@/Components/SectionBorder.vue';
 import TwoFactorAuthenticationForm from '@/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue';
 import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm.vue';
 import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue';
+import Breadcrumbs from '@/Components/Breadcrumbs.vue'
+import BreadcrumbsItem from '@/Components/BreadcrumbsItem.vue'
+import BreadcrumbsItemMain from '@/Components/BreadcrumbsItemMain.vue'
+import BreadcrumbsDivider from '@/Components/BreadcrumbsDivider.vue'
 
 defineProps({
     confirmsTwoFactorAuthentication: Boolean,
@@ -15,14 +19,13 @@ defineProps({
 
 <template>
     <AppLayout title="Profile">
-        <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Profile
-            </h2>
-        </template>
-
         <div>
-            <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <Breadcrumbs>
+                    <BreadcrumbsItemMain :href="route('dashboard')">Dashboard</BreadcrumbsItemMain>
+                    <BreadcrumbsDivider/>
+                    <BreadcrumbsItem :href="route('profile.show')">Profile</BreadcrumbsItem>
+                </Breadcrumbs>
                 <div v-if="$page.props.jetstream.canUpdateProfileInformation">
                     <UpdateProfileInformationForm :user="$page.props.auth.user" />
 

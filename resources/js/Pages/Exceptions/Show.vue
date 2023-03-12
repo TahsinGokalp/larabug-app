@@ -9,10 +9,18 @@ import Code from '@/Components/Code.vue'
 import Prism from 'prismjs';
 import Dropdown from "../../Components/Dropdown.vue";
 import DropdownOption from "../../Components/DropdownOption.vue";
+import Breadcrumbs from '@/Components/Breadcrumbs.vue'
+import BreadcrumbsItem from '@/Components/BreadcrumbsItem.vue'
+import BreadcrumbsItemMain from '@/Components/BreadcrumbsItemMain.vue'
+import BreadcrumbsDivider from '@/Components/BreadcrumbsDivider.vue'
 
 export default {
     components: {
         AppLayout,
+        Breadcrumbs,
+        BreadcrumbsItem,
+        BreadcrumbsDivider,
+        BreadcrumbsItemMain,
         DropdownOption,
         Dropdown,
         Card,
@@ -80,6 +88,15 @@ export default {
 <template>
     <AppLayout title="Project Exception">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <Breadcrumbs>
+                <BreadcrumbsItemMain :href="route('dashboard')">Dashboard</BreadcrumbsItemMain>
+                <BreadcrumbsDivider/>
+                <BreadcrumbsItem :href="route('projects.index')">Projects</BreadcrumbsItem>
+                <BreadcrumbsDivider/>
+                <BreadcrumbsItem :href="route('projects.show', this.project.id)">{{ this.project.title }}</BreadcrumbsItem>
+                <BreadcrumbsDivider/>
+                <BreadcrumbsItem :href="route('exceptions.show', [this.project.id, exception.id])">Exception Detail</BreadcrumbsItem>
+            </Breadcrumbs>
             <div class="flex w-full bg-white px-6 py-3 border-b border-gray-200 space-x-3">
                 <Button v-if="exception.status !== 'Fixed'" success @click="fixed">Mark as fixed</Button>
                 <Button v-if="!exception.publish_hash" @click="togglePublic" secondary>Share public</Button>

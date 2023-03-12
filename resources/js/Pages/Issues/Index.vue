@@ -10,9 +10,11 @@ import Paginator from '@/Components/Paginator.vue'
 import pickBy from 'lodash/pickBy'
 import throttle from 'lodash/throttle'
 import Badge from '@/Components/Badge.vue'
+import BreadcrumbsDivider from "../../Components/BreadcrumbsDivider.vue";
 
 export default {
     components: {
+        BreadcrumbsDivider,
         AppLayout,
         Badge,
         Breadcrumbs,
@@ -51,7 +53,9 @@ export default {
     <AppLayout title="Projects">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <Breadcrumbs>
-                <BreadcrumbsItemMain href="/issues">Issues</BreadcrumbsItemMain>
+                <BreadcrumbsItemMain :href="route('dashboard')">Dashboard</BreadcrumbsItemMain>
+                <BreadcrumbsDivider/>
+                <BreadcrumbsItem :href="route('issues.index')">Issues</BreadcrumbsItem>
             </Breadcrumbs>
             <Card>
                 <template #header>

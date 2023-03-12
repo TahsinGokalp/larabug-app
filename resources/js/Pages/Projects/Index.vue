@@ -3,12 +3,20 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import Card from '@/Components/Card.vue';
 import Button from '@/Components/Button.vue';
 import Paginator from '@/Components/Paginator.vue';
+import Breadcrumbs from '@/Components/Breadcrumbs.vue'
+import BreadcrumbsItem from '@/Components/BreadcrumbsItem.vue'
+import BreadcrumbsItemMain from '@/Components/BreadcrumbsItemMain.vue'
+import BreadcrumbsDivider from '@/Components/BreadcrumbsDivider.vue'
 import pickBy from 'lodash/pickBy';
 import throttle from 'lodash/throttle';
 
 export default {
     components: {
         AppLayout,
+        Breadcrumbs,
+        BreadcrumbsItem,
+        BreadcrumbsDivider,
+        BreadcrumbsItemMain,
         Card,
         Button,
         Paginator,
@@ -41,6 +49,11 @@ export default {
 <template>
     <AppLayout title="Projects">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <Breadcrumbs>
+                <BreadcrumbsItemMain :href="route('dashboard')">Dashboard</BreadcrumbsItemMain>
+                <BreadcrumbsDivider></BreadcrumbsDivider>
+                <BreadcrumbsItem :href="route('projects.index')">Projects</BreadcrumbsItem>
+            </Breadcrumbs>
             <Card>
                 <template #header>
                     <h2 class="text-xl font-bold">Projects</h2>

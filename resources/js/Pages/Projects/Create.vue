@@ -5,11 +5,19 @@ import Card from '@/Components/Card.vue'
 import Button from '@/Components/Button.vue'
 import FormInputGroup from '@/Components/FormInputGroup.vue'
 import FormTextareaGroup from '@/Components/FormTextareaGroup.vue'
+import Breadcrumbs from '@/Components/Breadcrumbs.vue'
+import BreadcrumbsItem from '@/Components/BreadcrumbsItem.vue'
+import BreadcrumbsItemMain from '@/Components/BreadcrumbsItemMain.vue'
+import BreadcrumbsDivider from '@/Components/BreadcrumbsDivider.vue'
 import { useForm } from '@inertiajs/vue3'
 
 export default {
     components: {
         AppLayout,
+        Breadcrumbs,
+        BreadcrumbsItem,
+        BreadcrumbsDivider,
+        BreadcrumbsItemMain,
         Card,
         Button,
         FormInputGroup,
@@ -43,6 +51,13 @@ export default {
 <template>
     <AppLayout title="Create Project">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <Breadcrumbs>
+                <BreadcrumbsItemMain :href="route('dashboard')">Dashboard</BreadcrumbsItemMain>
+                <BreadcrumbsDivider/>
+                <BreadcrumbsItem :href="route('projects.index')">Projects</BreadcrumbsItem>
+                <BreadcrumbsDivider/>
+                <BreadcrumbsItem :href="route('projects.create')">Create Project</BreadcrumbsItem>
+            </Breadcrumbs>
             <Card contained>
                 <template #header>
                     <h2 class="text-xl font-bold">New project</h2>

@@ -8,6 +8,10 @@ import ButtonRackItem from '@/Components/ButtonRackItem.vue'
 import Code from '@/Components/Code.vue'
 import Paginator from '@/Components/Paginator.vue'
 import EditProject from '@/Partials/EditProject.vue'
+import Breadcrumbs from '@/Components/Breadcrumbs.vue'
+import BreadcrumbsItem from '@/Components/BreadcrumbsItem.vue'
+import BreadcrumbsItemMain from '@/Components/BreadcrumbsItemMain.vue'
+import BreadcrumbsDivider from '@/Components/BreadcrumbsDivider.vue'
 import throttle from 'lodash/throttle'
 import pickBy from 'lodash/pickBy'
 import mapValues from 'lodash/mapValues'
@@ -15,6 +19,10 @@ import mapValues from 'lodash/mapValues'
 export default {
     components: {
         AppLayout,
+        Breadcrumbs,
+        BreadcrumbsItem,
+        BreadcrumbsDivider,
+        BreadcrumbsItemMain,
         EditProject,
         Code,
         Card,
@@ -149,6 +157,13 @@ export default {
 <template>
     <AppLayout title="Projects">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <Breadcrumbs>
+                <BreadcrumbsItemMain :href="route('dashboard')">Dashboard</BreadcrumbsItemMain>
+                <BreadcrumbsDivider/>
+                <BreadcrumbsItem :href="route('projects.index')">Projects</BreadcrumbsItem>
+                <BreadcrumbsDivider/>
+                <BreadcrumbsItem :href="route('projects.show', project.id)">{{ project.title }}</BreadcrumbsItem>
+            </Breadcrumbs>
             <Card>
                 <template #header>
                     <h2 class="text-xl font-bold">Project {{ project.title }}</h2>
