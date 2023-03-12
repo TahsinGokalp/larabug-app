@@ -40,6 +40,7 @@ use Illuminate\Support\Str;
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $unreadExceptions
  * @property-read int|null $unread_exceptions_count
+ *
  * @method static \Database\Factories\ProjectFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Project filter(array $input)
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
@@ -64,6 +65,7 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereTotalExceptions($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUrl($value)
+ *
  * @mixin \Eloquent
  */
 class Project extends Model
