@@ -51,13 +51,13 @@ const logout = () => {
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
-                                <NavLink :href="route('projects.index')" :active="route().current('projects.index')">
+                                <NavLink :href="route('projects.index')" :active="route().current('projects.*')">
                                     Projects
                                 </NavLink>
-                                <NavLink :href="route('issues.index')" :active="route().current('issues.index')">
+                                <NavLink :href="route('issues.index')" :active="route().current('issues.*')">
                                     Issues
                                 </NavLink>
-                                <NavLink :href="route('users.index')" :active="route().current('users.index')">
+                                <NavLink :href="route('users.index')" :active="route().current('users.*')">
                                     Users
                                 </NavLink>
                             </div>
@@ -203,13 +203,13 @@ const logout = () => {
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('projects.index')" :active="route().current('projects.index')">
+                        <ResponsiveNavLink :href="route('projects.index')" :active="route().current('projects.*')">
                             Projects
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('issues.index')" :active="route().current('issues.index')">
+                        <ResponsiveNavLink :href="route('issues.index')" :active="route().current('issues.*')">
                             Issues
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('users.index')" :active="route().current('users.index')">
+                        <ResponsiveNavLink :href="route('users.index')" :active="route().current('users.*')">
                             Users
                         </ResponsiveNavLink>
                     </div>
