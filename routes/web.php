@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Exceptions\ExceptionActionController;
 use App\Http\Controllers\Exceptions\ExceptionController;
 use App\Http\Controllers\Exceptions\ExceptionDeleteController;
 use App\Http\Controllers\IssuesController;
@@ -30,12 +31,16 @@ Route::middleware([
         Route::get('installation', [ProjectInstallationController::class, 'index'])->name('projects.installation');
         Route::post('refresh-token', [ProjectRefreshTokenController::class, 'index'])->name('projects.refresh-token');
         //Exceptions
-        Route::resource('exceptions', ExceptionController::class);
+        Route::resource('exceptions', ExceptionController::class, [
+            'only' => ['index', 'show', 'destroy']
+        ]);
         Route::prefix('exceptions')->group(static function () {
+            //Delete Exception
             Route::delete('delete-all', [ExceptionDeleteController::class, 'deleteAll'])->name('exceptions.delete-all');
             Route::post('delete-selected', [ExceptionDeleteController::class, 'deleteSelected'])->name('exceptions.delete-selected');
             Route::post('delete-fixed', [ExceptionDeleteController::class, 'deleteFixed'])->name('exceptions.delete-fixed');
-            Route::post('{exception}/fixed', [ExceptionController::class, 'fixed'])->name('exceptions.fixed');
+            //Exception Actions
+            Route::post('{exception}/fixed', [ExceptionActionController::class, 'fixed'])->name('exceptions.fixed');
             Route::post('{exception}/snooze', [ExceptionController::class, 'snooze'])->name('exceptions.snooze');
             Route::post('{exception}/unsnooze', [ExceptionController::class, 'unSnooze'])->name('exceptions.un-snooze');
             Route::post('{exception}/toggle-public', [ExceptionController::class, 'togglePublic'])->name('exceptions.toggle-public');
@@ -46,9 +51,11 @@ Route::middleware([
     });
 
     //Issues
-    Route::get('issues', [IssuesController::class, 'index'])->name('issues.index');
-    Route::get('issues/{id}', [IssuesController::class, 'show'])->name('issues.show');
-    Route::patch('issues/{id}/status', [IssuesController::class, 'updateStatus'])->name('issues.update-status');
+    Route::prefix('issues')->group(static function () {
+        Route::get('/', [IssuesController::class, 'index'])->name('issues.index');
+        Route::get('{id}', [IssuesController::class, 'show'])->name('issues.show');
+        Route::patch('{id}/status', [IssuesController::class, 'updateStatus'])->name('issues.update-status');
+    });
 
     //Users
     Route::resource('users', UserController::class);
