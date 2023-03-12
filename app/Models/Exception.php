@@ -188,14 +188,13 @@ class Exception extends Model
     {
         parent::boot();
 
-        static::creating(function ($exception) {
+        static::creating(static function ($exception) {
             $exception->status = ExceptionStatusEnum::Open->value;
         });
 
-        static::created(function ($exception) {
+        static::created(static function ($exception) {
             if ($exception->project && $exception->project->notifications_enabled) {
-                //TODO : Control
-                //$exception->project->notify(new ExceptionWasCreated($exception));
+                $exception->project->notify(new ExceptionWasCreated($exception));
             }
         });
     }

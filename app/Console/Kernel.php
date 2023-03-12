@@ -12,7 +12,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('rotate:exceptions')->twiceDaily();
+
+        $schedule->command('mail:exceptions')->everyFifteenMinutes()->when(function () {
+            return config('larabug.should_email_exceptions');
+        });
+
+        $schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
 
     /**
