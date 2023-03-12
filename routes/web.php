@@ -32,7 +32,7 @@ Route::middleware([
         Route::post('refresh-token', [ProjectRefreshTokenController::class, 'index'])->name('projects.refresh-token');
         //Exceptions
         Route::resource('exceptions', ExceptionController::class, [
-            'only' => ['index', 'show', 'destroy']
+            'only' => ['index', 'show', 'destroy'],
         ]);
         Route::prefix('exceptions')->group(static function () {
             //Delete Exception
