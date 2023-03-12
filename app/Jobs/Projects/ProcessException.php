@@ -3,6 +3,7 @@
 namespace App\Jobs\Projects;
 
 use App\Models\Project;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -25,7 +26,7 @@ class ProcessException implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param \Illuminate\Support\Carbon $date
+     * @param  \Illuminate\Support\Carbon  $date
      */
     public function __construct(array $data, Project $project, $date = null)
     {
@@ -41,7 +42,7 @@ class ProcessException implements ShouldQueue
      */
     public function handle()
     {
-        if (!is_array($this->data)) {
+        if (! is_array($this->data)) {
             return;
         }
 
@@ -54,7 +55,7 @@ class ProcessException implements ShouldQueue
                     ->where('snooze_until', '>', now());
             })->exists();
 
-            if (!$check) {
+            if (! $check) {
                 $exception = $this->project->exceptions()->create($this->data);
 
                 $exception->created_at = $this->date;
@@ -63,14 +64,14 @@ class ProcessException implements ShouldQueue
                 $issue = $this->project->issues()
                     ->firstOrCreate([
                         'exception' => $this->data['exception'],
-                        'line'      => $this->data['line'],
+                        'line' => $this->data['line'],
                     ], [
                         'exception_id' => $exception->id,
                     ]);
 
                 $issue->update([
                     'last_occurred_at' => $this->date,
-                    'status'           => 'OPEN',
+                    'status' => 'OPEN',
                 ]);
 
                 $exception->issue()->associate($issue)->save();
@@ -79,7 +80,7 @@ class ProcessException implements ShouldQueue
                 $this->project->total_exceptions++;
                 $this->project->save();
             }
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             // TODO: handle exception
         }
 

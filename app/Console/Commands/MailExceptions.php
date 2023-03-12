@@ -42,21 +42,21 @@ class MailExceptions extends Command
             ->get()
             ->map(function ($user) {
                 return [
-                    'name'  => $user->name,
+                    'name' => $user->name,
                     'email' => $user->email,
 
                     'projects' => $user->projects->map(function ($project) {
                         return [
-                            'id'         => $project->id,
-                            'title'      => $project->title,
+                            'id' => $project->id,
+                            'title' => $project->title,
                             'exceptions' => $project->exceptions->map(function (Exception $exception) {
-                                if (!$exception->mailed) {
+                                if (! $exception->mailed) {
                                     $exception->markAsMailed();
                                 }
 
                                 return [
-                                    'id'         => $exception->id,
-                                    'exception'  => $exception->exception,
+                                    'id' => $exception->id,
+                                    'exception' => $exception->exception,
                                     'project_id' => $exception->project_id,
                                     'created_at' => $exception->created_at,
                                 ];

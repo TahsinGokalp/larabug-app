@@ -17,7 +17,7 @@ class ApiController extends Controller
     {
         $user = $request->user();
 
-        if (!$user->hasVerifiedEmail()) {
+        if (! $user->hasVerifiedEmail()) {
             return response()->json([
                 'error' => 'This is not an verified account.',
             ])->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -31,7 +31,7 @@ class ApiController extends Controller
         }
 
         if (
-            !Arr::get($request->input('exception'), 'exception')
+            ! Arr::get($request->input('exception'), 'exception')
         ) {
             return response()->json([
                 'error' => 'Did not receive the correct parameters to process this exception',
@@ -39,21 +39,21 @@ class ApiController extends Controller
         }
 
         dispatch_sync(new ProcessException([
-            'id'              => $id = Uuid::uuid4(),
-            'host'            => array_get($request->input('exception'), 'host'),
-            'environment'     => array_get($request->input('exception'), 'environment'),
-            'error'           => array_get($request->input('exception'), 'error'),
-            'additional'      => $request->input('additional'),
-            'method'          => array_get($request->input('exception'), 'method'),
-            'class'           => array_get($request->input('exception'), 'class'),
-            'file'            => array_get($request->input('exception'), 'file'),
-            'file_type'       => array_get($request->input('exception'), 'file_type', 'php'),
-            'line'            => array_get($request->input('exception'), 'line'),
-            'fullUrl'         => array_get($request->input('exception'), 'fullUrl'),
-            'executor'        => array_get($request->input('exception'), 'executor'),
-            'storage'         => array_get($request->input('exception'), 'storage'),
-            'exception'       => str_limit(array_get($request->input('exception'), 'exception'), 10000),
-            'user'            => $request->input('user'),
+            'id' => $id = Uuid::uuid4(),
+            'host' => array_get($request->input('exception'), 'host'),
+            'environment' => array_get($request->input('exception'), 'environment'),
+            'error' => array_get($request->input('exception'), 'error'),
+            'additional' => $request->input('additional'),
+            'method' => array_get($request->input('exception'), 'method'),
+            'class' => array_get($request->input('exception'), 'class'),
+            'file' => array_get($request->input('exception'), 'file'),
+            'file_type' => array_get($request->input('exception'), 'file_type', 'php'),
+            'line' => array_get($request->input('exception'), 'line'),
+            'fullUrl' => array_get($request->input('exception'), 'fullUrl'),
+            'executor' => array_get($request->input('exception'), 'executor'),
+            'storage' => array_get($request->input('exception'), 'storage'),
+            'exception' => str_limit(array_get($request->input('exception'), 'exception'), 10000),
+            'user' => $request->input('user'),
             'project_version' => array_get($request->input('exception'), 'project_version'),
         ], $project, now()));
 

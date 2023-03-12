@@ -4,10 +4,10 @@ use App\Http\Controllers\Api\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::post('/feedback', [ApiController::class, 'feedback'])->name('api.feedback');
+Route::post('feedback', [ApiController::class, 'feedback'])->name('api.feedback');
 
 Route::middleware('auth:api')->group(function () {
-    Route::post('/log', [ApiController::class, 'log'])->name('exceptions.log');
+    Route::post('log', [ApiController::class, 'log'])->name('exceptions.log');
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

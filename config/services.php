@@ -36,5 +36,4 @@ return [
         'group' => env('TELEGRAM_GROUP_ID', 'YOUR GROUP ID HERE'),
     ],
 
-
 ];

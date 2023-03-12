@@ -28,8 +28,7 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param mixed $notifiable
-     *
+     * @param  mixed  $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -52,11 +51,11 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
                 'disable_web_page_preview' => true,
             ])
             ->view('notifications.exception_created', [
-                'title' => '['.$this->project->title.'] New exception thrown',
+                'title' => '[' . $this->project->title . '] New exception thrown',
                 'exception' => $this->exception->exception,
                 'route_url' => $this->exception->route_url,
                 'class' => $this->exception->class,
-                'date' => $this->exception->created_at->format('Y-m-d H:i:s').' (UTC)',
+                'date' => $this->exception->created_at->format('Y-m-d H:i:s') . ' (UTC)',
                 'file' => $this->exception->file,
                 'line' => $this->exception->line,
             ]);
@@ -65,8 +64,7 @@ class ExceptionWasCreated extends Notification implements ShouldQueue
     /**
      * Get the array representation of the notification.
      *
-     * @param mixed $notifiable
-     *
+     * @param  mixed  $notifiable
      * @return array
      */
     public function toArray($notifiable)

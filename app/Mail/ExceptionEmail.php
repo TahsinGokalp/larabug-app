@@ -14,9 +14,6 @@ class ExceptionEmail extends Mailable implements ShouldQueue
 
     public $collection;
 
-    /**
-     * Create a new message instance.
-     */
     public function __construct(array $collection)
     {
         $this->collection = $collection;
@@ -31,7 +28,7 @@ class ExceptionEmail extends Mailable implements ShouldQueue
     {
         return $this
             ->to($this->collection['email'], $this->collection['name'])
-            ->subject('New exceptions in projects '.$this->collection['projects']->take(3)->pluck('title')->implode(', '))
+            ->subject('New exceptions in projects ' . $this->collection['projects']->take(3)->pluck('title')->implode(', '))
             ->markdown('emails.exception');
     }
 }
