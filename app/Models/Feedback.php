@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Exception|null $exception
  * @property-read mixed $avatar
- *
  * @method static \Database\Factories\FeedbackFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Feedback filter(array $input = [], $filter = null)
  * @method static \Illuminate\Database\Eloquent\Builder|Feedback newModelQuery()
@@ -36,7 +35,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereLike($column, $value, $boolean = 'and')
  * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Feedback whereUpdatedAt($value)
- *
  * @mixin \Eloquent
  */
 class Feedback extends Model
