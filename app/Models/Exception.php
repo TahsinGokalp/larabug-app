@@ -134,11 +134,6 @@ class Exception extends Model
         'markup_language',
     ];
 
-    public function issue(): BelongsTo
-    {
-        return $this->belongsTo(Issue::class);
-    }
-
     /*
     public function scopeNotMailed($query)
     {
@@ -197,6 +192,11 @@ class Exception extends Model
                 $exception->project->notify(new ExceptionWasCreated($exception));
             }
         });
+    }
+
+    public function issue(): BelongsTo
+    {
+        return $this->belongsTo(Issue::class);
     }
 
     public function occurences(): HasMany

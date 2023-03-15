@@ -21,7 +21,8 @@ class ProjectService
             ->paginate(6);
     }
 
-    public function create($input){
+    public function create($input)
+    {
         return Project::create($input);
     }
 

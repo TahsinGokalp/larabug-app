@@ -25,6 +25,16 @@ trait HasSparklines
         );
     }
 
+    public function getSparklineAttribute()
+    {
+        return $this->getSparkline();
+    }
+
+    public function initializeHasSparklines()
+    {
+        $this->append('sparkline');
+    }
+
     private function getSVGDataPoints(int $days): Collection
     {
         $since = now()->subDays($days)->startOfDay()->toImmutable();
@@ -69,15 +79,5 @@ trait HasSparklines
         );
 
         return Str::of($svg)->toHtmlString();
-    }
-
-    public function getSparklineAttribute()
-    {
-        return $this->getSparkline();
-    }
-
-    public function initializeHasSparklines()
-    {
-        $this->append('sparkline');
     }
 }
