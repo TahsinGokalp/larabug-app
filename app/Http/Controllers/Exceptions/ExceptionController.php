@@ -2,67 +2,35 @@
 
 namespace App\Http\Controllers\Exceptions;
 
-use App\Enums\ExceptionStatusEnum;
 use App\Http\Controllers\Controller;
-use App\Models\Project;
+use App\Services\Exception\ExceptionService;
+use App\Services\Project\ProjectService;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ExceptionController extends Controller
 {
-    public function index(Request $request, $id)
+    public function __construct(protected ProjectService $projectService, protected ExceptionService $exceptionService)
     {
-        $project = Project::findOrFail($id, [
-            'id',
-            'title',
-        ]);
+    }
 
-        $exceptions = $project
-            ->exceptions();
+    public function index(Request $request, $id): LengthAwarePaginator
+    {
+        $project = $this->projectService->find($id);
 
-        if (! $request->input('status')) {
-            $exceptions = $exceptions->whereNotIn('status', [
-                ExceptionStatusEnum::Fixed->value,
-            ]);
-        } else {
-            $exceptions = $exceptions->filter($request->all());
-        }
-
-        return $exceptions
-            ->latest()
-            ->paginateFilter(15, [
-                'id',
-                'status',
-                'exception',
-                'project_id',
-                'publish_hash',
-                'created_at',
-                'method',
-                'class',
-                'line',
-                'fullUrl',
-                'file',
-            ]);
+        return $this->exceptionService->paginatedExceptions($request, $project);
     }
 
     public function show($id, $exception)
     {
-        $project = Project::findOrFail($id);
+        $project = $this->projectService->find($id);
 
-        $exception = $project->exceptions()
-            ->with('feedback')
-            ->withCount('occurences')
-            ->findOrFail($exception);
+        $exception = $this->exceptionService->findWithCount($project, $exception);
 
-        //Mark exception as read
-        if (! $exception->status || $exception->status === ExceptionStatusEnum::Open) {
-            $exception->markAsRead();
-        }
+        $this->exceptionService->markExceptionAsRead($exception);
 
-        // If it was not mailed yet (delay in cronjob which is ok), then mark as e-mail, saves resources & emails :)
-        if (! $exception->isMarkedAsMailed()) {
-            $exception->markAsMailed();
-        }
+        $this->exceptionService->markExceptionAsMailed($exception);
 
         return inertia('Exceptions/Show', [
             'project' => $project,
@@ -72,11 +40,9 @@ class ExceptionController extends Controller
 
     public function destroy($id, $exception): RedirectResponse
     {
-        $project = Project::findOrFail($id);
+        $project = $this->projectService->find($id);
 
-        $exception = $project->exceptions()->findOrFail($exception);
-
-        $exception->delete();
+        $this->exceptionService->delete($project, $exception);
 
         return redirect()->route('projects.show', $project->id)->with('success', 'Exception has been removed');
     }

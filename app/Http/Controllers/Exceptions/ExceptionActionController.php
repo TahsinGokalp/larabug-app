@@ -2,57 +2,45 @@
 
 namespace App\Http\Controllers\Exceptions;
 
-use App\Enums\ExceptionStatusEnum;
 use App\Http\Controllers\Controller;
-use App\Models\Project;
+use App\Services\Exception\ExceptionActionService;
+use App\Services\Project\ProjectService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ExceptionActionController extends Controller
 {
-    public function fixed($id, $exception): RedirectResponse
+    public function __construct(protected ProjectService $projectService, protected ExceptionActionService $exceptionActionService)
     {
-        $project = Project::findOrFail($id);
+    }
 
-        $exception = $project->exceptions()->findOrFail($exception);
+    public function fixed($id, $exceptionId): RedirectResponse
+    {
+        $project = $this->projectService->find($id);
 
-        $exception->markAs(ExceptionStatusEnum::Fixed);
+        $exception = $this->exceptionActionService->find($project, $exceptionId);
 
-        /*
-         * Also mark as mailed because the user would already know about this exception
-         */
-        $exception->markAsMailed();
+        $this->exceptionActionService->markAsFixed($exception);
 
-        /*
-         * Return redirect back to save filter
-         */
         return redirect()->route('exceptions.show', [$id, $exception])->with('success', 'Exception has been marked as fixed');
     }
 
-    public function togglePublic($id, $exception)
+    public function togglePublic($id, $exceptionId)
     {
-        $project = Project::findOrFail($id);
+        $project = $this->projectService->find($id);
 
-        $exception = $project->exceptions()->findOrFail($exception);
+        $exception = $this->exceptionActionService->find($project, $exceptionId);
 
-        if ($exception->publish_hash) {
-            $exception->removePublic();
+        $message = $this->exceptionActionService->togglePublic($project, $exception);
 
-            return redirect()->back()->withSuccess('Exception has been removed from public view');
-        }
-
-        $exception->makePublic();
-
-        return redirect()->back()->withSuccess('URL has been generated');
+        return redirect()->back()->withSuccess($message);
     }
 
-    public function markAllAsFixed(Request $request, $id): RedirectResponse
+    public function markAllAsFixed($id): RedirectResponse
     {
-        $project = Project::findOrFail($id);
+        $project = $this->projectService->find($id);
 
-        $total = $project->exceptions()
-            ->where('status', '!=', ExceptionStatusEnum::Fixed)
-            ->update(['status' => ExceptionStatusEnum::Fixed]);
+        $total = $this->exceptionActionService->markAllAsFixed($project);
 
         if ($total === 0) {
             return redirect()->route('projects.show', $id)->with('info', 'There are no exceptions to mark as fixed');
@@ -63,12 +51,9 @@ class ExceptionActionController extends Controller
 
     public function markAllAsRead($id): RedirectResponse
     {
-        $project = Project::findOrFail($id);
+        $project = $this->projectService->find($id);
 
-        $total = $project->exceptions()
-            ->where('status', '!=', ExceptionStatusEnum::Read)
-            ->where('status', '!=', ExceptionStatusEnum::Fixed)
-            ->update(['status' => ExceptionStatusEnum::Read]);
+        $total = $this->exceptionActionService->markAllAsRead($project);
 
         if ($total === 0) {
             return redirect()->route('projects.show', $id)->with('info', 'There are no exceptions to mark as read');
@@ -79,44 +64,31 @@ class ExceptionActionController extends Controller
 
     public function markAs(Request $request, $id): RedirectResponse
     {
-        $project = Project::findOrFail($id);
+        $project = $this->projectService->find($id);
 
-        foreach ($request->input('exceptions') as $exception) {
-            $exception = $project->exceptions()->findOrFail($exception);
-
-            if ((string) $request->input('type') === ExceptionStatusEnum::Fixed->value) {
-                $exception->markAs(ExceptionStatusEnum::Fixed);
-
-                /*
-                 * Also mark as mailed because the user would already know about this exception
-                 */
-                $exception->markAsMailed();
-            } else {
-                $exception->markAs(ExceptionStatusEnum::Read);
-            }
-        }
+        $this->exceptionActionService->markAs($project, $request->input('exceptions'), $request->input('type'));
 
         return redirect()->back();
     }
 
     public function snooze(Request $request, $id, $exceptionId): RedirectResponse
     {
-        $project = Project::findOrFail($id);
+        $project = $this->projectService->find($id);
 
-        $exception = $project->exceptions()->findOrFail($exceptionId);
+        $exception = $this->exceptionActionService->find($project, $exceptionId);
 
-        $exception->snooze($request->input('snooze', 30));
+        $this->exceptionActionService->snooze($exception, $request->input('snooze', 30));
 
         return redirect()->route('exceptions.show', [$id, $exceptionId])->with('success', 'Exception is now snoozed');
     }
 
     public function unSnooze($id, $exceptionId): RedirectResponse
     {
-        $project = Project::findOrFail($id);
+        $project = $this->projectService->find($id);
 
-        $exception = $project->exceptions()->findOrFail($exceptionId);
+        $exception = $this->exceptionActionService->find($project, $exceptionId);
 
-        $exception->unsnooze();
+        $this->exceptionActionService->unsnooze($exception);
 
         return redirect()->route('exceptions.show', [$id, $exceptionId])->with('success', 'Snooze status has been removed for this exception');
     }

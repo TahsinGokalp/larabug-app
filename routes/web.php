@@ -41,12 +41,12 @@ Route::middleware([
             Route::post('delete-fixed', [ExceptionDeleteController::class, 'deleteFixed'])->name('exceptions.delete-fixed');
             //Exception Actions
             Route::post('{exception}/fixed', [ExceptionActionController::class, 'fixed'])->name('exceptions.fixed');
-            Route::post('{exception}/snooze', [ExceptionController::class, 'snooze'])->name('exceptions.snooze');
-            Route::post('{exception}/unsnooze', [ExceptionController::class, 'unSnooze'])->name('exceptions.un-snooze');
-            Route::post('{exception}/toggle-public', [ExceptionController::class, 'togglePublic'])->name('exceptions.toggle-public');
-            Route::post('mark-as', [ExceptionController::class, 'markAs'])->name('exceptions.mark-as');
-            Route::post('mark-all-fixed', [ExceptionController::class, 'markAllAsFixed'])->name('exceptions.mark-all-fixed');
-            Route::post('mark-all-read', [ExceptionController::class, 'markAllAsRead'])->name('exceptions.mark-all-read');
+            Route::post('{exception}/snooze', [ExceptionActionController::class, 'snooze'])->name('exceptions.snooze');
+            Route::post('{exception}/unsnooze', [ExceptionActionController::class, 'unSnooze'])->name('exceptions.un-snooze');
+            Route::post('{exception}/toggle-public', [ExceptionActionController::class, 'togglePublic'])->name('exceptions.toggle-public');
+            Route::post('mark-as', [ExceptionActionController::class, 'markAs'])->name('exceptions.mark-as');
+            Route::post('mark-all-fixed', [ExceptionActionController::class, 'markAllAsFixed'])->name('exceptions.mark-all-fixed');
+            Route::post('mark-all-read', [ExceptionActionController::class, 'markAllAsRead'])->name('exceptions.mark-all-read');
         });
     });
 
