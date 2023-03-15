@@ -27,7 +27,7 @@ class SendExceptionEmailService
             return [
                 'name' => $user->name,
                 'email' => $user->email,
-                'projects' => $projects
+                'projects' => $projects,
             ];
         });
     }
@@ -63,5 +63,4 @@ class SendExceptionEmailService
                 ];
             });
     }
-
 }

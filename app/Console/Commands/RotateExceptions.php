@@ -18,7 +18,7 @@ class RotateExceptions extends Command
 
     public function handle(): void
     {
-        if(! $this->rotateExceptionService->isEnabled()) {
+        if (! $this->rotateExceptionService->isEnabled()) {
             $this->info('Rotate exceptions is disabled!');
 
             return;
