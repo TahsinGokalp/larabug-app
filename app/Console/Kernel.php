@@ -15,10 +15,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('rotate:exceptions')->twiceDaily();
 
         $schedule->command('mail:exceptions')->everyFifteenMinutes()->when(function () {
-            return config('larabug.should_email_exceptions');
+            return config('project.rotate_exceptions_enabled');
         });
 
-        $schedule->command('horizon:snapshot')->everyFiveMinutes();
+        //$schedule->command('horizon:snapshot')->everyFiveMinutes();
     }
 
     /**

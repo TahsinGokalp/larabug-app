@@ -12,7 +12,7 @@ class ExceptionEmail extends Mailable implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    public $collection;
+    public array $collection;
 
     public function __construct(array $collection)
     {
@@ -24,7 +24,7 @@ class ExceptionEmail extends Mailable implements ShouldQueue
      *
      * @return $this
      */
-    public function build()
+    public function build(): static
     {
         return $this
             ->to($this->collection['email'], $this->collection['name'])
