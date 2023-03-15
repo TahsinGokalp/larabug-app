@@ -134,6 +134,11 @@ class Exception extends Model
         'markup_language',
     ];
 
+    public function issue(): BelongsTo
+    {
+        return $this->belongsTo(Issue::class);
+    }
+
     /*
     public function scopeNotMailed($query)
     {
@@ -144,11 +149,6 @@ class Exception extends Model
     public function scopeNew($query)
     {
         return $query->whereStatus(self::OPEN);
-    }
-
-    public function issue(): BelongsTo
-    {
-        return $this->belongsTo(Issue::class);
     }
 
     public function isPublic()

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\ExceptionStatusEnum;
+use App\Models\Concerns\HasSparklines;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
@@ -48,16 +50,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Issue whereTags($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Issue whereUpdatedAt($value)
  *
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $exceptions
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $exceptions
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $exceptions
- *
  * @mixin \Eloquent
  */
 class Issue extends Model
 {
     use HasUuids;
     use Filterable;
+    use HasSparklines;
 
     protected $guarded = [
         'id',
@@ -66,22 +65,29 @@ class Issue extends Model
 
     protected $casts = [
         'last_occurred_at' => 'datetime',
+        'status' => ExceptionStatusEnum::class,
     ];
 
     protected $appends = [
-        'status_text',
         'last_occurred_at_human',
     ];
-    /*
-        public function exceptions(): HasMany
-        {
-            return $this->hasMany(Exception::class);
-        }
 
-        public function project(): BelongsTo
-        {
-            return $this->belongsTo(Project::class);
-        }
+    public function exceptions(): HasMany
+    {
+        return $this->hasMany(Exception::class);
+    }
+    public function project(): BelongsTo
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function getLastOccurredAtHumanAttribute(): string
+    {
+        return $this->last_occurred_at->diffForHumans();
+    }
+
+    /*
+
 
         public function unreadExceptions()
         {
@@ -92,14 +98,8 @@ class Issue extends Model
                 });
         }
 
-        public function getStatusTextAttribute()
-        {
-            return trans('status.'.strtoupper($this->status));
-        }
 
-        public function getLastOccurredAtHumanAttribute()
-        {
-            return $this->last_occurred_at->diffForHumans();
-        }
+
+
     */
 }

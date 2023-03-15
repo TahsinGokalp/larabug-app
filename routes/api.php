@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('feedback', [ApiController::class, 'feedback'])->name('api.feedback');
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::post('log', [ApiController::class, 'log'])->name('exceptions.log');
 });
 

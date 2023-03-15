@@ -41,7 +41,7 @@ export default {
         form: {
             handler: throttle(function() {
                 let query = pickBy(this.form)
-                this.$inertia.replace(this.route('panel.issues.index', Object.keys(query).length ? query : { remember: 'forget' }))
+                this.$inertia.replace(this.route('issues.index', Object.keys(query).length ? query : { remember: 'forget' }))
             }, 500),
             deep: true,
         },
@@ -73,10 +73,10 @@ export default {
 
                 <ul class="divide-y divide-gray-200">
                     <li v-for="issue in issues.data" :key="issue.id">
-                        <inertia-link :href="route('panel.issues.show', issue.id)" class="flex items-center px-6 py-4 space-x-6 hover:bg-gray-100">
-                            <Badge success v-if="issue.status === 'FIXED'">{{ issue.status_text }}</Badge>
-                            <Badge info v-if="issue.status === 'READ'">{{ issue.status_text }}</Badge>
-                            <Badge danger v-if="issue.status === 'OPEN'">{{ issue.status_text }}</Badge>
+                        <inertia-link :href="route('issues.show', issue.id)" class="flex items-center px-6 py-4 space-x-6 hover:bg-gray-100">
+                            <Badge success v-if="issue.status === 'Fixed'">{{ issue.status }}</Badge>
+                            <Badge info v-if="issue.status === 'Read'">{{ issue.status }}</Badge>
+                            <Badge danger v-if="issue.status === 'Open'">{{ issue.status }}</Badge>
 
                             <div class="flex-1">
                                 <p class="font-medium text-bold">{{ issue.exception }}</p>

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Issue;
-use Illuminate\Http\Response;
+use Illuminate\Http\RedirectResponse;
 
 class IssuesController extends Controller
 {
@@ -23,11 +23,7 @@ class IssuesController extends Controller
 
     public function show($id)
     {
-        $projectIds = auth()->user()->projects()->pluck('id');
-
-        $issue = Issue::query()->findOrFail($id);
-
-        abort_unless($projectIds->contains($issue->project_id), Response::HTTP_FORBIDDEN);
+        $issue = Issue::findOrFail($id);
 
         $exceptions = $issue
             ->exceptions()
@@ -55,18 +51,14 @@ class IssuesController extends Controller
         ]);
     }
 
-    public function updateStatus($id)
+    public function updateStatus($id): RedirectResponse
     {
-        $projectIds = auth()->user()->projects()->pluck('id');
-
-        $issue = Issue::query()->findOrFail($id);
-
-        abort_unless($projectIds->contains($issue->project_id), Response::HTTP_FORBIDDEN);
+        $issue = Issue::findOrFail($id);
 
         $issue->update([
             'status' => request()->input('status'),
         ]);
 
-        return redirect()->route('panel.issues.show', $issue->id)->with('success', 'Changed issue status successfully');
+        return redirect()->route('issues.show', $issue->id)->with('success', 'Changed issue status successfully');
     }
 }
