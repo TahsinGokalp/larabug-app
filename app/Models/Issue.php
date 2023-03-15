@@ -76,6 +76,7 @@ class Issue extends Model
     {
         return $this->hasMany(Exception::class);
     }
+
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);

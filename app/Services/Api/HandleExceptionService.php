@@ -15,21 +15,81 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class HandleExceptionService
 {
-
     private Project $project;
 
-    private function isQueueEnabled(): bool
+    public function isException(Request $request): bool
     {
-        return (bool)config('project.queue_enabled');
-    }
-
-    public function isException(Request $request): bool{
         return Arr::get($request->input('exception'), 'exception');
     }
 
     public function setProject($key): void
     {
-        $this->project =  Project::where('key', $key)->firstOrFail();
+        $this->project = Project::where('key', $key)->firstOrFail();
+    }
+
+    public function start(Request $request): JsonResponse
+    {
+        $this->setProject($request->input('project'));
+
+        if (! $this->isException($request)) {
+            return response()->json([
+                'error' => 'Did not receive the correct parameters to process this exception',
+            ])->setStatusCode(ResponseAlias::HTTP_UNPROCESSABLE_ENTITY);
+        }
+
+        $exception = $this->generateExceptionAsArray($request);
+
+        if ($this->isSnoozed($exception)) {
+            return response()->json([
+                'error' => 'Exception snoozed',
+            ])->setStatusCode(ResponseAlias::HTTP_OK);
+        }
+
+        if ($this->isQueueEnabled()) {
+            ProcessException::dispatch($exception, $this->project);
+        } else {
+            $this->handle($exception, $this->project, now());
+        }
+
+        return response()->json(['OK']);
+    }
+
+    public function handle($exception, $project, $date): void
+    {
+        try {
+            $exception = $project->exceptions()->create($exception);
+
+            $exception->created_at = $date;
+            $exception->save();
+
+            $issue = $project->issues()
+                ->firstOrCreate([
+                    'exception' => $exception['exception'],
+                    'line' => $exception['line'],
+                ], [
+                    'exception_id' => $exception->id,
+                ]);
+
+            $issue->update([
+                'last_occurred_at' => $date,
+                'status' => ExceptionStatusEnum::Open,
+            ]);
+
+            $exception->issue()->associate($issue)->save();
+
+            $project->last_error_at = $date;
+            $project->total_exceptions++;
+            $project->save();
+        } catch (Exception $exception) {
+            Log::critical($exception->getMessage(), [$exception]);
+        }
+
+        $this->deleteOldExceptions($project);
+    }
+
+    private function isQueueEnabled(): bool
+    {
+        return (bool) config('project.queue_enabled');
     }
 
     private function isSnoozed(array $exception): bool
@@ -65,67 +125,6 @@ class HandleExceptionService
         ];
     }
 
-    public function start(Request $request): JsonResponse
-    {
-
-        $this->setProject($request->input('project'));
-
-        if(!$this->isException($request)){
-            return response()->json([
-                'error' => 'Did not receive the correct parameters to process this exception',
-            ])->setStatusCode(ResponseAlias::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        $exception = $this->generateExceptionAsArray($request);
-
-        if($this->isSnoozed($exception)){
-            return response()->json([
-                'error' => 'Exception snoozed',
-            ])->setStatusCode(ResponseAlias::HTTP_OK);
-        }
-
-        if($this->isQueueEnabled()){
-            ProcessException::dispatch($exception, $this->project);
-        }else{
-            $this->handle($exception, $this->project, now());
-        }
-
-        return response()->json(['OK']);
-    }
-
-    public function handle($exception, $project, $date): void
-    {
-        try {
-            $exception = $project->exceptions()->create($exception);
-
-            $exception->created_at = $date;
-            $exception->save();
-
-            $issue = $project->issues()
-                ->firstOrCreate([
-                    'exception' => $exception['exception'],
-                    'line' => $exception['line'],
-                ], [
-                    'exception_id' => $exception->id,
-                ]);
-
-            $issue->update([
-                'last_occurred_at' => $date,
-                'status' => ExceptionStatusEnum::Open,
-            ]);
-
-            $exception->issue()->associate($issue)->save();
-
-            $project->last_error_at = $date;
-            $project->total_exceptions++;
-            $project->save();
-        } catch (Exception $exception) {
-            Log::critical($exception->getMessage(),[$exception]);
-        }
-
-        $this->deleteOldExceptions($project);
-    }
-
     private function deleteOldExceptions(Project $project): void
     {
         if ($project->exceptions()->count(['id']) > config('project.max_allowed_exception')) {
@@ -135,5 +134,4 @@ class HandleExceptionService
                 ->delete();
         }
     }
-
 }

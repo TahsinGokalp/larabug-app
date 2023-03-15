@@ -8,7 +8,10 @@ use Illuminate\Http\RedirectResponse;
 
 class ProjectRefreshTokenController extends Controller
 {
-    public function __construct(protected ProjectService $projectService){}
+    public function __construct(protected ProjectService $projectService)
+    {
+    }
+
     public function index($id): RedirectResponse
     {
         $project = $this->projectService->find($id);
