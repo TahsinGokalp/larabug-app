@@ -3,18 +3,17 @@
 namespace App\Http\Controllers\Projects;
 
 use App\Http\Controllers\Controller;
-use App\Models\Project;
+use App\Services\Project\ProjectService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Str;
 
 class ProjectRefreshTokenController extends Controller
 {
+    public function __construct(protected ProjectService $projectService){}
     public function index($id): RedirectResponse
     {
-        $project = Project::findOrFail($id);
+        $project = $this->projectService->find($id);
 
-        $project->key = Str::random(50);
-        $project->save();
+        $this->projectService->refreshToken($project);
 
         return redirect()->back()->with('success', 'A new API token has been generated');
     }

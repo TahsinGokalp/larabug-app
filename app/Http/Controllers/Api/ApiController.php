@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ApiController extends Controller
 {
-    protected function __construct(protected HandleExceptionService $handleExceptionService){}
+    public function __construct(protected HandleExceptionService $handleExceptionService){}
 
     public function log(Request $request): JsonResponse
     {

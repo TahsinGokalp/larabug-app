@@ -13,6 +13,8 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run(): void
     {
-        Project::factory()->count(20)->has(Exception::factory()->count(10))->create();
+        Project::withoutEvents(function (){
+            Project::factory()->count(20)->has(Exception::factory()->count(10))->create();
+        });
     }
 }

@@ -4,23 +4,20 @@ namespace App\Http\Controllers\Projects;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
-use App\Models\Project;
+use App\Services\Project\ProjectService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    public function __construct(protected ProjectService $projectService){}
     public function index()
     {
-        $projects = Project::select(['id', 'title', 'total_exceptions'])
-            ->withCount('unreadExceptions')
-            ->filter(request()->only('search'))
-            ->latest('last_error_at')
-            ->latest('created_at')
-            ->paginate(6);
+        $search = request()->only('search');
+        $projects = $this->projectService->paginatedProjects($search);
 
         return inertia('Projects/Index', [
-            'filters' => request()->only('search'),
+            'filters' => $search,
             'projects' => $projects,
         ]);
     }
@@ -32,40 +29,37 @@ class ProjectController extends Controller
 
     public function store(ProjectRequest $request): RedirectResponse
     {
-        $project = Project::create($request->only([
+        $input = $request->only([
             'title',
             'url',
             'description',
             'receive_email',
             'notifications_enabled',
             'telegram_notification_enabled',
-        ]));
+        ]);
+        $project = $this->projectService->create($input);
 
         return redirect()->route('projects.installation', $project);
     }
 
     public function show(Request $request, $id)
     {
-        $project = Project::withCount('unreadExceptions')
-            ->findOrFail($id);
+        $project = $this->projectService->findWithCount($id);
 
-        $exceptions = $project
-            ->exceptions()
-            ->filter($request->only('search', 'status', 'has_feedback'))
-            ->withCount('feedback')
-            ->latest()
-            ->paginate(10);
+        $filters = request()->all('search', 'status', 'has_feedback');
+
+        $exceptions = $this->projectService->exceptions($project, $filters);
 
         return inertia('Projects/Show', [
             'project' => $project,
             'exceptions' => $exceptions->appends($request->except('page')),
-            'filters' => request()->all('search', 'status', 'has_feedback'),
+            'filters' => $filters,
         ]);
     }
 
     public function edit($id)
     {
-        $project = Project::findOrFail($id);
+        $project = $this->projectService->find($id);
 
         return inertia('Projects/Edit', [
             'project' => $project,
@@ -74,18 +68,18 @@ class ProjectController extends Controller
 
     public function update(ProjectRequest $request, $id): RedirectResponse
     {
-        $project = Project::findOrFail($id);
+        $project = $this->projectService->find($id);
 
-        $project->update($request->all());
+        $this->projectService->update($project, $request->all());
 
         return redirect()->route('projects.show', $project)->with('success', 'Project has been updated');
     }
 
     public function destroy($id): RedirectResponse
     {
-        $project = Project::findOrFail($id);
+        $project = $this->projectService->find($id);
 
-        $project->delete();
+        $this->projectService->delete($project);
 
         return redirect()->route('projects.index')->with('success', 'Project has been removed');
     }
