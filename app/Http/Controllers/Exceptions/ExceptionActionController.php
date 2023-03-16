@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 
 class ExceptionActionController extends Controller
 {
-    public function __construct(protected ProjectService $projectService, protected ExceptionActionService $exceptionActionService)
+    public function __construct(protected ProjectService $projectService,
+                                protected ExceptionActionService $exceptionActionService)
     {
     }
 
@@ -22,7 +23,8 @@ class ExceptionActionController extends Controller
 
         $this->exceptionActionService->markAsFixed($exception);
 
-        return redirect()->route('exceptions.show', [$id, $exception])->with('success', 'Exception has been marked as fixed');
+        return redirect()->route('exceptions.show', [$id, $exception])
+            ->with('success', 'Exception has been marked as fixed');
     }
 
     public function togglePublic($id, $exceptionId)
@@ -43,10 +45,12 @@ class ExceptionActionController extends Controller
         $total = $this->exceptionActionService->markAllAsFixed($project);
 
         if ($total === 0) {
-            return redirect()->route('projects.show', $id)->with('info', 'There are no exceptions to mark as fixed');
+            return redirect()->route('projects.show', $id)
+                ->with('info', 'There are no exceptions to mark as fixed');
         }
 
-        return redirect()->route('projects.show', $id)->with('success', $total . ' exception(s) have been marked as fixed');
+        return redirect()->route('projects.show', $id)
+            ->with('success', $total . ' exception(s) have been marked as fixed');
     }
 
     public function markAllAsRead($id): RedirectResponse
@@ -56,10 +60,12 @@ class ExceptionActionController extends Controller
         $total = $this->exceptionActionService->markAllAsRead($project);
 
         if ($total === 0) {
-            return redirect()->route('projects.show', $id)->with('info', 'There are no exceptions to mark as read');
+            return redirect()->route('projects.show', $id)
+                ->with('info', 'There are no exceptions to mark as read');
         }
 
-        return redirect()->route('projects.show', $id)->with('success', $total . ' exception(s) have been marked as read');
+        return redirect()->route('projects.show', $id)
+            ->with('success', $total . ' exception(s) have been marked as read');
     }
 
     public function markAs(Request $request, $id): RedirectResponse
@@ -79,7 +85,8 @@ class ExceptionActionController extends Controller
 
         $this->exceptionActionService->snooze($exception, $request->input('snooze', 30));
 
-        return redirect()->route('exceptions.show', [$id, $exceptionId])->with('success', 'Exception is now snoozed');
+        return redirect()->route('exceptions.show', [$id, $exceptionId])
+            ->with('success', 'Exception is now snoozed');
     }
 
     public function unSnooze($id, $exceptionId): RedirectResponse
@@ -90,6 +97,7 @@ class ExceptionActionController extends Controller
 
         $this->exceptionActionService->unsnooze($exception);
 
-        return redirect()->route('exceptions.show', [$id, $exceptionId])->with('success', 'Snooze status has been removed for this exception');
+        return redirect()->route('exceptions.show', [$id, $exceptionId])
+            ->with('success', 'Snooze status has been removed for this exception');
     }
 }

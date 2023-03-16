@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 
 class ExceptionDeleteController extends Controller
 {
-    public function __construct(protected ProjectService $projectService, protected ExceptionDeleteService $exceptionDeleteService)
+    public function __construct(protected ProjectService $projectService,
+                                protected ExceptionDeleteService $exceptionDeleteService)
     {
     }
 
@@ -20,7 +21,8 @@ class ExceptionDeleteController extends Controller
 
         $this->exceptionDeleteService->deleteAll($project);
 
-        return redirect()->route('projects.show', $id)->with('success', 'All exceptions have been cleared up');
+        return redirect()->route('projects.show', $id)
+            ->with('success', 'All exceptions have been cleared up');
     }
 
     public function deleteFixed($id): RedirectResponse
@@ -38,6 +40,7 @@ class ExceptionDeleteController extends Controller
 
         $this->exceptionDeleteService->deleteSelected($project, $request->get('exceptions'));
 
-        return redirect()->route('projects.show', $id)->with('success', 'The selected exceptions have been cleared up');
+        return redirect()->route('projects.show', $id)
+            ->with('success', 'The selected exceptions have been cleared up');
     }
 }

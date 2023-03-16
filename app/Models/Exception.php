@@ -54,7 +54,6 @@ use Illuminate\Support\Str;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Exception> $occurences
  * @property-read int|null $occurences_count
  * @property-read \App\Models\Project $project
- *
  * @method static \Database\Factories\ExceptionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Exception filter(array $input = [], $filter = null)
  * @method static \Illuminate\Database\Eloquent\Builder|Exception newModelQuery()
@@ -91,7 +90,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|Exception whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Exception whereStorage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Exception whereUpdatedAt($value)
- *
+ * @property-read \App\Models\Issue|null $issue
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Exception> $occurences
  * @mixin \Eloquent
  */
 class Exception extends Model

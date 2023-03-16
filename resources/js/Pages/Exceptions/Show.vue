@@ -257,7 +257,7 @@ export default {
                                      v-if="exception.storage.PARAMETERS">
                                     <h3 class="mb-3">Parameters</h3>
                                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                        <table class="min-w-full divide-y divide-gray-200">
+                                        <table class="min-w-full divide-y divide-gray-200" aria-describedby="Parameters">
                                             <tbody>
                                             <tr class="bg-white" v-for="(detail, key) in exception.storage.PARAMETERS">
                                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
@@ -273,7 +273,7 @@ export default {
                                      v-if="exception.storage.HEADERS">
                                     <h3 class="mb-3">Headers</h3>
                                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                        <table class="min-w-full divide-y divide-gray-200">
+                                        <table class="min-w-full divide-y divide-gray-200" aria-describedby="Headers">
                                             <tbody>
                                             <tr class="bg-white" v-for="(detail, key) in exception.storage.HEADERS">
                                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
@@ -292,7 +292,7 @@ export default {
                             <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-                                        <table class="min-w-full divide-y divide-gray-200">
+                                        <table class="min-w-full divide-y divide-gray-200" aria-describedby="Server">
                                             <tbody>
                                             <tr class="bg-white" v-for="(detail, key) in exception.storage.SERVER">
                                                 <th class="w-1/5 px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
@@ -313,7 +313,7 @@ export default {
 
                         <div v-show="tab === 'user'" v-if="exception.user">
                             <div class="bg-white rounded shadow px-6 py-4 mt-2">
-                                <table class="w-full">
+                                <table class="w-full" aria-describedby="Detail">
                                     <tr class="" v-for="(detail, key) in exception.user">
                                         <th class="px-1 pt-3 pb-2 text-left font-bold" v-text="key"></th>
                                         <td v-text="detail"></td>

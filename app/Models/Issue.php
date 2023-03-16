@@ -29,7 +29,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read mixed $sparkline
  * @property-read mixed $status_text
  * @property-read \App\Models\Project|null $project
- *
  * @method static \Illuminate\Database\Eloquent\Builder|Issue filter(array $input = [], $filter = null)
  * @method static \Illuminate\Database\Eloquent\Builder|Issue newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Issue newQuery()
@@ -49,7 +48,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Issue whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Issue whereTags($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Issue whereUpdatedAt($value)
- *
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $exceptions
  * @mixin \Eloquent
  */
 class Issue extends Model
