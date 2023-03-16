@@ -5,7 +5,7 @@
 ## Project: {{ $project['title'] }}
 
 @foreach ($project['exceptions'] as $exception)
-**Exception:** {{ str_limit($exception['exception'], 50) }}<br />
+**Exception:** {{ \Illuminate\Support\Str::limit($exception['exception'], 50) }}<br />
 **Date:** {{ $exception['created_at'] }}<br />
 <a href="{{ route('exceptions.show', [$project['id'], $exception['id']]) }}">View exception</a><br /><br />
 @endforeach

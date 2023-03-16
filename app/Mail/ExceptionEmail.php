@@ -19,11 +19,6 @@ class ExceptionEmail extends Mailable implements ShouldQueue
         $this->collection = $collection;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build(): static
     {
         return $this

@@ -17,7 +17,11 @@ class SendExceptionEmailService
         $users = $this->getEmailEnabledUsersWithProjectMapped($projects);
 
         foreach ($users as $user) {
-            Mail::send(new ExceptionEmail($user));
+            if(config('project.queue_enabled')){
+                Mail::queue(new ExceptionEmail($user));
+            }else{
+                Mail::send(new ExceptionEmail($user));
+            }
         }
     }
 
