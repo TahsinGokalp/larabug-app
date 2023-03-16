@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -60,6 +61,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -112,5 +114,9 @@ class User extends Authenticatable
         }
 
         return 'No';
+    }
+
+    public function filter(string $search)
+    {
     }
 }

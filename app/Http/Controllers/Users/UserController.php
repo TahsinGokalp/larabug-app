@@ -1,24 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Users;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use App\Models\User;
+use App\Services\User\UserService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
+    public function __construct(protected UserService $userService)
+    {
+    }
+
     public function index()
     {
-        $users = User::select(['id', 'name', 'email'])
-            ->latest('created_at')
-            ->paginate(6);
+        $search = request()->only('search');
+        $users = $this->userService->paginatedUsers($search);
 
         return inertia('Users/Index', [
-            'filters' => request()->only('search'),
+            'filters' => $search,
             'users' => $users,
         ]);
     }
@@ -30,20 +31,18 @@ class UserController extends Controller
 
     public function store(UserRequest $request): RedirectResponse
     {
-        $fields = $request->only([
+        $user = $this->userService->create($request->only([
             'name',
             'email',
             'receive_email',
-        ]);
-        $fields['password'] = Hash::make(Str::random(25));
-        $user = User::create($fields);
+        ]));
 
         return redirect()->route('users.show', $user->id);
     }
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
-        $user = User::findOrFail($id);
+        $user = $this->userService->find($id);
 
         return inertia('Users/Show', [
             'user' => $user,
@@ -52,7 +51,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $user = $this->userService->find($id);
 
         return inertia('Users/Edit', [
             'user' => $user,
@@ -61,18 +60,22 @@ class UserController extends Controller
 
     public function update(UserRequest $request, $id): RedirectResponse
     {
-        $user = User::findOrFail($id);
+        $user = $this->userService->find($id);
 
-        $user->update($request->all());
+        $this->userService->update($user, $request->only([
+            'name',
+            'email',
+            'receive_email',
+        ]));
 
         return redirect()->route('users.show', $user)->with('success', 'User has been updated');
     }
 
-    public function destroy(Request $request, $id): RedirectResponse
+    public function destroy($id): RedirectResponse
     {
-        $user = User::findOrFail($id);
+        $user = $this->userService->find($id);
 
-        $user->delete();
+        $this->userService->delete($user);
 
         return redirect()->route('users.index')->with('success', 'User has been removed');
     }

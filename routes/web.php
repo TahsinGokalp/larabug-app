@@ -8,7 +8,7 @@ use App\Http\Controllers\Issues\IssuesController;
 use App\Http\Controllers\Projects\ProjectController;
 use App\Http\Controllers\Projects\ProjectInstallationController;
 use App\Http\Controllers\Projects\ProjectRefreshTokenController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::permanentRedirect('/', 'login');
