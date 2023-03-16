@@ -23,5 +23,4 @@ class ExceptionFilter extends ModelFilter
     {
         return $this->where('status', $status);
     }
-
 }

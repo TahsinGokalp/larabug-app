@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
@@ -37,6 +36,7 @@ use Illuminate\Support\Str;
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $unreadExceptions
  * @property-read int|null $unread_exceptions_count
+ *
  * @method static \Database\Factories\ProjectFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Project filter(array $input)
  * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
@@ -61,10 +61,12 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereTotalExceptions($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Project whereUrl($value)
+ *
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $exceptions
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Issue> $issues
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $unreadExceptions
+ *
  * @mixin \Eloquent
  */
 class Project extends Model

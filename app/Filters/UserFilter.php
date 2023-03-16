@@ -20,5 +20,4 @@ class UserFilter extends ModelFilter
             ->orWhere('name', 'LIKE', '%' . $search . '%')
             ->orWhere('email', 'LIKE', '%' . $search . '%');
     }
-
 }

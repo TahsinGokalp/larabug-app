@@ -3,12 +3,7 @@
 namespace App\Services\Issue;
 
 use App\Models\Issue;
-use App\Models\Project;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class IssueService
 {
@@ -52,5 +47,4 @@ class IssueService
             'status' => request()->input('status'),
         ]);
     }
-
 }

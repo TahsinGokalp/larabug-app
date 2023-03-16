@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Issues;
 
 use App\Http\Controllers\Controller;
-use App\Models\Issue;
 use App\Services\Issue\IssueService;
 use Illuminate\Http\RedirectResponse;
 
