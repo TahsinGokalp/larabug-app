@@ -1,44 +1,36 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Issues;
 
+use App\Http\Controllers\Controller;
 use App\Models\Issue;
+use App\Services\Issue\IssueService;
 use Illuminate\Http\RedirectResponse;
 
 class IssuesController extends Controller
 {
+    public function __construct(protected IssueService $issueService)
+    {
+    }
+
     public function index()
     {
-        $issues = Issue::query()
-            ->with('project:id,title')
-            ->filter(request()->only('search'))
-            ->orderBy('last_occurred_at', 'desc')
-            ->paginate();
+        $search = request()->only('search');
+        $issues = $this->issueService->paginatedIssues($search);
 
         return inertia('Issues/Index', [
-            'filters' => request()->only('search'),
+            'filters' => $search,
             'issues' => $issues,
         ]);
     }
 
     public function show($id)
     {
-        $issue = Issue::findOrFail($id);
+        $issue = $this->issueService->find($id);
 
-        $exceptions = $issue
-            ->exceptions()
-            ->filter(request()->only('search', 'status', 'has_feedback'))
-            ->withCount('feedback')
-            ->latest()
-            ->paginate(10);
+        $exceptions = $this->issueService->exceptions($issue, request()->only('search', 'status', 'has_feedback'));
 
-        $affectedVersions = $issue->exceptions()
-            ->pluck('project_version')
-            ->unique()
-            ->filter()
-            ->sort()
-            ->values()
-            ->toArray();
+        $affectedVersions = $this->issueService->affectedVersions($issue);
 
         return inertia('Issues/Show', [
             'issue' => $issue,
@@ -53,11 +45,9 @@ class IssuesController extends Controller
 
     public function updateStatus($id): RedirectResponse
     {
-        $issue = Issue::findOrFail($id);
+        $issue = $this->issueService->find($id);
 
-        $issue->update([
-            'status' => request()->input('status'),
-        ]);
+        $this->issueService->updateStatus($issue);
 
         return redirect()->route('issues.show', $issue->id)->with('success', 'Changed issue status successfully');
     }

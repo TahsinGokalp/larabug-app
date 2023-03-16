@@ -4,7 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Exceptions\ExceptionActionController;
 use App\Http\Controllers\Exceptions\ExceptionController;
 use App\Http\Controllers\Exceptions\ExceptionDeleteController;
-use App\Http\Controllers\IssuesController;
+use App\Http\Controllers\Issues\IssuesController;
 use App\Http\Controllers\Projects\ProjectController;
 use App\Http\Controllers\Projects\ProjectInstallationController;
 use App\Http\Controllers\Projects\ProjectRefreshTokenController;
