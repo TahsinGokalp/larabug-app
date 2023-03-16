@@ -1,4 +1,4 @@
-name: Run Pest Test
+name: Run Unit Tests
 
 on:
   push:
@@ -46,4 +46,4 @@ jobs:
         run: npm run build
 
       - name: Run test suite
-        run: ./vendor/bin/pest
+        run: php artisan test
