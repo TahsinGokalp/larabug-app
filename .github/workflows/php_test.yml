@@ -1,4 +1,4 @@
-name: PHP Composer
+name: Run Pest Test
 
 on:
   push:
@@ -43,7 +43,7 @@ jobs:
         run: npm install
 
       - name: Run npm run prod
-        run: npm run prod
+        run: npm run build
 
       - name: Run test suite
         run: ./vendor/bin/pest
