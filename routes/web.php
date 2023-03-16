@@ -15,8 +15,6 @@ Route::permanentRedirect('/', 'login');
 
 Route::get('exception/{exception:publish_hash}', [DashboardController::class, 'exception'])->name('public.exception');
 
-Route::get('scripts/feedback', [ProjectController::class, 'script'])->name('feedback.script');
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

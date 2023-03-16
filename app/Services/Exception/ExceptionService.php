@@ -43,7 +43,6 @@ class ExceptionService
     public function findWithCount(Project $project, $id): Exception
     {
         return $project->exceptions()
-            ->with('feedback')
             ->withCount('occurences')
             ->findOrFail($id);
     }

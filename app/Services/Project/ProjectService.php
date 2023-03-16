@@ -51,7 +51,6 @@ class ProjectService
         return $project
             ->exceptions()
             ->filter($filters)
-            ->withCount('feedback')
             ->latest()
             ->paginate(10);
     }

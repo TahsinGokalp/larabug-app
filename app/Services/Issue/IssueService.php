@@ -31,7 +31,6 @@ class IssueService
         return $issue
             ->exceptions()
             ->filter($filter)
-            ->withCount('feedback')
             ->latest()
             ->paginate(10);
     }

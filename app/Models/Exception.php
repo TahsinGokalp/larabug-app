@@ -43,8 +43,6 @@ use Illuminate\Support\Str;
  * @property string $project_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feedback> $feedback
- * @property-read int|null $feedback_count
  * @property-read string $executor_output
  * @property-read string $human_date
  * @property-read string|null $issue_route_url
@@ -308,11 +306,6 @@ class Exception extends Model
         }
 
         return 'language-php';
-    }
-
-    public function feedback(): HasMany
-    {
-        return $this->hasMany(Feedback::class);
     }
 
     public function snooze(int $minutes): bool

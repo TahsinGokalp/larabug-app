@@ -24,8 +24,4 @@ class ExceptionFilter extends ModelFilter
         return $this->where('status', $status);
     }
 
-    public function hasFeedback($value)
-    {
-        return $this->whereHas('feedback');
-    }
 }

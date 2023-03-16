@@ -28,7 +28,7 @@ class IssuesController extends Controller
     {
         $issue = $this->issueService->find($id);
 
-        $exceptions = $this->issueService->exceptions($issue, request()->only('search', 'status', 'has_feedback'));
+        $exceptions = $this->issueService->exceptions($issue, request()->only('search', 'status'));
 
         $affectedVersions = $this->issueService->affectedVersions($issue);
 

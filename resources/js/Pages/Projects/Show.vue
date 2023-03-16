@@ -46,8 +46,7 @@ export default {
             form: {
                 project: this.project.id,
                 search: this.filters.search,
-                status: this.filters.status,
-                has_feedback: this.filters.has_feedback
+                status: this.filters.status
             },
         }
     },

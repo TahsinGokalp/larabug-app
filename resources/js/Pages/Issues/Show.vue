@@ -52,7 +52,6 @@ export default {
             form: {
                 issue: this.issue.id,
                 status: this.filters.status,
-                has_feedback: this.filters.has_feedback
             },
         }
     },

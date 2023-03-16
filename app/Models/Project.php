@@ -30,9 +30,6 @@ use Illuminate\Support\Str;
  * @property string|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $exceptions
  * @property-read int|null $exceptions_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Feedback> $feedback
- * @property-read int|null $feedback_count
- * @property-read string $feedback_script_html
  * @property-read string $route_url
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Issue> $issues
  * @property-read int|null $issues_count
@@ -93,7 +90,6 @@ class Project extends Model
 
     protected $appends = [
         'route_url',
-        'feedback_script_html',
     ];
 
     public static function boot(): void
@@ -107,23 +103,12 @@ class Project extends Model
         static::deleting(static function (self $project) {
             $project->exceptions()->delete();
             $project->issues()->delete();
-            $project->feedback()->delete();
         });
     }
 
     public function getRouteUrlAttribute(): string
     {
         return route('projects.show', $this);
-    }
-
-    public function getFeedbackScriptUrl(): string
-    {
-        return route('feedback.script', ['project' => $this->id]);
-    }
-
-    public function getFeedbackScriptHtmlAttribute(): string
-    {
-        return '<script src="' . $this->getFeedbackScriptUrl() . '"></script>';
     }
 
     public function scopeWantsEmail($query)
@@ -148,11 +133,6 @@ class Project extends Model
                 return $query
                     ->where('status', ExceptionStatusEnum::Open->value);
             });
-    }
-
-    public function feedback(): HasManyThrough
-    {
-        return $this->hasManyThrough(Feedback::class, Exception::class);
     }
 
     public function scopeFilter($query, array $input): void

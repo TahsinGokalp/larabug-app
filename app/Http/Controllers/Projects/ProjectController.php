@@ -49,7 +49,7 @@ class ProjectController extends Controller
     {
         $project = $this->projectService->findWithCount($id);
 
-        $filters = request()->all('search', 'status', 'has_feedback');
+        $filters = request()->all('search', 'status');
 
         $exceptions = $this->projectService->exceptions($project, $filters);
 
