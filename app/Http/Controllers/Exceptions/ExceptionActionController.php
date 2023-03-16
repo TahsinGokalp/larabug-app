@@ -33,7 +33,7 @@ class ExceptionActionController extends Controller
 
         $exception = $this->exceptionActionService->find($project, $exceptionId);
 
-        $message = $this->exceptionActionService->togglePublic($project, $exception);
+        $message = $this->exceptionActionService->togglePublic($exception);
 
         return redirect()->back()->withSuccess($message);
     }

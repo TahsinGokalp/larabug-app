@@ -20,7 +20,7 @@ class ExceptionActionService
         $exception->markAsMailed();
     }
 
-    public function togglePublic(Project $project, $exception): string
+    public function togglePublic($exception): string
     {
         if ($exception->publish_hash) {
             $exception->removePublic();
