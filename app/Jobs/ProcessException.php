@@ -32,7 +32,7 @@ class ProcessException implements ShouldQueue, ShouldBeEncrypted
         $this->data = $data;
         $this->project = $project;
         $this->date = $date;
-        $this->handleExceptionService = new HandleExceptionService();
+        $this->handleExceptionService = new HandleExceptionService;
     }
 
     public function handle(): void
