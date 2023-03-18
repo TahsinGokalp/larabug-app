@@ -25,11 +25,14 @@ class ProcessException implements ShouldQueue, ShouldBeEncrypted
 
     public Carbon $date;
 
-    public function __construct(array $data, Project $project, Carbon $date, protected HandleExceptionService $handleExceptionService)
+    public HandleExceptionService $handleExceptionService;
+
+    public function __construct(array $data, Project $project, Carbon $date)
     {
         $this->data = $data;
         $this->project = $project;
         $this->date = $date;
+        $this->handleExceptionService = new HandleExceptionService();
     }
 
     public function handle(): void

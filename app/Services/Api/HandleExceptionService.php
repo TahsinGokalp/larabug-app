@@ -46,7 +46,7 @@ class HandleExceptionService
         }
 
         if ($this->isQueueEnabled()) {
-            ProcessException::dispatch($exception, $this->project);
+            ProcessException::dispatch($exception, $this->project, now());
         } else {
             $this->handle($exception, $this->project, now());
         }
