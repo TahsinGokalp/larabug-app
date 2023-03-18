@@ -80,10 +80,6 @@ const deleteApiToken = () => {
                 Create API Token
             </template>
 
-            <template #description>
-                API tokens allow third-party services to authenticate with our application on your behalf.
-            </template>
-
             <template #form>
                 <!-- Token Name -->
                 <div class="col-span-6 sm:col-span-4">
@@ -98,19 +94,6 @@ const deleteApiToken = () => {
                     <InputError :message="createApiTokenForm.errors.name" class="mt-2" />
                 </div>
 
-                <!-- Token Permissions -->
-                <div v-if="availablePermissions.length > 0" class="col-span-6">
-                    <InputLabel for="permissions" value="Permissions" />
-
-                    <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div v-for="permission in availablePermissions" :key="permission">
-                            <label class="flex items-center">
-                                <Checkbox v-model:checked="createApiTokenForm.permissions" :value="permission" />
-                                <span class="ml-2 text-sm text-gray-600">{{ permission }}</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
             </template>
 
             <template #actions>
@@ -133,11 +116,6 @@ const deleteApiToken = () => {
                     <template #title>
                         Manage API Tokens
                     </template>
-
-                    <template #description>
-                        You may delete any of your existing tokens if they are no longer needed.
-                    </template>
-
                     <!-- API Token List -->
                     <template #content>
                         <div class="space-y-6">
@@ -150,15 +128,7 @@ const deleteApiToken = () => {
                                     <div v-if="token.last_used_ago" class="text-sm text-gray-400">
                                         Last used {{ token.last_used_ago }}
                                     </div>
-
-                                    <button
-                                        v-if="availablePermissions.length > 0"
-                                        class="cursor-pointer ml-6 text-sm text-gray-400 underline"
-                                        @click="manageApiTokenPermissions(token)"
-                                    >
-                                        Permissions
-                                    </button>
-
+                                    
                                     <button class="cursor-pointer ml-6 text-sm text-red-500" @click="confirmApiTokenDeletion(token)">
                                         Delete
                                     </button>
