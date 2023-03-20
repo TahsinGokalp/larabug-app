@@ -12,6 +12,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response as ResponseAlias;
+use TahsinGokalp\LettConstants\Enum\ApiResponseCodeEnum;
 
 class HandleExceptionService
 {
@@ -33,16 +34,18 @@ class HandleExceptionService
 
         if (! $this->isException($request)) {
             return response()->json([
-                'error' => 'Did not receive the correct parameters to process this exception',
-            ])->setStatusCode(ResponseAlias::HTTP_UNPROCESSABLE_ENTITY);
+                'message' => trans('lett-constants::'.ApiResponseCodeEnum::ParametersValidationError->name),
+                'code' => ApiResponseCodeEnum::ParametersValidationError->value
+            ]);
         }
 
         $exception = $this->generateExceptionAsArray($request);
 
         if ($this->isSnoozed($exception)) {
             return response()->json([
-                'error' => 'Exception snoozed',
-            ])->setStatusCode(ResponseAlias::HTTP_OK);
+                'message' => trans('lett-constants::'.ApiResponseCodeEnum::ExceptionSnoozed->name),
+                'code' => ApiResponseCodeEnum::ExceptionSnoozed->value
+            ]);
         }
 
         if ($this->isQueueEnabled()) {
@@ -51,7 +54,10 @@ class HandleExceptionService
             $this->handle($exception, $this->project, now());
         }
 
-        return response()->json(['OK']);
+        return response()->json([
+            'message' => trans('lett-constants::'.ApiResponseCodeEnum::Success->name),
+            'code' => ApiResponseCodeEnum::Success->value
+        ]);
     }
 
     public function handle($exception, $project, $date): void

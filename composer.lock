@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba2c98265f2492c22f597905680448e5",
+    "content-hash": "fc9a23f7f3fe5602fa3d36f1c1f568c9",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -5831,6 +5831,75 @@
                 }
             ],
             "time": "2023-02-24T10:42:00+00:00"
+        },
+        {
+            "name": "tahsingokalp/lett-constants",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TahsinGokalp/lett-constants.git",
+                "reference": "33dcbfd5ba8502a9dbd055bbdc020a18ba36985f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TahsinGokalp/lett-constants/zipball/33dcbfd5ba8502a9dbd055bbdc020a18ba36985f",
+                "reference": "33dcbfd5ba8502a9dbd055bbdc020a18ba36985f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^9.0 || ^10.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "nunomaduro/larastan": "^2.5",
+                "roave/security-advisories": "dev-latest"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TahsinGokalp\\LettConstants\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TahsinGokalp\\LettConstants\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tahsin Gökalp Şaan",
+                    "email": "tahsinsaan@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Constants for Lett and Lett-Tracker",
+            "homepage": "https://github.com/tahsingokalp/lett-constants",
+            "keywords": [
+                "TahsinGokalp",
+                "error",
+                "laravel",
+                "lett",
+                "lett-constants",
+                "lett-tracker",
+                "log"
+            ],
+            "support": {
+                "issues": "https://github.com/TahsinGokalp/lett-constants/issues",
+                "source": "https://github.com/TahsinGokalp/lett-constants/tree/1.0.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/TahsinGokalp",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-03-20T18:52:06+00:00"
         },
         {
             "name": "tightenco/ziggy",
