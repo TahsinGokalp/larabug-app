@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use TahsinGokalp\LettConstants\Enum\ApiResponseCodeEnum;
 
 class HandleExceptionService
@@ -34,8 +33,8 @@ class HandleExceptionService
 
         if (! $this->isException($request)) {
             return response()->json([
-                'message' => trans('lett-constants::'.ApiResponseCodeEnum::ParametersValidationError->name),
-                'code' => ApiResponseCodeEnum::ParametersValidationError->value
+                'message' => trans('lett-constants::' . ApiResponseCodeEnum::ParametersValidationError->name),
+                'code' => ApiResponseCodeEnum::ParametersValidationError->value,
             ]);
         }
 
@@ -43,8 +42,8 @@ class HandleExceptionService
 
         if ($this->isSnoozed($exception)) {
             return response()->json([
-                'message' => trans('lett-constants::'.ApiResponseCodeEnum::ExceptionSnoozed->name),
-                'code' => ApiResponseCodeEnum::ExceptionSnoozed->value
+                'message' => trans('lett-constants::' . ApiResponseCodeEnum::ExceptionSnoozed->name),
+                'code' => ApiResponseCodeEnum::ExceptionSnoozed->value,
             ]);
         }
 
@@ -55,8 +54,8 @@ class HandleExceptionService
         }
 
         return response()->json([
-            'message' => trans('lett-constants::'.ApiResponseCodeEnum::Success->name),
-            'code' => ApiResponseCodeEnum::Success->value
+            'message' => trans('lett-constants::' . ApiResponseCodeEnum::Success->name),
+            'code' => ApiResponseCodeEnum::Success->value,
         ]);
     }
 
