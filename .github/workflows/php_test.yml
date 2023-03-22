@@ -12,17 +12,19 @@ permissions:
   contents: write
 
 jobs:
-  build:
+  configure:
     runs-on: ubuntu-latest
     outputs:
       uid_gid: ${{ steps.get-user.outputs.uid_gid }}
-      steps:
-        - id: get-user
-          run: echo "::set-output name=uid_gid::$(id -u):$(id -g)"
+    steps:
+      - id: get-user
+        run: echo "::set-output name=uid_gid::$(id -u):$(id -g)"
+  build:
+    needs: configure
+    runs-on: ubuntu-latest
     container:
       image: kirschbaumdevelopment/laravel-test-runner:8.2
       options: --user ${{ needs.configure.outputs.uid_gid }}
-
     services:
       mysql:
         image: mysql:5.7
@@ -32,7 +34,6 @@ jobs:
         ports:
           - 33306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
