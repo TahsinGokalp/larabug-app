@@ -43,7 +43,7 @@ jobs:
       - name: Run npm install & Run npm run prod
         run: |
           npm install
-          npm run build
+          sudo npm run build
 
       - name: Run test suite
         run: php artisan test
