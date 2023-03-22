@@ -26,6 +26,7 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "nunomaduro/larastan": "^2.5",
+        "pestphp/pest": "^2.2",
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0",
         "tightenco/duster": "^1.0"
@@ -57,7 +58,9 @@
             "@php artisan key:generate --ansi"
         ],
         "analyse": "./vendor/bin/phpstan analyse",
-        "helpers": "php artisan ide-helper:generate && php artisan ide-helper:meta && php artisan ide-helper:models --write"
+        "helpers": "php artisan ide-helper:generate && php artisan ide-helper:meta && php artisan ide-helper:models --write",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage"
     },
     "extra": {
         "laravel": {
