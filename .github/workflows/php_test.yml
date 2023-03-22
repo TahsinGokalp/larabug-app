@@ -40,10 +40,8 @@ jobs:
       - name: Generate key
         run: php artisan key:generate
 
-      - name: Run npm install & Run npm run prod
-        run: |
-          npm install
-          sudo npm run build
+      - name: Run npm run prod
+        run: npm run build
 
       - name: Run test suite
         run: php artisan test
