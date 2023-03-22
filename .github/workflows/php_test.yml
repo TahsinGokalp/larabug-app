@@ -50,6 +50,9 @@ jobs:
       - name: Generate key
         run: php artisan key:generate
 
+      - name: Migrate & Seed
+        run: php artisan migrate:fresh --seed
+
       - name: Run npm run prod
         run: |
           npm install
