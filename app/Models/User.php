@@ -2,217 +2,131 @@
 
 namespace App\Models;
 
-use App\Traits\Planable;
-use App\Mail\User\WelcomeEmail;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Notifications\Notifiable;
-use Filament\Models\Contracts\FilamentUser;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
- * @property mixed plan
- * @property string api_token
- * @property mixed is_admin
- * @property bool plan_notified
+ * App\Models\User
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string $password
+ * @property string|null $two_factor_secret
+ * @property string|null $two_factor_recovery_codes
+ * @property string|null $two_factor_confirmed_at
+ * @property string|null $remember_token
+ * @property int|null $current_team_id
+ * @property string|null $profile_photo_path
+ * @property bool $receive_email
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read string $receive_email_text
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
+ * @property-read int|null $tokens_count
+ *
+ * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|User query()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCurrentTeamId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereProfilePhotoPath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereReceiveEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorConfirmedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorRecoveryCodes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ *
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|User filter(array $input = [], $filter = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User paginateFilter($perPage = null, $columns = [], $pageName = 'page', $page = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User simplePaginateFilter($perPage = null, $columns = [], $pageName = 'page', $page = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereBeginsWith($column, $value, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEndsWith($column, $value, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLike($column, $value, $boolean = 'and')
+ *
+ * @mixin \Eloquent
  */
-class User extends Authenticatable implements FilamentUser, MustVerifyEmail
+class User extends Authenticatable
 {
-    use Notifiable,
-        Planable,
-        HasFactory;
+    use HasApiTokens;
+    use HasFactory;
+    use HasProfilePhoto;
+    use Notifiable;
+    use TwoFactorAuthenticatable;
+    use Filterable;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
-        'abilities',
         'name',
         'email',
         'password',
         'receive_email',
-        'newsletter',
-        'locale',
-        'settings'
     ];
 
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
     protected $hidden = [
         'password',
         'remember_token',
-        'google2fa_secret'
+        'two_factor_recovery_codes',
+        'two_factor_secret',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
-        'settings' => 'array',
-        'is_admin' => 'boolean',
-        'newsletter' => 'boolean',
+        'email_verified_at' => 'datetime',
         'receive_email' => 'boolean',
-        'plan_notified' => 'boolean',
-        'projects.pivot.owner' => 'boolean',
-        'abilities' => 'array',
     ];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'plan_expires_at'
-    ];
-
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array<int, string>
+     */
     protected $appends = [
-        'first_name',
-        'settings'
+        'profile_photo_url',
+        'receive_email_text',
     ];
 
-    public static $filamentUserColumn = 'is_admin';
-
-    public function setPasswordAttribute($value)
+    public function getReceiveEmailTextAttribute(): string
     {
-        $this->attributes['password'] = bcrypt($value);
-    }
-
-    public function getGravatar($size = 150)
-    {
-        return 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($this->attributes['email']))) . '?s=' . (int)$size;
-    }
-
-    public function getSettingsAttribute($value)
-    {
-        if (!$value) {
-            return [
-                'code_preview' => [
-                    'rainbow' => false,
-                ]
-            ];
+        if ($this->receive_email) {
+            return 'Yes';
         }
 
-        if (is_array($value)) {
-            return $value;
-        }
-
-        return json_decode($value, true);
+        return 'No';
     }
 
-    public function getFirstNameAttribute()
+    public function filter(string $search)
     {
-        return array_first(explode(' ', $this->name), null, $this->name);
-    }
-
-    public function markAsExpired()
-    {
-        $this->plan_notified = true;
-        $this->plan_expires_at = null;
-        $this->plan_id = 1;
-
-        $this->save();
-    }
-
-    public function generateNewToken()
-    {
-        $this->api_token = str_random(25);
-        $this->save();
-    }
-
-    public function isAdmin()
-    {
-        return $this->is_admin;
-    }
-
-    public function scopeWantsEmail($query)
-    {
-        return $query->where('receive_email', true);
-    }
-
-    public function scopeExpired($query)
-    {
-        return $query->where(function ($query) {
-            return $query
-                ->whereNotNull('plan_expires_at')
-                ->where('plan_expires_at', '<', carbon())
-                ->where('plan_notified', false);
-        });
-    }
-
-    public function scopePaidPlan($query)
-    {
-        return $query->whereNotNull('plan_expires_at');
-    }
-
-    public function newsletters()
-    {
-        return $this->belongsToMany(Newsletter::class)->latest();
-    }
-
-    public function plan()
-    {
-        return $this->belongsTo(Plan::class);
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
-
-    public function ordersLatest()
-    {
-        return $this->hasMany(Order::class)->latest();
-    }
-
-    public function projects()
-    {
-        return $this->belongsToMany(Project::class)->withPivot('owner');
-    }
-
-    public function projectGroups()
-    {
-        return $this->hasMany(ProjectGroup::class);
-    }
-
-    public function social_users()
-    {
-        return $this->hasMany(SocialUser::class);
-    }
-
-    public function socialUsersLatest()
-    {
-        return $this->hasMany(SocialUser::class)->latest();
-    }
-
-    public function fcmTokens()
-    {
-        return $this->hasMany(UserFcmToken::class);
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($user) {
-            $user->api_token = str_random(50);
-        });
-
-        static::created(function ($user) {
-            Mail::to($user)->send(new WelcomeEmail($user));
-        });
-
-        static::deleting(function (self $user) {
-            foreach ($user->projects as $project) {
-                $project->exceptions()->delete();
-
-                $project->users()->detach($user->id);
-
-                $project->delete();
-            }
-
-            $user->social_users()->delete();
-            $user->newsletters()->detach();
-        });
-    }
-
-    public function hasAbility($key)
-    {
-        return isset($this->abilities[$key]) && $this->abilities[$key];
-    }
-
-    public function canAccessFilament(): bool
-    {
-        return $this->isAdmin();
     }
 }

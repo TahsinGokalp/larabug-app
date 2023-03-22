@@ -2,138 +2,117 @@
 
 namespace App\Models;
 
-use App\Notifications\IssueStatusUpdatedNotification;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Kblais\Uuid\Uuid;
+use App\Enums\ExceptionStatusEnum;
 use EloquentFilter\Filterable;
-use Illuminate\Database\Eloquent\Model;
-use App\Notifications\ProjectWasCreated;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 /**
- * @property string slack_webhook
- * @property string discord_channel
- * @property string discord_webhook
- * @property string title
- * @property mixed pivot
- * @property boolean receive_email
- * @property boolean notifications_enabled
- * @property boolean mobile_notifications_enabled
- * @property boolean slack_webhook_enabled
- * @property boolean discord_webhook_enabled
- * @property boolean custom_webhook_enabled
- * @property string key
- * @property mixed url
+ * App\Models\Project
+ *
+ * @property string $id
+ * @property string|null $title
+ * @property string|null $url
+ * @property string|null $key
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $last_error_at
+ * @property bool $notifications_enabled
+ * @property bool $receive_email
+ * @property bool $telegram_notification_enabled
+ * @property string $total_exceptions
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $exceptions
+ * @property-read int|null $exceptions_count
+ * @property-read string $route_url
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Issue> $issues
+ * @property-read int|null $issues_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $unreadExceptions
+ * @property-read int|null $unread_exceptions_count
+ *
+ * @method static \Database\Factories\ProjectFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder|Project filter(array $input)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project paginateFilter($perPage = null, $columns = [], $pageName = 'page', $page = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project simplePaginateFilter($perPage = null, $columns = [], $pageName = 'page', $page = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project wantsEmail()
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereBeginsWith($column, $value, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereEndsWith($column, $value, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereLastErrorAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereLike($column, $value, $boolean = 'and')
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereNotificationsEnabled($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereReceiveEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereTelegramNotificationEnabled($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereTotalExceptions($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Project whereUrl($value)
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $exceptions
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Issue> $issues
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exception> $unreadExceptions
+ *
+ * @mixin \Eloquent
  */
 class Project extends Model
 {
-    use Uuid,
-        Filterable,
-        Notifiable,
-        HasFactory;
+    use HasUuids;
+    use Filterable;
+    use Notifiable;
+    use HasFactory;
 
     protected $fillable = [
         'url',
         'title',
         'description',
-        'receive_email',
         'notifications_enabled',
-        'slack_webhook',
-        'discord_webhook',
-        'custom_webhook',
-        'mobile_notifications_enabled',
-        'slack_webhook_enabled',
-        'discord_webhook_enabled',
-        'custom_webhook_enabled',
-        'issue_receive_email',
-        'issue_slack_webhook',
-        'issue_discord_webhook',
-        'issue_custom_webhook',
-        'issue_mobile_notifications_enabled',
-        'issue_slack_webhook_enabled',
-        'issue_discord_webhook_enabled',
-        'issue_custom_webhook_enabled',
-    ];
-
-    protected $dates = [
-        'last_exception_at',
-        'created_at',
-        'updated_at'
+        'receive_email',
+        'telegram_notification_enabled',
     ];
 
     protected $casts = [
         'receive_email' => 'boolean',
         'notifications_enabled' => 'boolean',
-        'mobile_notifications_enabled' => 'boolean',
-        'slack_webhook_enabled' => 'boolean',
-        'discord_webhook_enabled' => 'boolean',
-        'custom_webhook_enabled' => 'boolean',
-        'issue_receive_email' => 'boolean',
-        'issue_mobile_notifications_enabled' => 'boolean',
-        'issue_slack_webhook_enabled' => 'boolean',
-        'issue_discord_webhook_enabled' => 'boolean',
-        'issue_custom_webhook_enabled' => 'boolean',
+        'telegram_notification_enabled' => 'boolean',
+        'last_error_at' => 'datetime',
     ];
 
     protected $appends = [
         'route_url',
-        'feedback_script_html'
     ];
 
-    public function getRouteUrlAttribute()
+    public static function boot(): void
     {
-        return route('panel.projects.show', $this);
+        parent::boot();
+
+        static::creating(static function (self $project) {
+            $project->key = Str::random(50);
+        });
+
+        static::deleting(static function (self $project) {
+            $project->exceptions()->delete();
+            $project->issues()->delete();
+        });
     }
 
-    public function getFeedbackScriptUrl()
+    public function getRouteUrlAttribute(): string
     {
-        return route('feedback.script', ['project' => $this->id]);
-    }
-
-    public function getFeedbackScriptHtmlAttribute()
-    {
-        return '<script src="' . $this->getFeedbackScriptUrl() . '"></script>';
-    }
-
-    public function routeNotificationForSlack($notification)
-    {
-        if ($notification instanceof IssueStatusUpdatedNotification) {
-            return $this->issue_slack_webhook;
-        }
-
-        return $this->slack_webhook;
-    }
-
-    public function routeNotificationForDiscord($notification)
-    {
-        if ($notification instanceof IssueStatusUpdatedNotification) {
-            return $this->issue_discord_webhook;
-        }
-
-        return $this->discord_webhook;
-    }
-
-    public function routeNotificationForWebhook($notification)
-    {
-        if ($notification instanceof IssueStatusUpdatedNotification) {
-            return $this->issue_custom_webhook;
-        }
-
-        return $this->custom_webhook;
-    }
-
-    public function isOwner()
-    {
-        return $this->pivot->owner;
-    }
-
-    public function hasNotificationChannelsEnabled()
-    {
-        return $this->slack_webhook || $this->discord_webhook;
+        return route('projects.show', $this);
     }
 
     public function scopeWantsEmail($query)
@@ -141,19 +120,9 @@ class Project extends Model
         return $query->where('receive_email', true);
     }
 
-    public function users(): BelongsToMany
-    {
-        return $this->belongsToMany(\App\Models\User::class)->withPivot('owner');
-    }
-
-    public function group(): BelongsTo
-    {
-        return $this->belongsTo(\App\Models\ProjectGroup::class);
-    }
-
     public function exceptions(): HasMany
     {
-        return $this->hasMany(\App\Models\Exception::class);
+        return $this->hasMany(Exception::class);
     }
 
     public function issues(): HasMany
@@ -161,57 +130,21 @@ class Project extends Model
         return $this->hasMany(Issue::class);
     }
 
-    public function unreadExceptions()
+    public function unreadExceptions(): HasMany
     {
         return $this->exceptions()
             ->where(function ($query) {
                 return $query
-                    ->where('status', \App\Models\Exception::OPEN);
+                    ->where('status', ExceptionStatusEnum::Open->value);
             });
     }
 
-    public function feedback(): HasManyThrough
+    public function scopeFilter($query, array $input): void
     {
-        return $this->hasManyThrough(Feedback::class, Exception::class);
-    }
-
-    public function scopeFilter($query, array $filters)
-    {
-        $query->when($filters['search'] ?? null, function ($query, $search) {
+        $query->when($input['search'] ?? null, function ($query, $search) {
             $query->where(function ($query) use ($search) {
                 $query->where('title', 'like', '%' . $search . '%');
             });
-        });
-    }
-
-    public function routeNotificationForFcm()
-    {
-        return $this->users()->wherePivot('owner', true)->first()
-            ->fcmTokens()
-            ->get()
-            ->map(function ($fcmToken) {
-                return $fcmToken->token;
-            })->toArray();
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function (self $project) {
-            $project->key = str_random(50);
-        });
-
-        static::created(function (self $project) {
-            if (auth()->check()) {
-                auth()->user()->notify(new ProjectWasCreated($project));
-            }
-        });
-
-        static::deleting(function (self $project) {
-            $project->exceptions()->delete();
-            $project->issues()->delete();
-            $project->feedback()->delete();
         });
     }
 }

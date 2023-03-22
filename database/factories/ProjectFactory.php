@@ -3,30 +3,32 @@
 namespace Database\Factories;
 
 use App\Models\Project;
-use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
+ */
 class ProjectFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
     protected $model = Project::class;
 
     /**
      * Define the model's default state.
      *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            'title' => $this->faker->company,
-            'description' => $this->faker->text(50),
-            'url' => $this->faker->url,
-            'key' => Str::random(25)
+            'title' => $this->faker->company(),
+            'url' => $this->faker->url(),
+            'key' => Str::random(50),
+            'description' => $this->faker->text(200),
+            'last_error_at' => $this->faker->randomElement([null, now()]),
+            'notifications_enabled' => $this->faker->boolean(),
+            'receive_email' => $this->faker->boolean(),
+            'telegram_notification_enabled' => $this->faker->boolean(),
         ];
     }
 }

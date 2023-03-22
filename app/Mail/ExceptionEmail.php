@@ -3,32 +3,23 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class ExceptionEmail extends Mailable implements ShouldQueue
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
-    public $collection;
+    public array $collection;
 
-    /**
-     * Create a new message instance.
-     *
-     * @param array $collection
-     */
     public function __construct(array $collection)
     {
         $this->collection = $collection;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
-    public function build()
+    public function build(): static
     {
         return $this
             ->to($this->collection['email'], $this->collection['name'])

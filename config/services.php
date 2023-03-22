@@ -18,10 +18,11 @@ return [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+        'scheme' => 'https',
     ],
 
     'postmark' => [
-        'token' => env('POSTMARK_SECRET'),
+        'token' => env('POSTMARK_TOKEN'),
     ],
 
     'ses' => [
@@ -30,25 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'github' => [
-        'client_id' => env('GITHUB_ID'),
-        'client_secret' => env('GITHUB_SECRET'),
-        'redirect' => env('GITHUB_CALLBACK'),
-        'token' => env('GITHUB_TOKEN'),
+    'telegram-bot-api' => [
+        'token' => env('TELEGRAM_BOT_TOKEN', 'YOUR BOT TOKEN HERE'),
+        'group' => env('TELEGRAM_GROUP_ID', 'YOUR GROUP ID HERE'),
     ],
 
-    'facebook' => [
-        'client_id' => env('FACEBOOK_ID'),
-        'client_secret' => env('FACEBOOK_SECRET'),
-        'redirect' => env('APP_URL') . '/login/facebook/callback',
-    ],
-
-    'stripe' => [
-        'key' => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
-    ],
-
-    'horizon' => [
-        'token' => env('HORIZON_TOKEN')
-    ]
 ];

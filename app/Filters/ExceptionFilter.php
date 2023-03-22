@@ -1,4 +1,6 @@
-<?php namespace App\Filters;
+<?php
+
+namespace App\Filters;
 
 use EloquentFilter\ModelFilter;
 
@@ -20,10 +22,5 @@ class ExceptionFilter extends ModelFilter
     public function status($status)
     {
         return $this->where('status', $status);
-    }
-
-    public function hasFeedback($value)
-    {
-        return $this->whereHas('feedback');
     }
 }

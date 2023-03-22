@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Exception;
+use App\Services\Command\RotateExceptionService;
 use Illuminate\Console\Command;
 
 class RotateExceptions extends Command
@@ -11,11 +11,20 @@ class RotateExceptions extends Command
 
     protected $description = 'Rotates all the exceptions that are expired';
 
-    protected $starterRetention = 30;
-
-    public function handle()
+    public function __construct(protected RotateExceptionService $rotateExceptionService)
     {
-        $rotate = Exception::query()->where('created_at', '<', now()->subDays(20))->delete();
+        parent::__construct();
+    }
+
+    public function handle(): void
+    {
+        if (! $this->rotateExceptionService->isEnabled()) {
+            $this->info('Rotate exceptions is disabled!');
+
+            return;
+        }
+
+        $rotate = $this->rotateExceptionService->delete();
 
         $this->info('Rotated ' . $rotate . ' exceptions!');
     }
