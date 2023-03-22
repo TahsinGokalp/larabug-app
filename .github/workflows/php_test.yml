@@ -14,8 +14,14 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      uid_gid: ${{ steps.get-user.outputs.uid_gid }}
+      steps:
+        - id: get-user
+          run: echo "::set-output name=uid_gid::$(id -u):$(id -g)"
     container:
       image: kirschbaumdevelopment/laravel-test-runner:8.2
+      options: --user ${{ needs.configure.outputs.uid_gid }}
 
     services:
       mysql:
