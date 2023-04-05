@@ -5170,16 +5170,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v6.2.7",
+            "version": "v6.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "680e8a2ea6b3f87aecc07a6a65a203ae573d1902"
+                "reference": "75ed64103df4f6615e15a7fe38b8111099f47416"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/680e8a2ea6b3f87aecc07a6a65a203ae573d1902",
-                "reference": "680e8a2ea6b3f87aecc07a6a65a203ae573d1902",
+                "url": "https://api.github.com/repos/symfony/process/zipball/75ed64103df4f6615e15a7fe38b8111099f47416",
+                "reference": "75ed64103df4f6615e15a7fe38b8111099f47416",
                 "shasum": ""
             },
             "require": {
@@ -5211,7 +5211,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v6.2.7"
+                "source": "https://github.com/symfony/process/tree/v6.2.8"
             },
             "funding": [
                 {
@@ -5227,7 +5227,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-24T10:42:00+00:00"
+            "time": "2023-03-09T16:20:02+00:00"
         },
         {
             "name": "symfony/routing",
@@ -8004,34 +8004,34 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v2.2.3",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "6c8970e0a3b9bb36544bb1eacba0a4175dbafe97"
+                "reference": "12c75524a2548e787ade52023d6e2d5725dba9bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/6c8970e0a3b9bb36544bb1eacba0a4175dbafe97",
-                "reference": "6c8970e0a3b9bb36544bb1eacba0a4175dbafe97",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/12c75524a2548e787ade52023d6e2d5725dba9bb",
+                "reference": "12c75524a2548e787ade52023d6e2d5725dba9bb",
                 "shasum": ""
             },
             "require": {
                 "brianium/paratest": "^7.1.2",
-                "nunomaduro/collision": "^7.3.3",
+                "nunomaduro/collision": "^7.4.0",
                 "nunomaduro/termwind": "^1.15.1",
                 "pestphp/pest-plugin": "^2.0.1",
-                "pestphp/pest-plugin-arch": "^2.0.2",
+                "pestphp/pest-plugin-arch": "^2.1.1",
                 "php": "^8.1.0",
-                "phpunit/phpunit": "^10.0.18"
+                "phpunit/phpunit": "^10.0.19"
             },
             "conflict": {
-                "phpunit/phpunit": ">10.0.18",
+                "phpunit/phpunit": ">10.0.19",
                 "webmozart/assert": "<1.11.0"
             },
             "require-dev": {
-                "pestphp/pest-dev-tools": "^2.5.0",
-                "symfony/process": "^6.2.7"
+                "pestphp/pest-dev-tools": "^2.6.0",
+                "symfony/process": "^6.2.8"
             },
             "bin": [
                 "bin/pest"
@@ -8087,7 +8087,7 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v2.2.3"
+                "source": "https://github.com/pestphp/pest/tree/v2.4.0"
             },
             "funding": [
                 {
@@ -8099,7 +8099,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-24T11:26:54+00:00"
+            "time": "2023-04-02T20:12:31+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
@@ -8172,26 +8172,27 @@
         },
         {
             "name": "pestphp/pest-plugin-arch",
-            "version": "v2.0.2",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest-plugin-arch.git",
-                "reference": "02ce3fd7cf795f30be72cb4935f6ad99b077d278"
+                "reference": "eb458dee939014a7f796147fa011db5e73dac63c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest-plugin-arch/zipball/02ce3fd7cf795f30be72cb4935f6ad99b077d278",
-                "reference": "02ce3fd7cf795f30be72cb4935f6ad99b077d278",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-arch/zipball/eb458dee939014a7f796147fa011db5e73dac63c",
+                "reference": "eb458dee939014a7f796147fa011db5e73dac63c",
                 "shasum": ""
             },
             "require": {
-                "pestphp/pest-plugin": "^2.0.0",
+                "nunomaduro/collision": "^7.4.0",
+                "pestphp/pest-plugin": "^2.0.1",
                 "php": "^8.1",
                 "ta-tikoma/phpunit-architecture-test": "^0.7.2"
             },
             "require-dev": {
-                "pestphp/pest": "^2.2.2",
-                "pestphp/pest-dev-tools": "^2.5.0"
+                "pestphp/pest": "^2.3.0",
+                "pestphp/pest-dev-tools": "^2.6.0"
             },
             "type": "library",
             "autoload": {
@@ -8219,7 +8220,7 @@
                 "unit"
             ],
             "support": {
-                "source": "https://github.com/pestphp/pest-plugin-arch/tree/v2.0.2"
+                "source": "https://github.com/pestphp/pest-plugin-arch/tree/v2.1.1"
             },
             "funding": [
                 {
@@ -8231,7 +8232,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-24T11:18:19+00:00"
+            "time": "2023-04-02T19:43:12+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -9026,16 +9027,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.0.18",
+            "version": "10.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "582563ed2edc62d1455cdbe00ea49fe09428eef3"
+                "reference": "20c23e85c86e5c06d63538ba464e8054f4744e62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/582563ed2edc62d1455cdbe00ea49fe09428eef3",
-                "reference": "582563ed2edc62d1455cdbe00ea49fe09428eef3",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/20c23e85c86e5c06d63538ba464e8054f4744e62",
+                "reference": "20c23e85c86e5c06d63538ba464e8054f4744e62",
                 "shasum": ""
             },
             "require": {
@@ -9107,7 +9108,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.0.18"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.0.19"
             },
             "funding": [
                 {
@@ -9123,7 +9124,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-22T06:15:31+00:00"
+            "time": "2023-03-27T11:46:33+00:00"
         },
         {
             "name": "psr/cache",
