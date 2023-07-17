@@ -29,7 +29,7 @@
         "pestphp/pest": "^2.2",
         "phpunit/phpunit": "^10.0",
         "spatie/laravel-ignition": "^2.0",
-        "tightenco/duster": "^1.0"
+        "tightenco/duster": "^2.1"
     },
     "autoload": {
         "psr-4": {
